@@ -1,4 +1,5 @@
 # lightup-a41d
 
-@fclaisse
-@gdindart
+### Membres du groupe:
+- @fclaisse
+- @gdindart
