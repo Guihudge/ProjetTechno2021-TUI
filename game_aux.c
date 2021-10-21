@@ -4,31 +4,26 @@
 #include "game_aux.h"
 #include "game.h"
 
-void game_print(cgame g)
-{
-    if (g == NULL)
-    {
-        exit(-1);
+void game_print(cgame g) {
+    if (g == NULL) {
+        return;
     }
 
-    int i_cpt = 0;
-    printf("\n   0123456\n");
-    printf("   ------- ");
-    printf("\n%d |", i_cpt);
-    i_cpt++;
+    printf("   ");
+    for(uint i = 0; i < DEFAULT_SIZE; i++) printf("%u", i);
+    printf("\n   ");
+    for(uint i = 0; i < DEFAULT_SIZE; i++) printf("-");
+    printf("\n");
 
-    for (int i = 0; i < DEFAULT_SIZE; i++)
-    {
-        for (int j = 0; j < DEFAULT_SIZE; j++)
-        {
+    for (uint i = 0; i < DEFAULT_SIZE; i++) {
+        printf("%u |", i);
+        for (uint j = 0; j < DEFAULT_SIZE; j++) {
             square tiles = game_get_square(g, i, j);
-            if (tiles > 16)
-            {
+            if (tiles > 16) {
                 tiles = tiles - game_get_flags(g, i, j);
             }
 
-            switch (tiles)
-            {
+            switch (tiles) {
             case S_BLANK:
                 printf(" ");
                 break;
@@ -67,65 +62,41 @@ void game_print(cgame g)
                 break;
             }
         }
-        if (i_cpt <= 6)
-        {
-            printf("|\n%d |", i_cpt);
-            i_cpt++;
-        }
+        printf("|\n");
     }
-    printf("|\n   ------- \n");
+    printf("   ");
+    for(uint i = 0; i < DEFAULT_SIZE; i++) printf("-");
+    printf("\n");
 }
 
-game game_default(void)
-{
+game game_default(void) {
     //new blank game
-    int init_value[DEFAULT_SIZE * DEFAULT_SIZE] = {
+    square init_value[DEFAULT_SIZE * DEFAULT_SIZE] = {
         S_BLANK, S_BLANK, S_BLACK1, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
         S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
         S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLACK2,
         S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
         S_BLACK1, S_BLACKU, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
         S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK,
-        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK};
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK
+    };
 
-    int cpt = 0;
-    game default_game = game_new_empty();
-
-    for (int i = 0; i < DEFAULT_SIZE; i++) //fill up game array
-    {
-        for (int j = 0; j < DEFAULT_SIZE; j++)
-        {
-            game_set_square(default_game, i, j, init_value[cpt]);
-            cpt++;
-        }
-    }
-
-    return default_game;
+    return game_new(init_value);
 }
 
-game game_default_solution(void)
-{
+game game_default_solution(void) {
     //Base solution tab
-    int solution_value[DEFAULT_SIZE * DEFAULT_SIZE] = {
+    square solution_value[DEFAULT_SIZE * DEFAULT_SIZE] = {
         S_LIGHTBULB, S_BLANK, S_BLACK1, S_LIGHTBULB, S_BLANK, S_BLANK, S_BLANK,
         S_BLANK, S_LIGHTBULB, S_BLACK2, S_BLANK, S_BLANK, S_BLANK, S_LIGHTBULB,
         S_BLANK, S_BLANK, S_LIGHTBULB, S_BLANK, S_BLANK, S_BLACKU, S_BLACK2,
         S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_LIGHTBULB,
         S_BLACK1, S_BLACKU, S_BLANK, S_BLANK, S_LIGHTBULB, S_BLANK, S_BLANK,
         S_LIGHTBULB, S_BLANK, S_BLANK, S_BLANK, S_BLACK2, S_LIGHTBULB, S_BLANK,
-        S_BLANK, S_LIGHTBULB, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK};
+        S_BLANK, S_LIGHTBULB, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK
+    };
 
-    int cpt = 0;
-    game solution_game = game_new_empty(); //fill up game array
-
-    for (int i = 0; i < DEFAULT_SIZE; i++)
-    {
-        for (int j = 0; j < DEFAULT_SIZE; j++)
-        {
-            game_set_square(solution_game, i, j, solution_value[cpt]);
-            cpt++;
-        }
-    }
+    game solution_game = game_new(solution_game);
     game_update_flags(solution_game);
 
     return solution_game;

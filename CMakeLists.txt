@@ -8,9 +8,9 @@ project(game_text C)
 set(CMAKE_C_FLAGS "-std=c99 -Wall")
 
 #cration des libraire
-add_library(libgame.a game_aux.c game.o)
+add_library(game game_aux.c game.o)
 
 #création de l'éxécutable
 add_executable(game_text game_text.c)
 
-target_link_libraries(game_text libgame.a)
+target_link_libraries(game_text game)
