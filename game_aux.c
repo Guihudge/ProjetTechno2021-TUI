@@ -81,7 +81,8 @@ game game_default(void) {
         S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK
     };
 
-    return game_new(init_value);
+    game new = game_new(init_value);
+    return new;
 }
 
 game game_default_solution(void) {
@@ -96,7 +97,7 @@ game game_default_solution(void) {
         S_BLANK, S_LIGHTBULB, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK
     };
 
-    game solution_game = game_new(solution_game);
+    game solution_game = game_new(solution_value);
     game_update_flags(solution_game);
 
     return solution_game;
