@@ -15,8 +15,11 @@ add_library(game game_aux.c game.o)
 
 #création de l'éxécutable
 add_executable(game_text game_text.c)
+#executable de test
 add_executable(game_test_fclaisse game_test_fclaisse.c)
 
 target_link_libraries(game_text game)
 
+# Ajout des tests
+# fclaisse
 add_test(test_fclaisse_dummy ./game_test_fclaisse dummy)
