@@ -17,9 +17,13 @@ add_library(game game_aux.c game.o)
 add_executable(game_text game_text.c)
 #executable de test
 add_executable(game_test_fclaisse game_test_fclaisse.c)
+add_executable(game_test_gdindart game_test_gdindart.c)
 
 target_link_libraries(game_text game)
 
 # Ajout des tests
 # fclaisse
 add_test(test_fclaisse_dummy ./game_test_fclaisse dummy)
+
+#gdindart
+add_test(test_gdindart_dummy ./game_test_gdindart dummy)
