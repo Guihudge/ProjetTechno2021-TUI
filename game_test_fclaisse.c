@@ -16,7 +16,7 @@ void usage(int argc, char *argv[]) {
 
 /* ********** MAIN ROUTINE ********** */
 
-int main(int argc, char const *argv[]) {
+int main(int argc, char *argv[]) {
 
     if(argc == 1) 
         usage(argc, argv);
