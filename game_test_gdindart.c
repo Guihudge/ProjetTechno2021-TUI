@@ -5,7 +5,7 @@
 
 /*Dummy test*/
 
-bool dummy(){
+bool test_dummy(){
     return true;
 }
 
