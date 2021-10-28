@@ -24,7 +24,7 @@ int main(int argc, char *argv[]){
     fprintf(stderr, "Starting test '%s'.\n", argv[1]);
     bool passed = false;
     if (strcmp("dummy", argv[1]) == 0){
-        passed = dummy();
+        passed = test_dummy();
     }
     else{
         fprintf(stderr, "Error: unkown test name %s\n", argv[1]);
