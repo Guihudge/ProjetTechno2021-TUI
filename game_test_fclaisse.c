@@ -5,7 +5,7 @@
 
 /* ********** TEST DUMMY ********** */
 
-bool dummy(void) { return true; }
+bool test_dummy(void) { return true; }
 
 /* ********** USAGE ********** */
 
