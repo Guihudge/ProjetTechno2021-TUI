@@ -27,6 +27,11 @@ add_test(test_fclaisse_dummy ./game_test_fclaisse dummy)
 
 #gdindart
 add_test(test_gdindart_dummy ./game_test_gdindart dummy)
-
-#millhe
-add_test(test_millhe_dummy ./game_test_millhe dummy)
+add_test(test_gdindart_game_update_flags ./game_test_gdindart game_update_flags)
+add_test(test_gdindart_game_default ./game_test_gdindart game_default)
+add_test(test_gdindart_game_has_error ./game_test_gdindart game_has_error)
+add_test(test_gdindart_game_is_marked ./game_test_gdindart game_is_marked)
+add_test(test_gdindart_game_is_black ./game_test_gdindart game_is_black)
+add_test(test_gdindart_game_set_square ./game_test_gdindart game_set_square)
+add_test(test_gdindart_game_equal ./game_test_gdindart game_equal)
+add_test(test_gdindart_game_new_empty ./game_test_gdindart game_new_empty)
