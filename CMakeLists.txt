@@ -18,7 +18,7 @@ add_executable(game_text game_text.c)
 #executable de test
 add_executable(game_test_fclaisse game_test_fclaisse.c)
 add_executable(game_test_gdindart game_test_gdindart.c)
-
+add_executable(game_test_millhe game_test_millhe.c)
 target_link_libraries(game_text game)
 
 # Ajout des tests
