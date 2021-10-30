@@ -15,7 +15,21 @@ bool test_game_update_flags()
 /*test_game_default*/
 bool test_game_default()
 {
-    return true;
+    //create test game
+    square init_value_test[DEFAULT_SIZE * DEFAULT_SIZE] = {
+        S_BLANK, S_BLANK, S_BLACK1, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLACK2,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLACK1, S_BLACKU, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK};
+
+    game test_game = game_new(init_value_test);
+
+    game default_game = game_default();
+
+    return game_equal(test_game, default_game);
 }
 
 /*test_game_has_error*/
