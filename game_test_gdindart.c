@@ -9,7 +9,42 @@
 /*test_game_update_flags*/
 bool test_game_update_flags()
 {
-    return true;
+    bool ok = true;
+
+    //test game creation
+    game test_game = game_default();
+    game_set_square(test_game, 0, 6, S_LIGHTBULB);
+
+    //update flags
+    game_update_flags(test_game);
+
+    //test if update is correct
+    if (!game_is_lighted(test_game, 0, 3))
+    {
+        ok = false;
+    }
+    if (!game_is_lighted(test_game, 0, 4))
+    {
+        ok = false;
+    }
+    if (!game_is_lighted(test_game, 0, 5))
+    {
+        ok = false;
+    }
+    if (game_is_lighted(test_game, 1, 5))
+    {
+        ok = false;
+    }
+    if (!game_is_lighted(test_game, 1, 6))
+    {
+        ok = false;
+    }
+    if (!game_is_lightbulb(test_game, 0, 6))
+    {
+        ok = false;
+    }
+
+    return ok;
 }
 
 /*test_game_default*/
