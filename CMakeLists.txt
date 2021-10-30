@@ -27,3 +27,6 @@ add_test(test_fclaisse_dummy ./game_test_fclaisse dummy)
 
 #gdindart
 add_test(test_gdindart_dummy ./game_test_gdindart dummy)
+
+#millhe
+add_test(test_millhe_dummy ./game_test_millhe dummy)
