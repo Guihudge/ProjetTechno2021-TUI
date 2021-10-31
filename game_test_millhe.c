@@ -14,16 +14,24 @@ void usage(int argc, char *argv[])
 }
 
 int main (int argc, char *argv[]){
-    if (argc == 1){
-        usage(argc, argv);
-    }
-    bool ok = false;
+  if (argc == 1){
+      usage(argc, argv);
+  }
+  bool ok = false;
     if(strcmp("dummy", argv[1]) == 0){
-        ok = test_dummy();
+      ok = test_dummy();
     }
     else{
       exit(EXIT_FAILURE);
     }
+    if (ok)
+    {
+      exit(EXIT_SUCCESS);
+    }
+    else {
+      exit(EXIT_FAILURE);
+    }
+    
 
 
     return EXIT_SUCCESS;
