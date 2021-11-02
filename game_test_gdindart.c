@@ -6,6 +6,20 @@
 #include "game.h"
 #include "game_aux.h"
 
+/*Util fonction*/
+void print_bool(bool ok, char *text)
+{
+    fprintf(stderr, "%s", text);
+    if (ok)
+    {
+        fprintf(stderr, "true\n");
+    }
+    else
+    {
+        fprintf(stderr, "false\n");
+    }
+}
+
 /*test_game_update_flags*/
 bool test_game_update_flags()
 {
@@ -70,7 +84,27 @@ bool test_game_default()
 /*test_game_has_error*/
 bool test_game_has_error()
 {
-    return true;
+    bool ok = true;
+
+    square init_test_value[DEFAULT_SIZE * DEFAULT_SIZE] = {
+        S_LIGHTBULB, S_BLANK, S_BLACK1, S_LIGHTBULB, S_BLANK, S_BLANK, S_LIGHTBULB,
+        S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLACK2,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLACK1, S_BLACKU, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK};
+
+    game test_game = game_new(init_test_value);
+    game_update_flags(test_game);
+
+    ok = game_has_error(test_game, 0, 6);
+    print_bool(ok, "test1: ");
+    ok = game_has_error(test_game, 0, 3) && ok;
+    print_bool(ok, "test2: ");
+    ok = !game_has_error(test_game, 0, 0) && ok;
+    print_bool(ok, "test3: ");
+    return ok;
 }
 
 /*test_game_is_marked*/
