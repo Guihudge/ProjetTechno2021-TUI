@@ -111,7 +111,7 @@ bool test_game_has_error()
 bool test_game_is_marked()
 {
     square init_test_value[DEFAULT_SIZE * DEFAULT_SIZE] = {
-        S_LIGHTBULB, S_BLANK, S_BLACK1, S_BLANK, S_MARK, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLACK1, S_BLANK, S_MARK, S_BLANK, S_BLANK,
         S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
         S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLACK2,
         S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_MARK, S_BLANK, S_BLANK,
@@ -128,7 +128,31 @@ bool test_game_is_marked()
 /*test_game_is_black*/
 bool test_game_is_black()
 {
-    return true;
+    square init_test_value[DEFAULT_SIZE * DEFAULT_SIZE] = {
+        S_BLANK, S_BLANK, S_BLACK1, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLACK2,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLACK1, S_BLACKU, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK};
+
+    game test_game = game_new(init_test_value);
+    game_update_flags(test_game);
+
+    char mask = 247; //11110111
+    char check = 255;
+    bool ok = true;
+
+    for (int i = 0; i < DEFAULT_SIZE; i++)
+    {
+        for (int y = 0; y < DEFAULT_SIZE; y++)
+        {
+            char tiles = game_get_square(test_game, i, y);
+            ok = ok && (((tiles | mask) == check) == game_is_black(test_game, i, y));
+        }
+    }
+    return ok;
 }
 
 /*test_game_set_square*/
