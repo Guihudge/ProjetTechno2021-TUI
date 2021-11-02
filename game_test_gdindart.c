@@ -206,6 +206,18 @@ bool test_game_equal()
 /*test_game_new_empty*/
 bool test_game_new_empty()
 {
+    game blank_game = game_new_empty();
+
+    for (int i = 0; i < DEFAULT_SIZE; i++)
+    {
+        for (int y = 0; y < DEFAULT_SIZE; y++)
+        {
+            if (game_get_square(blank_game, i, y) != S_BLANK)
+            {
+                return false;
+            }
+        }
+    }
     return true;
 }
 
