@@ -110,7 +110,19 @@ bool test_game_has_error()
 /*test_game_is_marked*/
 bool test_game_is_marked()
 {
-    return true;
+    square init_test_value[DEFAULT_SIZE * DEFAULT_SIZE] = {
+        S_LIGHTBULB, S_BLANK, S_BLACK1, S_BLANK, S_MARK, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLACK2,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_MARK, S_BLANK, S_BLANK,
+        S_BLACK1, S_BLACKU, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK};
+
+    game test_game = game_new(init_test_value);
+    game_update_flags(test_game);
+
+    return game_is_marked(test_game, 0, 4) && game_is_marked(test_game, 3, 4) && !game_is_marked(test_game, 0, 6);
 }
 
 /*test_game_is_black*/
