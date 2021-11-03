@@ -2,9 +2,11 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+#include <time.h>
 
 #include "game.h"
 #include "game_aux.h"
+
 
 /*Util fonction*/
 void print_bool(bool ok, char *text)
@@ -158,7 +160,22 @@ bool test_game_is_black()
 /*test_game_set_square*/
 bool test_game_set_square()
 {
+    game test_game = game_new_empty();
+
+    for (int i = 0; i < DEFAULT_SIZE; i++)
+    {
+        for (int y = 0; y < DEFAULT_SIZE; y++)
+        {
+            char val = rand() % 256;
+            game_set_square(test_game, i, y, val);
+
+            if (game_get_square(test_game, i, y) != val){
+                return false;
+            }
+        }
+    }
     return true;
+
 }
 
 /*test_game_equal*/
@@ -242,6 +259,8 @@ int main(int argc, char *argv[])
     {
         usage(argc, argv);
     }
+
+    srand(time(NULL));
 
     fprintf(stderr, "Starting test '%s'.\n", argv[1]);
     bool passed = false;
