@@ -9,6 +9,42 @@ bool test_dummy(){
   return true;
 }
 
+bool test_game_print(){
+  square test[DEFAULT_SIZE * DEFAULT_SIZE] = {
+    S_LIGHTBULB, S_BLANK, S_BLACK1, S_MARK, S_BLANK, S_BLANK, S_BLANK,
+    S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+    S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLACK2,
+    S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_LIGHTBULB,
+    S_BLACK1, S_BLACK0, S_LIGHTBULB, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+    S_BLANK, S_BLANK, S_BLACK4, S_BLANK, S_BLACK3, S_BLANK, S_BLANK,
+    S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_LIGHTBULB};
+  game g2 = game_new(test);
+  game_print(g2); 
+  return true;
+}
+
+bool test_game_get_flags(){
+  square test[DEFAULT_SIZE * DEFAULT_SIZE] = {
+    S_LIGHTBULB, S_BLANK, S_BLACK1, S_MARK, S_BLANK, S_BLANK, S_BLANK,
+    S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+    S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLACK2,
+    S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_LIGHTBULB,
+    S_BLACK1, S_BLACK0, S_LIGHTBULB, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+    S_BLANK, S_BLANK, S_BLACK4, S_BLANK, S_BLACK3, S_BLANK, S_BLANK,
+    S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_LIGHTBULB};
+  game g2 = game_new(test);
+  game_update_flags(g2);
+  square test = game_get_flags(g2, 0, 0);
+  if (test != F_LIGHTED) return false;
+  square test = game_get_flags(g2, 0, 1);
+  if (test != F_LIGHTED) return false;
+  square test = game_get_flags(g2, 4, 2);
+  if (test != F_ERROR) return false;
+  square test = game_get_flags(g2, 6, 6);
+  if (test != F_ERROR) return false;
+  return true;
+}
+
 bool test_game_get_black_number(){
   square test[DEFAULT_SIZE * DEFAULT_SIZE] = {
     S_LIGHTBULB, S_BLANK, S_BLACK1, S_MARK, S_BLANK, S_BLANK, S_BLANK,
@@ -182,22 +218,46 @@ int main (int argc, char *argv[]){
   if (argc == 1){
       usage(argc, argv);
   }
+  fprintf(stderr, "Starting test '%s'.\n", argv[1]);
   bool ok = false;
     if(strcmp("dummy", argv[1]) == 0){
       ok = test_dummy();
     }
+    else if(strcmp("game_print", argv[1]) == 0){
+      ok = test_game_print();
+    }
+    else if(strcmp("game_get_flags", argv[1]) == 0){
+      ok = test_game_get_flags();
+    }
+    else if(strcmp("game_get_black_number", argv[1]) == 0){
+      ok = test_game_get_black_number();
+    }
+    else if(strcmp("game_get_square", argv[1]) == 0){
+      ok = test_game_get_square();
+    }
+    else if(strcmp("game_is_over", argv[1]) == 0){
+      ok = test_game_is_over();
+    }
+    else if(strcmp("game_is_blanck", argv[1]) == 0){
+      ok = test_game_is_blanck();
+    }
+    else if(strcmp("game_delete", argv[1]) == 0){
+      ok = test_game_delete();
+    }
+    else if(strcmp("game_copy", argv[1]) == 0){
+      ok = test_game_copy();
+    }
     else{
+      fprintf(stderr, "Error: unkown test name %s\n", argv[1]);
       exit(EXIT_FAILURE);
     }
     if (ok)
     {
+      fprintf(stderr, "Test %s passed\n", argv[1]);
       exit(EXIT_SUCCESS);
     }
     else {
+      fprintf(stderr, "Test %s failed\n", argv[1]);
       exit(EXIT_FAILURE);
     }
-    
-
-
-    return EXIT_SUCCESS;
 }

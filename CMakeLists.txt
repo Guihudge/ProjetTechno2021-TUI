@@ -19,7 +19,9 @@ add_executable(game_text game_text.c)
 add_executable(game_test_fclaisse game_test_fclaisse.c)
 add_executable(game_test_gdindart game_test_gdindart.c)
 add_executable(game_test_millhe game_test_millhe.c)
+
 target_link_libraries(game_text game)
+target_link_libraries(game_test_millhe game)
 
 # Ajout des tests
 # fclaisse
@@ -30,3 +32,11 @@ add_test(test_gdindart_dummy ./game_test_gdindart dummy)
 
 #millhe
 add_test(test_millhe_dummy ./game_test_millhe dummy)
+add_test(test_millhe_game_print ./game_test_millhe game_print)
+add_test(test_millhe_game_get_flags ./game_test_millhe game_get_flags)
+add_test(test_millhe_game_get_black_number ./game_test_millhe game_get_black_number)
+add_test(test_millhe_game_get_square ./game_test_millhe game_get_square)
+add_test(test_millhe_game_is_over ./game_test_millhe game_is_over)
+add_test(test_millhe_game_is_blanck ./game_test_millhe game_is_blanck)
+add_test(test_millhe_game_delete ./game_test_millhe game_delete)
+add_test(test_millhe_game_copy ./game_test_millhe game_copy)
