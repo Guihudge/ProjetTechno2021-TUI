@@ -25,6 +25,7 @@ bool test_game_default_solution(void) {
     };
 
     game default_solution_test = game_new(square_default_solution_test);
+    game_update_flags(default_solution_test);
 
     if(default_solution_test == NULL) fprintf(stderr, "game_new fonction return NULL pointer\n");
     if(default_solution == NULL) fprintf(stderr, "game_default_solution return NULL pointer\n");
