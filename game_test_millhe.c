@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "game.h"
+#include "game_aux.h"
 
 bool test_dummy(){
   return true;
@@ -24,7 +25,7 @@ bool test_game_print(){
 }
 
 bool test_game_get_flags(){
-  square test[DEFAULT_SIZE * DEFAULT_SIZE] = {
+  square test_jeu[DEFAULT_SIZE * DEFAULT_SIZE] = {
     S_LIGHTBULB, S_BLANK, S_BLACK1, S_MARK, S_BLANK, S_BLANK, S_BLANK,
     S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
     S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLACK2,
@@ -32,7 +33,7 @@ bool test_game_get_flags(){
     S_BLACK1, S_BLACK0, S_LIGHTBULB, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
     S_BLANK, S_BLANK, S_BLACK4, S_BLANK, S_BLACK3, S_BLANK, S_BLANK,
     S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_LIGHTBULB};
-  game g2 = game_new(test);
+  game g2 = game_new(test_jeu);
   game_update_flags(g2);
   square test = game_get_flags(g2, 0, 0);
   if (test != F_LIGHTED) return false;
@@ -141,7 +142,7 @@ bool test_game_is_over(){
   {
     for (int j = 0; j < DEFAULT_SIZE; j++)
     {
-      if (game_is_lighbulb(sol_test, i, j))
+      if (game_is_lightbulb(sol_test, i, j))
       {
         game_play_move(g2, i, j, S_LIGHTBULB);
         if (!game_equal(g2, sol_test)){
@@ -154,7 +155,8 @@ bool test_game_is_over(){
          }
       }
     }
-  }   
+  } 
+  return game_is_over(g2);  
 } 
 
 bool test_game_is_blanck(){
@@ -200,7 +202,7 @@ bool test_game_copy(){
   
   game g2 = game_new(test);
   game g3 = game_copy(g2);
-  if (!game_equal(g3, test)){
+  if (!game_equal(g3, g2)){
     return false;
   }
   game_update_flags(g2);
