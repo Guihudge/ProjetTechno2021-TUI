@@ -24,6 +24,14 @@ target_link_libraries(game_text game)
 # Ajout des tests
 # fclaisse
 add_test(test_fclaisse_dummy ./game_test_fclaisse dummy)
+add_test(test_fclaisse_game_default_solution ./game_test_fclaisse game_default_solution)
+add_test(test_fclaisse_game_new ./game_test_fclaisse game_new)
+add_test(test_fclaisse_game_set_square ./game_test_fclaisse game_set_square)
+add_test(test_fclaisse_game_is_lightbulb ./game_test_fclaisse game_is_lightbulb)
+add_test(test_fclaisse_game_is_lighted ./game_test_fclaisse game_is_lighted)
+add_test(test_fclaisse_game_check_move ./game_test_fclaisse game_check_move)
+add_test(test_fclaisse_game_play_move ./game_test_fclaisse game_play_move)
+add_test(test_fclaisse_game_restart ./game_test_fclaisse game_restart)
 
 #gdindart
 add_test(test_gdindart_dummy ./game_test_gdindart dummy)
