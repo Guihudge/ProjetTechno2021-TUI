@@ -27,8 +27,14 @@ bool test_game_default_solution(void) {
     game default_solution_test = game_new(square_default_solution_test);
     game_update_flags(default_solution_test);
 
-    if(default_solution_test == NULL) fprintf(stderr, "game_new fonction return NULL pointer\n");
-    if(default_solution == NULL) fprintf(stderr, "game_default_solution return NULL pointer\n");
+    if(default_solution_test == NULL) {
+        fprintf(stderr, "game_new fonction return NULL pointer\n");
+        return false;
+    }
+    if(default_solution == NULL) {
+        fprintf(stderr, "game_default_solution return NULL pointer\n");
+        return false;
+    }
 
     bool passed = false;
     if(game_is_over(default_solution) && game_equal(default_solution, default_solution_test))
@@ -43,6 +49,32 @@ bool test_game_default_solution(void) {
 /* ********** TEST GAME NEW ********** */
 
 bool test_game_new(void) {
+    square game_default[DEFAULT_SIZE * DEFAULT_SIZE] = {
+        S_BLANK, S_BLANK, S_BLACK1, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLACK2,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLACK1, S_BLACKU, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK
+    };
+
+    game test_game = game_new(game_default);
+
+    if(test_game == NULL) {
+        fprintf(stderr, "game_new return NULL pointeur\n");
+        return false;
+    }
+
+    for(uint i = 0; i < DEFAULT_SIZE; i++) {
+        for(uint j = 0; j < DEFAULT_SIZE; j++) {
+            if(game_get_square(test_game, i, j) != game_default[i * DEFAULT_SIZE + j])
+                return false;
+        }
+    }
+
+    game_delete(test_game);
+
     return true;
 }
 
