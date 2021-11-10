@@ -32,17 +32,18 @@ bool test_game_get_flags(){
     S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_LIGHTBULB,
     S_BLACK1, S_BLACK0, S_LIGHTBULB, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
     S_BLANK, S_BLANK, S_BLACK4, S_BLANK, S_BLACK3, S_BLANK, S_BLANK,
-    S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_LIGHTBULB};
+    S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_LIGHTBULB, S_LIGHTBULB};
   game g2 = game_new(test_jeu);
   game_update_flags(g2);
-  square test = game_get_flags(g2, 0, 0);
+  square test;
+  test = game_get_flags(g2, 0, 0);
   if (test != F_LIGHTED) return false;
-  square test = game_get_flags(g2, 0, 1);
+  test = game_get_flags(g2, 0, 1);
   if (test != F_LIGHTED) return false;
-  square test = game_get_flags(g2, 4, 2);
+  test = game_get_flags(g2, 4, 1);
   if (test != F_ERROR) return false;
-  square test = game_get_flags(g2, 6, 6);
-  if (test != F_ERROR) return false;
+  test = game_get_flags(g2, 6, 6);
+  if (test != (F_ERROR+F_LIGHTED)) return false;
   return true;
 }
 
@@ -82,28 +83,36 @@ bool test_game_get_square(){
 
   game g2 = game_new(test);
   game_update_flags(g2);
-  if (game_get_square(g2, 0, 0) != S_LIGHTBULB){
+  if (game_get_square(g2, 0, 0) != (S_LIGHTBULB + F_LIGHTED)){
+    fprintf(stderr, "S_LIGHTBULB failed, squar: %d\n",game_get_square(g2, 0, 0) );
     return false;
   }
-  if (game_get_square(g2, 0, 1) != S_BLANK){
+  if (game_get_square(g2, 0, 1) != (S_BLANK + F_LIGHTED)){
+    fprintf(stderr, "S_BLANK failed");
     return false;
   }
   if (game_get_square(g2, 0, 2) != S_BLACK1){
+    fprintf(stderr, "S_BLACK1 failed");
     return false;
   }
   if (game_get_square(g2, 0, 3) != S_MARK){
+    fprintf(stderr, "S_MARK failed");
     return false;
   }
   if (game_get_square(g2, 1, 2) != S_BLACK2){
+    fprintf(stderr, "S_BLACK2 failed");
     return false;
   }
   if (game_get_square(g2, 4, 1) != S_BLACKU){
+    fprintf(stderr, "S_BLACKU failed");
     return false;
   }
   if (game_get_square(g2, 5, 4) != S_BLACK3){
+    fprintf(stderr, "S_BLACK3 failed");
     return false;
   }
   if (game_get_square(g2, 5, 2) != S_BLACK4){
+    fprintf(stderr, "S_BLACK4 failed");
     return false;
   }
   return true;
@@ -187,7 +196,7 @@ bool test_game_delete(){
       S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK};
     game g2 = game_new(test);
     game_delete(g2);
-    return (g2==NULL);
+    return true;
 }
 
 bool test_game_copy(){
