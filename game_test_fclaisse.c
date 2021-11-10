@@ -13,7 +13,30 @@ bool test_dummy(void) { return true; }
 /* ********** TEST GAME DEFAULT SOLUTION ********** */
 
 bool test_game_default_solution(void) {
-    return true;
+    game default_solution = game_default_solution();
+    square square_default_solution_test[DEFAULT_SIZE * DEFAULT_SIZE] = {
+        S_LIGHTBULB, S_BLANK, S_BLACK1, S_LIGHTBULB, S_BLANK, S_BLANK, S_BLANK,
+        S_BLANK, S_LIGHTBULB, S_BLACK2, S_BLANK, S_BLANK, S_BLANK, S_LIGHTBULB,
+        S_BLANK, S_BLANK, S_LIGHTBULB, S_BLANK, S_BLANK, S_BLACKU, S_BLACK2,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_LIGHTBULB,
+        S_BLACK1, S_BLACKU, S_BLANK, S_BLANK, S_LIGHTBULB, S_BLANK, S_BLANK,
+        S_LIGHTBULB, S_BLANK, S_BLANK, S_BLANK, S_BLACK2, S_LIGHTBULB, S_BLANK,
+        S_BLANK, S_LIGHTBULB, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK
+    };
+
+    game default_solution_test = game_new(square_default_solution_test);
+
+    if(default_solution_test == NULL) fprintf(stderr, "game_new fonction return NULL pointer\n");
+    if(default_solution == NULL) fprintf(stderr, "game_default_solution return NULL pointer\n");
+
+    bool passed = false;
+    if(game_is_over(default_solution) && game_equal(default_solution, default_solution_test))
+        passed = true;
+
+    game_delete(default_solution);
+    game_delete(default_solution_test);
+
+    return passed;
 }
 
 /* ********** TEST GAME NEW ********** */
