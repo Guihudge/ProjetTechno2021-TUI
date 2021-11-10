@@ -20,6 +20,7 @@ add_executable(game_test_fclaisse game_test_fclaisse.c)
 add_executable(game_test_gdindart game_test_gdindart.c)
 
 target_link_libraries(game_text game)
+target_link_libraries(game_test_fclaisse game)
 
 # Ajout des tests
 # fclaisse
