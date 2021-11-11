@@ -93,7 +93,24 @@ bool test_game_is_lightbulb(void) {
 /* ********** TEST GAME IS LIGHTED ********** */
 
 bool test_game_is_lighted(void) {
-    return true;
+    square test_square[DEFAULT_SIZE * DEFAULT_SIZE] = {
+        S_LIGHTBULB, S_LIGHTBULB, S_BLACK1, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLACK2,
+        S_BLANK, S_MARK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLACK1, S_BLACKU, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK
+    };
+
+    game test_game = game_new(test_square);
+
+    if(test_game == NULL)
+        return false;
+
+    game_update_flags(test_game);
+
+    return game_is_lighted(test_game, 0, 0) && game_is_lighted(test_game, 0, 1) && game_is_lighted(test_game, 1, 0) && game_is_lighted(test_game, 3, 1) && !game_is_lighted(test_game, 4, 0);
 }
 
 /* ********** TEST GAME CHECK MOVE ********** */
