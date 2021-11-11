@@ -68,8 +68,10 @@ bool test_game_new(void) {
 
     for(uint i = 0; i < DEFAULT_SIZE; i++) {
         for(uint j = 0; j < DEFAULT_SIZE; j++) {
-            if(game_get_square(test_game, i, j) != game_default[i * DEFAULT_SIZE + j])
+            if(game_get_square(test_game, i, j) != game_default[i * DEFAULT_SIZE + j]) {
+                game_delete(test_game);
                 return false;
+            }
         }
     }
 
@@ -110,7 +112,12 @@ bool test_game_is_lighted(void) {
 
     game_update_flags(test_game);
 
-    return game_is_lighted(test_game, 0, 0) && game_is_lighted(test_game, 0, 1) && game_is_lighted(test_game, 1, 0) && game_is_lighted(test_game, 3, 1) && !game_is_lighted(test_game, 4, 0);
+    bool passed = false;
+    passed = game_is_lighted(test_game, 0, 0) && game_is_lighted(test_game, 0, 1) && game_is_lighted(test_game, 1, 0) && game_is_lighted(test_game, 3, 1) && !game_is_lighted(test_game, 4, 0);
+
+    game_delete(test_game);
+
+    return passed;
 }
 
 /* ********** TEST GAME CHECK MOVE ********** */
@@ -122,7 +129,52 @@ bool test_game_check_move(void) {
 /* ********** TEST GAME PLAY MOVE ********** */
 
 bool test_game_play_move(void) {
-    return true;
+    square test_square[DEFAULT_SIZE * DEFAULT_SIZE] = {
+        S_BLANK, S_BLANK, S_BLACK1, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLACK2,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLACK1, S_BLACKU, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK
+    };
+
+    square solution_square[DEFAULT_SIZE * DEFAULT_SIZE] = {
+        S_LIGHTBULB, S_BLANK, S_BLACK1, S_LIGHTBULB, S_BLANK, S_BLANK, S_BLANK,
+        S_BLANK, S_LIGHTBULB, S_BLACK2, S_BLANK, S_BLANK, S_BLANK, S_LIGHTBULB,
+        S_BLANK, S_BLANK, S_LIGHTBULB, S_BLANK, S_BLANK, S_BLACKU, S_BLACK2,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_LIGHTBULB,
+        S_BLACK1, S_BLACKU, S_BLANK, S_BLANK, S_LIGHTBULB, S_BLANK, S_BLANK,
+        S_LIGHTBULB, S_BLANK, S_BLANK, S_BLANK, S_BLACK2, S_LIGHTBULB, S_BLANK,
+        S_BLANK, S_LIGHTBULB, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK
+    };
+
+    game test_game = game_new(test_square);
+    game solution_game = game_new(solution_square);
+
+    if(test_game == NULL || solution_game == NULL) 
+        return false;
+
+    game_update_flags(solution_game);
+
+    game_play_move(test_game, 0, 0, S_LIGHTBULB);
+    game_play_move(test_game, 0, 3, S_LIGHTBULB);
+    game_play_move(test_game, 1, 1, S_LIGHTBULB);
+    game_play_move(test_game, 1, 6, S_LIGHTBULB);
+    game_play_move(test_game, 2, 2, S_LIGHTBULB);
+    game_play_move(test_game, 3, 6, S_LIGHTBULB);
+    game_play_move(test_game, 4, 4, S_LIGHTBULB);
+    game_play_move(test_game, 5, 0, S_LIGHTBULB);
+    game_play_move(test_game, 5, 5, S_LIGHTBULB);
+    game_play_move(test_game, 6, 1, S_LIGHTBULB);
+
+    bool passed = false;
+    passed = game_equal(test_game, solution_game);
+
+    game_delete(test_game);
+    game_delete(solution_game);
+
+    return passed;
 }
 
 /* ********** TEST GAME restart ********** */
