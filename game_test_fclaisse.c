@@ -111,14 +111,48 @@ bool test_game_play_move(void) {
 /* ********** TEST GAME restart ********** */
 
 bool test_game_restart(void) {
+    square default_square[DEFAULT_SIZE * DEFAULT_SIZE] = {
+        S_BLANK, S_BLANK, S_BLACK1, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLACK2,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLACK1, S_BLACKU, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK
+    };
+
+    square solution_square[DEFAULT_SIZE * DEFAULT_SIZE] = {
+        S_LIGHTBULB, S_BLANK, S_BLACK1, S_LIGHTBULB, S_BLANK, S_BLANK, S_BLANK,
+        S_BLANK, S_LIGHTBULB, S_BLACK2, S_BLANK, S_BLANK, S_BLANK, S_LIGHTBULB,
+        S_BLANK, S_BLANK, S_LIGHTBULB, S_BLANK, S_BLANK, S_BLACKU, S_BLACK2,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_LIGHTBULB,
+        S_BLACK1, S_BLACKU, S_BLANK, S_BLANK, S_LIGHTBULB, S_BLANK, S_BLANK,
+        S_LIGHTBULB, S_BLANK, S_BLANK, S_BLANK, S_BLACK2, S_LIGHTBULB, S_BLANK,
+        S_BLANK, S_LIGHTBULB, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK
+    };
+
+    game solution_game = game_new(solution_square);
+    game_update_flags(solution_game);
+    game_restart(solution_game);
+
+    if(solution_game == NULL)
+        return false;
+
+    for(uint i = 0; i < DEFAULT_SIZE; i++) {
+        for(uint j = 0; j < DEFAULT_SIZE; j++) {
+            if(game_get_square(solution_game, i, j) != default_square[i * DEFAULT_SIZE + j])
+                return false;
+        }
+    }
+
     return true;
 }
 
 /* ********** USAGE ********** */
 
 void usage(int argc, char *argv[]) {
-  fprintf(stderr, "Usage: %s <testname> [<...>]\n", argv[0]);
-  exit(EXIT_FAILURE);
+    fprintf(stderr, "Usage: %s <testname> [<...>]\n", argv[0]);
+    exit(EXIT_FAILURE);
 }
 
 /* ********** MAIN ROUTINE ********** */
