@@ -123,7 +123,35 @@ bool test_game_is_lighted(void) {
 /* ********** TEST GAME CHECK MOVE ********** */
 
 bool test_game_check_move(void) {
-    return true;
+    square test_square[DEFAULT_SIZE * DEFAULT_SIZE] = {
+        S_LIGHTBULB, S_LIGHTBULB, S_BLACK1, S_LIGHTBULB, S_MARK, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK, S_BLANK, S_LIGHTBULB,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLACK2,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLACK1, S_BLACKU, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK
+    };
+
+    game test_game = game_new(test_square);
+
+    if(test_game == NULL)
+        return false;
+
+    game_update_flags(test_game);
+
+    bool passed = true;
+    if(game_check_move(test_game, 0, 0, S_BLANK) == false) passed = false;
+    else if(game_check_move(test_game, 0, 1, S_MARK) == false) passed = false;
+    else if(game_check_move(test_game, 1, 0, S_LIGHTBULB) == false) passed = false;
+    else if(game_check_move(test_game, 0, 2, S_MARK) == true) passed = false;
+    else if(game_check_move(test_game, 0, 2, S_LIGHTBULB) == true) passed = false;
+    else if(game_check_move(test_game, 0, 2, S_BLANK) == true) passed = false;
+    else if(game_check_move(test_game, -1, 0, S_BLANK) == true) passed = false;
+    else if(game_check_move(test_game, 7, 6, S_BLANK) == true) passed = false;
+
+    game_delete(test_game);
+    return passed;
 }
 
 /* ********** TEST GAME PLAY MOVE ********** */
