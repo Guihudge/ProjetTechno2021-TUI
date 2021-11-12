@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <time.h>
 
 #include "game.h"
 #include "game_aux.h"
@@ -83,7 +84,23 @@ bool test_game_new(void) {
 /* ********** TEST GAME SET SQUARE ********** */
 
 bool test_game_set_square(void) {
+    game test_game = game_new_empty();
+
+    for (int i = 0; i < DEFAULT_SIZE; i++) {
+        for (int y = 0; y < DEFAULT_SIZE; y++) {
+            char val = rand() % 256;
+            game_set_square(test_game, i, y, val);
+
+            if (game_get_square(test_game, i, y) != val){
+                game_delete(test_game);
+                return false;
+            }
+        }
+    }
+
+    game_delete(test_game);
     return true;
+
 }
 
 /* ********** TEST GAME IS LIGHTBULB ********** */
@@ -213,7 +230,7 @@ bool test_game_play_move(void) {
     game test_game = game_new(test_square);
     game solution_game = game_new(solution_square);
 
-    if(test_game == NULL || solution_game == NULL) 
+    if(test_game == NULL || solution_game == NULL)
         return false;
 
     game_update_flags(solution_game);
@@ -293,6 +310,8 @@ int main(int argc, char *argv[]) {
 
     if(argc == 1) 
         usage(argc, argv);
+
+    srand(time(NULL));
 
     fprintf(stderr, "=> Start test \"%s\"\n", argv[1]);
     bool passed = false;
