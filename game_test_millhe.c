@@ -71,11 +71,11 @@ bool test_game_get_black_number(){
   return true;
 }
  
-bool test_game_get_square(){
+bool test_game_get_state(){
   square test[DEFAULT_SIZE * DEFAULT_SIZE] = {
     S_LIGHTBULB, S_BLANK, S_BLACK1, S_MARK, S_BLANK, S_BLANK, S_BLANK,
     S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
-    S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLACK2,
+    S_BLANK, S_BLACK0, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLACK2,
     S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
     S_BLACK1, S_BLACKU, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
     S_BLANK, S_BLANK, S_BLACK4, S_BLANK, S_BLACK3, S_BLANK, S_BLANK,
@@ -83,36 +83,40 @@ bool test_game_get_square(){
 
   game g2 = game_new(test);
   game_update_flags(g2);
-  if (game_get_square(g2, 0, 0) != (S_LIGHTBULB + F_LIGHTED) || game_get_square(g2, 0, 0) != (S_LIGHTBULB + F_LIGHTED + F_ERROR)){
+  if (game_get_state(g2, 0, 0) != S_LIGHTBULB){
     fprintf(stderr, "S_LIGHTBULB failed, squar: %d\n",game_get_square(g2, 0, 0) );
     return false;
   }
-  if (game_get_square(g2, 0, 1) != (S_BLANK + F_LIGHTED) || game_get_square(g2, 0, 1) != (S_BLANK + F_LIGHTED + F_ERROR) || game_get_square(g2, 0, 1) != S_BLANK){
+  if (game_get_state(g2, 0, 1) != S_BLANK){
     fprintf(stderr, "S_BLANK failed");
     return false;
   }
-  if (game_get_square(g2, 0, 2) != S_BLACK1 || game_get_square(g2, 0, 2) != (S_BLACK1 + F_ERROR) || game_get_square(g2, 0, 2) != (S_BLACK1 + F_LIGHTED) || game_get_square(g2, 0, 2) != S_BLACK1 + F_LIGHTED + F_ERROR){
+  if (game_get_state(g2, 0, 2) != S_BLACK1){
     fprintf(stderr, "S_BLACK1 failed");
     return false;
   }
-  if (game_get_square(g2, 0, 3) != S_MARK || game_get_square(g2, 0, 3) != (S_MARK + F_LIGHTED) || game_get_square(g2, 0, 3) != (S_MARK + F_ERROR) || game_get_square(g2, 0, 3) != (S_MARK + F_ERROR + F_LIGHTED)){
+  if (game_get_state(g2, 0, 3) != S_MARK){
     fprintf(stderr, "S_MARK failed");
     return false;
   }
-  if (game_get_square(g2, 1, 2) != S_BLACK2 || game_get_square(g2, 1, 2) != (S_BLACK2 + F_ERROR) || game_get_square(g2, 1, 2) != (S_BLACK2 + F_LIGHTED) || game_get_square(g2, 1, 2) != (S_BLACK2 + F_LIGHTED + F_ERROR)) {
+  if (game_get_state(g2, 1, 2) != S_BLACK2){
     fprintf(stderr, "S_BLACK2 failed");
     return false;
   }
-  if (game_get_square(g2, 4, 1) != S_BLACKU || game_get_square(g2, 4, 1) != (S_BLACKU + F_ERROR) || game_get_square(g2, 4, 1) != (S_BLACKU + F_LIGHTED) || game_get_square(g2, 4, 1) != (S_BLACKU + F_ERROR + F_LIGHTED)){
+  if (game_get_state(g2, 4, 1) != S_BLACKU ){
     fprintf(stderr, "S_BLACKU failed");
     return false;
   }
-  if (game_get_square(g2, 5, 4) != S_BLACK3 || game_get_square(g2, 5, 4) != (S_BLACK3 + F_ERROR) || game_get_square(g2, 5, 4) != (S_BLACK3 + F_LIGHTED) || game_get_square(g2, 5, 4) != (S_BLACK3 + F_ERROR + F_LIGHTED)){
+  if (game_get_state(g2, 5, 4) != S_BLACK3){
     fprintf(stderr, "S_BLACK3 failed");
     return false;
   }
-  if (game_get_square(g2, 5, 2) != S_BLACK4 || game_get_square(g2, 5, 2) != (S_BLACK4 + F_ERROR) || game_get_square(g2, 5, 2) != (S_BLACK4 + F_LIGHTED) || game_get_square(g2, 5, 2) != (S_BLACK4 + F_ERROR + F_LIGHTED)){
+  if (game_get_state(g2, 5, 2) != S_BLACK4){
     fprintf(stderr, "S_BLACK4 failed");
+    return false;
+  }
+  if (game_get_square(g2, 2, 1) != S_BLACK0){
+    fprintf(stderr, "S_BLACK0 failed");
     return false;
   }
   return true;
@@ -243,8 +247,8 @@ int main (int argc, char *argv[]){
     else if(strcmp("game_get_black_number", argv[1]) == 0){
       ok = test_game_get_black_number();
     }
-    else if(strcmp("game_get_square", argv[1]) == 0){
-      ok = test_game_get_square();
+    else if(strcmp("game_get_state", argv[1]) == 0){
+      ok = test_game_get_state();
     }
     else if(strcmp("game_is_over", argv[1]) == 0){
       ok = test_game_is_over();
