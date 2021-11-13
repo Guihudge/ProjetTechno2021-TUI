@@ -7,7 +7,6 @@
 #include "game.h"
 #include "game_aux.h"
 
-
 /*Util fonction*/
 void print_bool(bool ok, char *text)
 {
@@ -79,7 +78,7 @@ bool test_game_default()
     game test_game = game_new(init_value_test);
 
     game default_game = game_default();
-    
+
     bool ok = game_equal(test_game, default_game);
     game_delete(test_game);
     game_delete(default_game);
@@ -128,7 +127,7 @@ bool test_game_is_marked()
     game test_game = game_new(init_test_value);
     game_update_flags(test_game);
     bool ok = game_is_marked(test_game, 0, 4) && game_is_marked(test_game, 3, 4) && !game_is_marked(test_game, 0, 6);
-    
+
     game_delete(test_game);
     return ok;
 }
@@ -165,25 +164,25 @@ bool test_game_is_black()
 }
 
 /*test_game_set_square*/
-bool test_game_set_square()
+bool test_game_get_square()
 {
-    game test_game = game_new_empty();
+    game test_game = game_default_solution();
 
     for (int i = 0; i < DEFAULT_SIZE; i++)
     {
         for (int y = 0; y < DEFAULT_SIZE; y++)
         {
-            char val = rand() % 256;
-            game_set_square(test_game, i, y, val);
+            char val = game_get_flags(test_game, i, y) + game_get_state(test_game, i, y);
 
-            if (game_get_square(test_game, i, y) != val){
+            if (game_get_square(test_game, i, y) != val)
+            {
+                game_delete(test_game);
                 return false;
             }
         }
     }
     game_delete(test_game);
     return true;
-
 }
 
 /*test_game_equal*/
@@ -302,9 +301,9 @@ int main(int argc, char *argv[])
     {
         passed = test_game_is_black();
     }
-    else if (strcmp("game_set_square", argv[1]) == 0)
+    else if (strcmp("game_get_square", argv[1]) == 0)
     {
-        passed = test_game_set_square();
+        passed = test_game_get_square();
     }
     else if (strcmp("game_equal", argv[1]) == 0)
     {
