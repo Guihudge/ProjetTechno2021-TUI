@@ -82,7 +82,6 @@ bool test_game_get_state(){
     S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK};
 
   game g2 = game_new(test);
-  game_update_flags(g2);
   if (game_get_state(g2, 0, 0) != S_LIGHTBULB){
     fprintf(stderr, "S_LIGHTBULB failed, squar: %d\n",game_get_square(g2, 0, 0) );
     return false;
