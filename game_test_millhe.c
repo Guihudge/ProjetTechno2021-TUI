@@ -21,6 +21,7 @@ bool test_game_print(){
     S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_LIGHTBULB};
   game g2 = game_new(test);
   game_print(g2); 
+  game_delete(g2);
   return true;
 }
 
@@ -37,13 +38,26 @@ bool test_game_get_flags(){
   game_update_flags(g2);
   square test;
   test = game_get_flags(g2, 0, 0);
-  if (test != F_LIGHTED) return false;
+  if (test != F_LIGHTED){
+    game_delete(g2);
+    return false;
+  }
   test = game_get_flags(g2, 0, 1);
-  if (test != F_LIGHTED) return false;
+  if (test != F_LIGHTED){
+    game_delete(g2);
+    return false;
+  }
   test = game_get_flags(g2, 4, 1);
-  if (test != F_ERROR) return false;
+  if (test != F_ERROR) {
+    game_delete(g2);
+    return false;
+  }
   test = game_get_flags(g2, 6, 6);
-  if (test != (F_ERROR+F_LIGHTED)) return false;
+  if (test != (F_ERROR+F_LIGHTED)) {
+    game_delete(g2);
+    return false;
+  }
+  game_delete(g2);
   return true;
 }
 
@@ -66,8 +80,10 @@ bool test_game_get_black_number(){
   int t = game_get_black_number(g2, 4, 1);
   int t5 = game_get_black_number(g2, 6, 4);
   if (t != 0 || t1 != 1 || t2 != 2 || t3 != 3 || t4 != 4 || t5 != -1){
+    game_delete(g2);
     return false;
   }
+  game_delete(g2);
   return true;
 }
  
@@ -85,40 +101,50 @@ bool test_game_get_state(){
   game_update_flags(g2);
   if (game_get_state(g2, 0, 0) != S_LIGHTBULB){
     fprintf(stderr, "S_LIGHTBULB failed" );
+    game_delete(g2);
     return false;
   }
   if (game_get_state(g2, 0, 1) != S_BLANK){
     fprintf(stderr, "S_BLANK failed");
+    game_delete(g2);
     return false;
   }
   if (game_get_state(g2, 0, 2) != S_BLACK1){
     fprintf(stderr, "S_BLACK1 failed");
+    game_delete(g2);
     return false;
   }
   if (game_get_state(g2, 0, 3) != S_MARK){
     fprintf(stderr, "S_MARK failed");
+    game_delete(g2);
     return false;
   }
   if (game_get_state(g2, 1, 2) != S_BLACK2){
     fprintf(stderr, "S_BLACK2 failed");
+    game_delete(g2);
     return false;
   }
   if (game_get_state(g2, 4, 1) != S_BLACKU ){
     fprintf(stderr, "S_BLACKU failed");
+    game_delete(g2);
     return false;
   }
   if (game_get_state(g2, 5, 4) != S_BLACK3){
     fprintf(stderr, "S_BLACK3 failed");
+    game_delete(g2);
     return false;
   }
   if (game_get_state(g2, 5, 2) != S_BLACK4){
     fprintf(stderr, "S_BLACK4 failed");
+    game_delete(g2);
     return false;
   }
   if (game_get_square(g2, 2, 1) != S_BLACK0){
     fprintf(stderr, "S_BLACK0 failed");
+    game_delete(g2);
     return false;
   }
+  game_delete(g2);
   return true;
 }
 
@@ -145,10 +171,15 @@ bool test_game_is_over(){
     };
   game sol_test = game_new(solution_test);
   game_update_flags(sol_test);
+  bool oktest;
   if(game_is_over(g2)){
+    game_delete(g2);
+    game_delete(sol_test);
     return false;
   }
   if (!game_is_over(sol_test)){
+    game_delete(g2);
+    game_delete(sol_test);
     return false;
   }
   for (int i = 0; i < DEFAULT_SIZE; i++)
@@ -160,16 +191,24 @@ bool test_game_is_over(){
         game_play_move(g2, i, j, S_LIGHTBULB);
         if (!game_equal(g2, sol_test)){
           if (game_is_over(g2)){
+            game_delete(g2);
+            game_delete(sol_test);
             return false;
           }
         }
         else if (game_equal(g2, sol_test)){
-          return game_is_over(g2);
+          oktest = game_is_over(g2);
+          game_delete(g2);
+          game_delete(sol_test);
+          return oktest;
          }
       }
     }
   } 
-  return game_is_over(g2);  
+  oktest = game_is_over(g2);
+  game_delete(g2);
+  game_delete(sol_test);
+  return oktest; 
 } 
 
 bool test_game_is_blanck(){
@@ -215,12 +254,18 @@ bool test_game_copy(){
   
   game g2 = game_new(test);
   game g3 = game_copy(g2);
+  bool oktest;
   if (!game_equal(g3, g2)){
+    game_delete(g2);
+    game_delete(g3);    
     return false;
   }
   game_update_flags(g2);
   g3 = game_copy(g2);
-  return game_equal(g2, g3);
+  oktest = game_equal(g2, g3);
+  game_delete(g2);
+  game_delete(g3);
+  return oktest;
 }
 
 void usage(int argc, char *argv[])
