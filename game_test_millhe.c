@@ -227,8 +227,9 @@ bool test_game_is_blanck(){
   game g2 = game_new (test);
   game_update_flags(g2);
   
-  return !game_is_blank(g2, 0, 0) && game_is_blank(g2, 0, 1) && !game_is_blank(g2, 0, 2) && !game_is_blank(g2, 0, 3) && !game_is_blank(g2, 1, 2) && !game_is_blank(g2, 4, 1) && !game_is_blank(g2, 5, 2) && !game_is_blank(g2, 5, 4);
-  
+  bool oktest = !game_is_blank(g2, 0, 0) && game_is_blank(g2, 0, 1) && !game_is_blank(g2, 0, 2) && !game_is_blank(g2, 0, 3) && !game_is_blank(g2, 1, 2) && !game_is_blank(g2, 4, 1) && !game_is_blank(g2, 5, 2) && !game_is_blank(g2, 5, 4);
+  game_delete(g2);
+  return oktest;
 }
 bool test_game_delete(){
     square test[DEFAULT_SIZE * DEFAULT_SIZE] = {
@@ -264,10 +265,11 @@ bool test_game_copy(){
 
   }
   game_update_flags(g2);
-  g3 = game_copy(g2);
-  oktest = game_equal(g2, g3);
+  game g4 = game_copy(g2);
+  oktest = game_equal(g2, g4);
   game_delete(g2);
   game_delete(g3);
+  game_delete(g4);
   return oktest;
 }
 
