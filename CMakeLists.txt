@@ -44,7 +44,7 @@ add_test(test_gdindart_game_default ./game_test_gdindart game_default)
 add_test(test_gdindart_game_has_error ./game_test_gdindart game_has_error)
 add_test(test_gdindart_game_is_marked ./game_test_gdindart game_is_marked)
 add_test(test_gdindart_game_is_black ./game_test_gdindart game_is_black)
-add_test(test_gdindart_game_set_square ./game_test_gdindart game_get_square)
+add_test(test_gdindart_game_get_square ./game_test_gdindart game_get_square)
 add_test(test_gdindart_game_equal ./game_test_gdindart game_equal)
 add_test(test_gdindart_game_new_empty ./game_test_gdindart game_new_empty)
 

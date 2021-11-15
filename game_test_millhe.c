@@ -171,7 +171,9 @@ bool test_game_is_over(){
     };
   game sol_test = game_new(solution_test);
   game_update_flags(sol_test);
+  
   bool oktest;
+
   if(game_is_over(g2)){
     game_delete(g2);
     game_delete(sol_test);
@@ -206,8 +208,8 @@ bool test_game_is_over(){
     }
   } 
   oktest = game_is_over(g2);
-  game_delete(g2);
   game_delete(sol_test);
+  game_delete(g2);
   return oktest; 
 } 
 
@@ -259,6 +261,7 @@ bool test_game_copy(){
     game_delete(g2);
     game_delete(g3);    
     return false;
+
   }
   game_update_flags(g2);
   g3 = game_copy(g2);
