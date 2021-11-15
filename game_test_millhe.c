@@ -59,6 +59,8 @@ bool test_game_get_flags(){
   }
   game_delete(g2);
   return true;
+
+  
 }
 
 bool test_game_get_black_number(){
