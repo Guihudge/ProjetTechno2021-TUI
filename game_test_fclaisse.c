@@ -279,10 +279,11 @@ bool test_game_restart(void) {
     };
 
     game solution_game = game_new(solution_square);
+    game _solution_game = solution_game;
     game_update_flags(solution_game);
     game_restart(solution_game);
 
-    if(solution_game == NULL)
+    if(solution_game == NULL || solution_game != _solution_game)
         return false;
 
     for(uint i = 0; i < DEFAULT_SIZE; i++) {
