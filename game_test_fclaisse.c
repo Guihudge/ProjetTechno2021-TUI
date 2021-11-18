@@ -256,7 +256,7 @@ bool test_game_play_move(void) {
 /* ********** TEST GAME RESTART ********** */
 
 bool test_game_restart(void) {
-    square default_square[DEFAULT_SIZE * DEFAULT_SIZE] = {
+    square squares[DEFAULT_SIZE * DEFAULT_SIZE] = {
         S_BLANK, S_BLANK, S_BLACK1, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
         S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
         S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLACK2,
@@ -266,35 +266,45 @@ bool test_game_restart(void) {
         S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK
     };
 
-    square solution_square[DEFAULT_SIZE * DEFAULT_SIZE] = {
-        S_LIGHTBULB, S_BLANK, S_BLACK1, S_LIGHTBULB, S_BLANK, S_BLANK, S_BLANK,
-        S_BLANK, S_LIGHTBULB, S_BLACK2, S_BLANK, S_BLANK, S_BLANK, S_LIGHTBULB,
-        S_BLANK, S_BLANK, S_LIGHTBULB, S_BLANK, S_BLANK, S_BLACKU, S_BLACK2,
-        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_LIGHTBULB,
-        S_BLACK1, S_BLACKU, S_BLANK, S_BLANK, S_LIGHTBULB, S_BLANK, S_BLANK,
-        S_LIGHTBULB, S_BLANK, S_BLANK, S_BLANK, S_BLACK2, S_LIGHTBULB, S_BLANK,
-        S_BLANK, S_LIGHTBULB, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK
-    };
+    game g_true;
+    cgame g1;
+    cgame g2;
 
-    game solution_game = game_new(solution_square);
-    game_update_flags(solution_game);
-    game_restart(solution_game);
-
-    if(solution_game == NULL)
-        return false;
+    g_true = game_default();
+    bool failed = false;
 
     for(uint i = 0; i < DEFAULT_SIZE; i++) {
         for(uint j = 0; j < DEFAULT_SIZE; j++) {
-            if(game_get_square(solution_game, i, j) != default_square[i * DEFAULT_SIZE + j]) {
-                game_delete(solution_game);
-                return false;
+            if(game_get_square(g_true, i, j) == S_BLANK) {
+                game_play_move(g_true, i, j, S_MARK);
             }
         }
     }
 
-    game_delete(solution_game);
+    game_restart(g_true);
 
-    return true;
+    g1 = g_true;
+    game g_true2 = game_default();
+    g2 = g_true2;
+
+    if(g1 == NULL || g2 == NULL)
+        printf("NULL pointeur\n");
+
+    if(!game_equal(g1, g2)) {
+        for(uint i = 0; i < DEFAULT_SIZE; i++) {
+            for(uint j = 0; j < DEFAULT_SIZE; j++) {
+                if(game_get_square(g1, i, j) != squares[i * DEFAULT_SIZE + j]) {
+                    failed = true;
+                }
+            }
+        }
+    }
+
+    g1 = NULL;
+    g2 = NULL;
+    game_delete(g_true);
+    game_delete(g_true2);
+    return !(failed);
 }
 
 /* ********** USAGE ********** */
