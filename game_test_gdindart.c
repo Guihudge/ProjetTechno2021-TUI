@@ -95,6 +95,10 @@ bool test_game_update_flags()
     {
         ok = false;
     }
+    if (game_has_error(test_game, 0, 5))
+    {
+        ok = false;
+    }
 
     game_delete(test_game);
     return ok;
