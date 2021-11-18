@@ -33,47 +33,68 @@ bool test_game_update_flags()
     //update flags
     game_update_flags(test_game);
 
-    //test if update is correct
-    if (!game_is_lighted(test_game, 0, 3))
+    int x_check, y_check;
+    x_check = 0;
+    y_check = 6;
+
+    while (x_check < DEFAULT_SIZE)
     {
-        ok = false;
-    }
-    if (!game_is_lighted(test_game, 0, 4))
-    {
-        ok = false;
-    }
-    if (!game_is_lighted(test_game, 0, 5))
-    {
-        ok = false;
-    }
-    if (game_is_lighted(test_game, 1, 5))
-    {
-        ok = false;
-    }
-    if (!game_is_lighted(test_game, 1, 6))
-    {
-        ok = false;
-    }
-    if (!game_is_lightbulb(test_game, 0, 6))
-    {
-        ok = false;
+        if (game_is_black(test_game, x_check, 6))
+        {
+            x_check ++;
+            break;
+        }
+        ok = ok && game_is_lighted(test_game, x_check, 6);
+        x_check++;
     }
 
+    while (x_check < DEFAULT_SIZE)
+    {
+        if (game_is_black(test_game, x_check, 6))
+        {
+            break;
+        }
+        ok = ok && !game_is_lighted(test_game, x_check, 6);
+        x_check++;
+    }
+
+    while (y_check >= 0)
+    {
+        if (game_is_black(test_game, 0, y_check))
+        {
+            y_check --;
+            break;
+        }
+        ok = ok && game_is_lighted(test_game, 0, y_check);
+        y_check--;
+    }
+
+    while (y_check >= 0)
+    {
+        if (game_is_black(test_game, 0, y_check))
+        {
+            break;
+        }
+        ok = ok && !game_is_lighted(test_game, 0, y_check);
+        y_check--;
+    }
     //Error flags
     game_set_square(test_game, 0, 3, S_LIGHTBULB);
-    
+
     game_update_flags(test_game);
 
-    if (!game_has_error(test_game, 0,3)){
+    if (!game_has_error(test_game, 0, 3))
+    {
         ok = false;
     }
-    if (!game_has_error(test_game, 0,6)){
+    if (!game_has_error(test_game, 0, 6))
+    {
         ok = false;
     }
-    if (game_has_error(test_game, 0,4)){
+    if (game_has_error(test_game, 0, 4))
+    {
         ok = false;
     }
-
 
     game_delete(test_game);
     return ok;
