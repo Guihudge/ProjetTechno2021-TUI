@@ -58,6 +58,23 @@ bool test_game_update_flags()
     {
         ok = false;
     }
+
+    //Error flags
+    game_set_square(test_game, 0, 3, S_LIGHTBULB);
+    
+    game_update_flags(test_game);
+
+    if (!game_has_error(test_game, 0,3)){
+        ok = false;
+    }
+    if (!game_has_error(test_game, 0,6)){
+        ok = false;
+    }
+    if (game_has_error(test_game, 0,4)){
+        ok = false;
+    }
+
+
     game_delete(test_game);
     return ok;
 }
