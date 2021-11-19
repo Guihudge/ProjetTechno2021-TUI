@@ -175,6 +175,7 @@ bool test_game_is_over(){
     game_delete(g2);
     game_delete(sol_test);
     return false;
+  }
     
   game_update_flags(sol_test);
   
