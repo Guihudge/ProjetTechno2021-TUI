@@ -83,20 +83,33 @@ bool test_game_update_flags()
 
     game_update_flags(test_game);
 
-    if (!game_has_error(test_game, 0, 3) && game_is_lighted(test_game, 0, 3))
+    if (!game_has_error(test_game, 0, 3) || !game_is_lighted(test_game, 0, 3))
     {
+        fprintf(stderr, "test 1");
         ok = false;
     }
-    if (!game_has_error(test_game, 0, 6) && game_is_lighted(test_game, 0, 6))
+    if (!game_has_error(test_game, 0, 6) || !game_is_lighted(test_game, 0, 6))
     {
+        fprintf(stderr, "test 2");
         ok = false;
     }
-    if (game_has_error(test_game, 0, 4) && game_is_lighted(test_game, 0, 4))
+    if (game_has_error(test_game, 0, 4) || !game_is_lighted(test_game, 0, 4))
     {
+        fprintf(stderr, "test 3");
         ok = false;
     }
-    if (game_has_error(test_game, 0, 5) && game_is_lighted(test_game, 0, 5))
+    if (game_has_error(test_game, 0, 5) || !game_is_lighted(test_game, 0, 5))
     {
+        fprintf(stderr, "test 4");
+        ok = false;
+    }
+
+    game_set_square(test_game, 0, 3, S_MARK);
+    game_update_flags(test_game);
+
+    if (game_has_error(test_game, 0, 3) || !game_is_lighted(test_game, 0, 3))
+    {
+        fprintf(stderr, "test 5");
         ok = false;
     }
 
@@ -104,9 +117,9 @@ bool test_game_update_flags()
     game_set_square(test_game, 5, 0, S_LIGHTBULB);
     game_update_flags(test_game);
 
-    game_print(test_game);
-    if (!game_has_error(test_game, 4, 0))
+    if (!game_has_error(test_game, 4, 0) || game_is_lighted(test_game, 4, 0))
     {
+        fprintf(stderr, "test 6");
         ok = false;
     }
 
