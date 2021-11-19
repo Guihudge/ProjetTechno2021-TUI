@@ -37,7 +37,7 @@ bool test_game_update_flags()
     x_check = 0;
     y_check = 6;
 
-    while (x_check < DEFAULT_SIZE)
+    while (x_check < DEFAULT_SIZE) // colone avant le mur
     {
         if (game_is_black(test_game, x_check, 6))
         {
@@ -48,7 +48,7 @@ bool test_game_update_flags()
         x_check++;
     }
 
-    while (x_check < DEFAULT_SIZE)
+    while (x_check < DEFAULT_SIZE) // colone après le mur
     {
         if (game_is_black(test_game, x_check, 6))
         {
@@ -58,7 +58,7 @@ bool test_game_update_flags()
         x_check++;
     }
 
-    while (y_check >= 0)
+    while (y_check >= 0) // ligne avant le mur
     {
         if (game_is_black(test_game, 0, y_check))
         {
@@ -69,7 +69,7 @@ bool test_game_update_flags()
         y_check--;
     }
 
-    while (y_check >= 0)
+    while (y_check >= 0) // ligne après le mur
     {
         if (game_is_black(test_game, 0, y_check))
         {
