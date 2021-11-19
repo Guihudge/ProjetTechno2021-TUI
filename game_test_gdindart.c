@@ -100,6 +100,16 @@ bool test_game_update_flags()
         ok = false;
     }
 
+    game_set_square(test_game, 3, 0, S_LIGHTBULB);
+    game_set_square(test_game, 5, 0, S_LIGHTBULB);
+    game_update_flags(test_game);
+
+    game_print(test_game);
+    if (!game_has_error(test_game, 4, 0))
+    {
+        ok = false;
+    }
+
     game_delete(test_game);
 
     game empty_game = game_new_empty();
