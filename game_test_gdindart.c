@@ -83,19 +83,19 @@ bool test_game_update_flags()
 
     game_update_flags(test_game);
 
-    if (!game_has_error(test_game, 0, 3))
+    if (!game_has_error(test_game, 0, 3) && game_is_lighted(test_game, 0, 3))
     {
         ok = false;
     }
-    if (!game_has_error(test_game, 0, 6))
+    if (!game_has_error(test_game, 0, 6) && game_is_lighted(test_game, 0, 6))
     {
         ok = false;
     }
-    if (game_has_error(test_game, 0, 4))
+    if (game_has_error(test_game, 0, 4) && game_is_lighted(test_game, 0, 4))
     {
         ok = false;
     }
-    if (game_has_error(test_game, 0, 5))
+    if (game_has_error(test_game, 0, 5) && game_is_lighted(test_game, 0, 5))
     {
         ok = false;
     }
