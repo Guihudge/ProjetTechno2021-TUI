@@ -242,8 +242,8 @@ bool test_game_equal()
 
     game diff2_game = game_default();
     game_update_flags(diff2_game);
-    game_play_move(diff2_game, 1, 1, S_LIGHTBULB);
-    game_play_move(diff2_game, 6, 6, S_LIGHTBULB);
+    game_play_move(diff2_game, 0, 3, S_LIGHTBULB);
+    game_play_move(diff2_game, 0, 6, S_LIGHTBULB);
 
     bool ok = game_equal(base_game, equal_game);
     ok = ok && !game_equal(base_game, diff1_game);
