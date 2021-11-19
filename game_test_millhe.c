@@ -170,6 +170,12 @@ bool test_game_is_over(){
     S_BLANK, S_LIGHTBULB, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK
     };
   game sol_test = game_new(solution_test);
+
+  if (game_is_over(sol_test)){
+    game_delete(g2);
+    game_delete(sol_test);
+    return false;
+    
   game_update_flags(sol_test);
   
   bool oktest;
@@ -184,6 +190,15 @@ bool test_game_is_over(){
     game_delete(sol_test);
     return false;
   }
+  game_play_move(sol_test, 0, 1, S_LIGHTBULB);
+
+  if (game_is_over(sol_test)){
+    game_delete(g2);
+    game_delete(sol_test);
+    return false;
+  }
+  game_play_move(sol_test, 0, 1, S_BLANK);
+
   for (int i = 0; i < DEFAULT_SIZE; i++)
   {
     for (int j = 0; j < DEFAULT_SIZE; j++)
