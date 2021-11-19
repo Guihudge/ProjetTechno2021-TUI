@@ -101,6 +101,22 @@ bool test_game_update_flags()
     }
 
     game_delete(test_game);
+
+    game empty_game = game_new_empty();
+    game_update_flags(empty_game);
+
+    for (int i = 0; i < DEFAULT_SIZE; i++)
+    {
+        for (int y = 0; y < DEFAULT_SIZE; y++)
+        {
+            if (game_get_flags(empty_game, i, y) != 0)
+            {
+                ok = false;
+            }
+        }
+    }
+
+    game_delete(empty_game);
     return ok;
 }
 
