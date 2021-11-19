@@ -279,14 +279,29 @@ bool test_game_equal()
     game diff1_game = game_default_solution();
     game_update_flags(diff1_game);
 
-    game diff2_game = game_default();
-    game_update_flags(diff2_game);
-    game_play_move(diff2_game, 0, 3, S_LIGHTBULB);
-    game_play_move(diff2_game, 0, 6, S_LIGHTBULB);
+    square solution_value[DEFAULT_SIZE * DEFAULT_SIZE] = {
+        S_LIGHTBULB, S_BLANK, S_BLACK1, S_LIGHTBULB, S_BLANK, S_BLANK, S_BLANK,
+        S_BLANK, S_LIGHTBULB, S_BLACK2, S_BLANK, S_BLANK, S_BLANK, S_LIGHTBULB,
+        S_BLANK, S_BLANK, S_LIGHTBULB, S_BLANK, S_BLANK, S_BLACKU, S_BLACK2,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_LIGHTBULB,
+        S_BLACK1, S_BLACKU, S_BLANK, S_BLANK, S_LIGHTBULB, S_BLANK, S_BLANK,
+        S_LIGHTBULB, S_BLANK, S_BLANK, S_BLANK, S_BLACK2, S_LIGHTBULB, S_BLANK,
+        S_BLANK, S_LIGHTBULB, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK};
+
+    game diff2_game = game_new(solution_value);
 
     bool ok = game_equal(base_game, equal_game);
     ok = ok && !game_equal(base_game, diff1_game);
+    ok = ok && !game_equal(diff1_game, diff2_game);
     ok = ok && !game_equal(base_game, diff2_game);
+
+    game_update_flags(diff2_game);
+
+    ok = ok && game_equal(diff2_game, diff1_game);
+
+    game_play_move(diff2_game, 0, 3, S_LIGHTBULB);
+    game_play_move(diff2_game, 0, 6, S_LIGHTBULB);
+
     ok = ok && !game_equal(diff1_game, diff2_game);
 
     game_delete(base_game);
