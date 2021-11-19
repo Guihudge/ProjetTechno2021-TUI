@@ -41,7 +41,7 @@ bool test_game_update_flags()
     {
         if (game_is_black(test_game, x_check, 6))
         {
-            x_check ++;
+            x_check++;
             break;
         }
         ok = ok && game_is_lighted(test_game, x_check, 6);
@@ -62,7 +62,7 @@ bool test_game_update_flags()
     {
         if (game_is_black(test_game, 0, y_check))
         {
-            y_check --;
+            y_check--;
             break;
         }
         ok = ok && game_is_lighted(test_game, 0, y_check);
@@ -230,47 +230,30 @@ bool test_game_get_square()
 /*test_game_equal*/
 bool test_game_equal()
 {
-    square base_game_val[DEFAULT_SIZE * DEFAULT_SIZE] = {
-        S_BLANK, S_BLANK, S_BLACK1, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
-        S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
-        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLACK2,
-        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
-        S_BLACK1, S_BLACKU, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
-        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK,
-        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK};
 
-    game base_game = game_new(base_game_val);
+    game base_game = game_default();
     game_update_flags(base_game);
 
-    square equal_game_val[DEFAULT_SIZE * DEFAULT_SIZE] = {
-        S_BLANK, S_BLANK, S_BLACK1, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
-        S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
-        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLACK2,
-        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
-        S_BLACK1, S_BLACKU, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
-        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK,
-        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK};
-
-    game equal_game = game_new(equal_game_val);
+    game equal_game = game_default();
     game_update_flags(equal_game);
 
-    square diff_game_val[DEFAULT_SIZE * DEFAULT_SIZE] = {
-        S_BLANK, S_BLANK, S_BLACK1, S_BLANK, S_BLANK, S_BLANK, S_MARK,
-        S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
-        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLACK2,
-        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
-        S_BLACK1, S_BLACKU, S_BLANK, S_LIGHTBULB, S_BLANK, S_BLANK, S_BLANK,
-        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACK2, S_BLANK, S_BLANK,
-        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK};
+    game diff1_game = game_default_solution();
+    game_update_flags(diff1_game);
 
-    game diff_game = game_new(diff_game_val);
-    game_update_flags(diff_game);
+    game diff2_game = game_default();
+    game_update_flags(diff2_game);
+    game_play_move(diff2_game, 1, 1, S_LIGHTBULB);
+    game_play_move(diff2_game, 6, 6, S_LIGHTBULB);
 
-    bool ok = game_equal(base_game, equal_game) && !game_equal(base_game, diff_game);
+    bool ok = game_equal(base_game, equal_game);
+    ok = ok && !game_equal(base_game, diff1_game);
+    ok = ok && !game_equal(base_game, diff2_game);
+    ok = ok && !game_equal(diff1_game, diff2_game);
 
     game_delete(base_game);
     game_delete(equal_game);
-    game_delete(diff_game);
+    game_delete(diff1_game);
+    game_delete(diff2_game);
     return ok;
 }
 
