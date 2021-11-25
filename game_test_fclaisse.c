@@ -77,7 +77,6 @@ bool test_game_new(void) {
     }
 
     game_delete(test_game);
-
     return true;
 }
 
@@ -100,7 +99,6 @@ bool test_game_set_square(void) {
 
     game_delete(test_game);
     return true;
-
 }
 
 /* ********** TEST GAME IS LIGHTBULB ********** */
@@ -255,7 +253,7 @@ bool test_game_play_move(void) {
     return passed;
 }
 
-/* ********** TEST GAME restart ********** */
+/* ********** TEST GAME RESTART ********** */
 
 bool test_game_restart(void) {
     square squares[DEFAULT_SIZE * DEFAULT_SIZE] = {
@@ -320,7 +318,7 @@ void usage(int argc, char *argv[]) {
 
 int main(int argc, char *argv[]) {
 
-    if(argc == 1) 
+    if(argc == 1)
         usage(argc, argv);
 
     srand(time(NULL));
