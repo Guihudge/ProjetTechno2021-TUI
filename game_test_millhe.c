@@ -259,6 +259,9 @@ bool test_game_delete() {
         S_BLANK,  S_BLANK,  S_BLANK,  S_BLANK, S_BLACK2, S_BLANK,  S_BLANK,
         S_BLANK,  S_BLANK,  S_BLANK,  S_BLANK, S_BLACKU, S_BLANK,  S_BLANK};
     game g2 = game_new(test);
+    if (g2 == NULL) {
+        return false;
+    }
     game_delete(g2);
     return true;
 }
@@ -276,7 +279,13 @@ bool test_game_copy() {
         S_BLANK};
 
     game g2 = game_new(test);
+    if (g2 == NULL) {
+        return false;
+    }
     game g3 = game_copy(g2);
+    if (g3 == NULL) {
+        return false;
+    }
     bool oktest;
     if (!game_equal(g3, g2)) {
         game_delete(g2);
@@ -285,6 +294,9 @@ bool test_game_copy() {
     }
     game_update_flags(g2);
     game g4 = game_copy(g2);
+    if (g4 == NULL) {
+        return false;
+    }
     oktest = game_equal(g2, g4);
     game_delete(g2);
     game_delete(g3);
