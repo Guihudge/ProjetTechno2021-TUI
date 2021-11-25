@@ -1,6 +1,6 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #include "game.h"
 #include "game_aux.h"
@@ -69,10 +69,14 @@ int main(void) {
             game_delete(actual_game);
             printf("shame\n");
             return EXIT_SUCCESS;
-        } else if (cmd == 'l') scan_and_play_move(actual_game, S_LIGHTBULB);
-        else if (cmd == 'm') scan_and_play_move(actual_game, S_MARK);
-        else if (cmd == 'b') scan_and_play_move(actual_game, S_BLANK);
-        else printf("undefined command '%c', use h for help.\n", cmd);
+        } else if (cmd == 'l')
+            scan_and_play_move(actual_game, S_LIGHTBULB);
+        else if (cmd == 'm')
+            scan_and_play_move(actual_game, S_MARK);
+        else if (cmd == 'b')
+            scan_and_play_move(actual_game, S_BLANK);
+        else
+            printf("undefined command '%c', use h for help.\n", cmd);
 
         win = game_is_over(actual_game);
     }
