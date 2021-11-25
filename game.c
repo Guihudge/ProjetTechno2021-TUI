@@ -3,6 +3,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+struct game_s {
+    square **tab;
+    uint nb_row;
+    uint nb_col;
+};
+
 game game_new(square *squares) { return NULL; }
 
 game game_new_empty(void) { return NULL; }
