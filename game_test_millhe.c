@@ -10,15 +10,11 @@ bool test_dummy() { return true; }
 
 bool test_game_print() {
     square test[DEFAULT_SIZE * DEFAULT_SIZE] = {
-        S_LIGHTBULB, S_BLANK,  S_BLACK1, S_MARK,      S_BLANK,  S_BLANK,
-        S_BLANK,     S_BLANK,  S_BLANK,  S_BLACK2,    S_BLANK,  S_BLANK,
-        S_BLANK,     S_BLANK,  S_BLANK,  S_BLANK,     S_BLANK,  S_BLANK,
-        S_BLANK,     S_BLACKU, S_BLACK2, S_BLANK,     S_BLANK,  S_BLANK,
-        S_BLANK,     S_BLANK,  S_BLANK,  S_LIGHTBULB, S_BLACK1, S_BLACK0,
-        S_LIGHTBULB, S_BLANK,  S_BLANK,  S_BLANK,     S_BLANK,  S_BLANK,
-        S_BLANK,     S_BLACK4, S_BLANK,  S_BLACK3,    S_BLANK,  S_BLANK,
-        S_BLANK,     S_BLANK,  S_BLANK,  S_BLANK,     S_BLACKU, S_BLANK,
-        S_LIGHTBULB};
+        S_LIGHTBULB, S_BLANK, S_BLACK1, S_MARK,  S_BLANK, S_BLANK, S_BLANK,  S_BLANK,     S_BLANK,    S_BLACK2,
+        S_BLANK,     S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK,     S_BLANK,    S_BLACKU,
+        S_BLACK2,    S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_LIGHTBULB, S_BLACK1,   S_BLACK0,
+        S_LIGHTBULB, S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLACK4,    S_BLANK,    S_BLACK3,
+        S_BLANK,     S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK,     S_LIGHTBULB};
     game g2 = game_new(test);
     game_print(g2);
     game_delete(g2);
@@ -27,15 +23,11 @@ bool test_game_print() {
 
 bool test_game_get_flags() {
     square test_jeu[DEFAULT_SIZE * DEFAULT_SIZE] = {
-        S_LIGHTBULB, S_BLANK,  S_BLACK1, S_MARK,      S_BLANK,  S_BLANK,
-        S_BLANK,     S_BLANK,  S_BLANK,  S_BLACK2,    S_BLANK,  S_BLANK,
-        S_BLANK,     S_BLANK,  S_BLANK,  S_BLANK,     S_BLANK,  S_BLANK,
-        S_BLANK,     S_BLACKU, S_BLACK2, S_BLANK,     S_BLANK,  S_BLANK,
-        S_BLANK,     S_BLANK,  S_BLANK,  S_LIGHTBULB, S_BLACK1, S_BLACK0,
-        S_LIGHTBULB, S_BLANK,  S_BLANK,  S_BLANK,     S_BLANK,  S_BLANK,
-        S_BLANK,     S_BLACK4, S_BLANK,  S_BLACK3,    S_BLANK,  S_BLANK,
-        S_BLANK,     S_BLANK,  S_BLANK,  S_BLANK,     S_BLACKU, S_LIGHTBULB,
-        S_LIGHTBULB};
+        S_LIGHTBULB, S_BLANK, S_BLACK1, S_MARK,  S_BLANK, S_BLANK, S_BLANK,  S_BLANK,     S_BLANK,    S_BLACK2,
+        S_BLANK,     S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK,     S_BLANK,    S_BLACKU,
+        S_BLACK2,    S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_LIGHTBULB, S_BLACK1,   S_BLACK0,
+        S_LIGHTBULB, S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLACK4,    S_BLANK,    S_BLACK3,
+        S_BLANK,     S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_LIGHTBULB, S_LIGHTBULB};
     game g2 = game_new(test_jeu);
     game_update_flags(g2);
     square test;
@@ -65,13 +57,11 @@ bool test_game_get_flags() {
 
 bool test_game_get_black_number() {
     square test[DEFAULT_SIZE * DEFAULT_SIZE] = {
-        S_LIGHTBULB, S_BLANK,  S_BLACK1, S_MARK,  S_BLANK,  S_BLANK,  S_BLANK,
-        S_BLANK,     S_BLANK,  S_BLACK2, S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,
-        S_BLANK,     S_BLANK,  S_BLANK,  S_BLANK, S_BLANK,  S_BLACKU, S_BLACK2,
-        S_BLANK,     S_BLANK,  S_BLANK,  S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,
-        S_BLACK1,    S_BLACK0, S_BLANK,  S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,
-        S_BLANK,     S_BLANK,  S_BLACK4, S_BLANK, S_BLACK3, S_BLANK,  S_BLANK,
-        S_BLANK,     S_BLANK,  S_BLANK,  S_BLANK, S_BLACKU, S_BLANK,  S_BLANK};
+        S_LIGHTBULB, S_BLANK, S_BLACK1, S_MARK,  S_BLANK, S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,  S_BLACK2,
+        S_BLANK,     S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,  S_BLACKU,
+        S_BLACK2,    S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK,  S_BLACK1, S_BLACK0,
+        S_BLANK,     S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLACK4, S_BLANK,  S_BLACK3,
+        S_BLANK,     S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK,  S_BLANK};
 
     game g2 = game_new(test);
     game_update_flags(g2);
@@ -91,13 +81,11 @@ bool test_game_get_black_number() {
 
 bool test_game_get_state() {
     square test[DEFAULT_SIZE * DEFAULT_SIZE] = {
-        S_LIGHTBULB, S_BLANK,  S_BLACK1, S_MARK,  S_BLANK,  S_BLANK,  S_BLANK,
-        S_BLANK,     S_BLANK,  S_BLACK2, S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,
-        S_BLANK,     S_BLACK0, S_BLANK,  S_BLANK, S_BLANK,  S_BLACKU, S_BLACK2,
-        S_BLANK,     S_BLANK,  S_BLANK,  S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,
-        S_BLACK1,    S_BLACKU, S_BLANK,  S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,
-        S_BLANK,     S_BLANK,  S_BLACK4, S_BLANK, S_BLACK3, S_BLANK,  S_BLANK,
-        S_BLANK,     S_BLANK,  S_BLANK,  S_BLANK, S_BLACKU, S_BLANK,  S_BLANK};
+        S_LIGHTBULB, S_BLANK, S_BLACK1, S_MARK,  S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,  S_BLANK,  S_BLACK2,
+        S_BLANK,     S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLACK0, S_BLANK,  S_BLANK,  S_BLANK,  S_BLACKU,
+        S_BLACK2,    S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,  S_BLACK1, S_BLACKU,
+        S_BLANK,     S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK,  S_BLANK,  S_BLACK4, S_BLANK,  S_BLACK3,
+        S_BLANK,     S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK,  S_BLACKU, S_BLANK,  S_BLANK};
 
     game g2 = game_new(test);
     game_update_flags(g2);
@@ -152,27 +140,21 @@ bool test_game_get_state() {
 
 bool test_game_is_over() {
     square test[DEFAULT_SIZE * DEFAULT_SIZE] = {
-        S_BLANK,  S_BLANK,  S_BLACK1, S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,
-        S_BLANK,  S_BLANK,  S_BLACK2, S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,
-        S_BLANK,  S_BLANK,  S_BLANK,  S_BLANK, S_BLANK,  S_BLACKU, S_BLACK2,
-        S_BLANK,  S_BLANK,  S_BLANK,  S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,
-        S_BLACK1, S_BLACKU, S_BLANK,  S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,
-        S_BLANK,  S_BLANK,  S_BLANK,  S_BLANK, S_BLACK2, S_BLANK,  S_BLANK,
-        S_BLANK,  S_BLANK,  S_BLANK,  S_BLANK, S_BLACKU, S_BLANK,  S_BLANK};
+        S_BLANK,  S_BLANK, S_BLACK1, S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACK2,
+        S_BLANK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACKU,
+        S_BLACK2, S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLACK1, S_BLACKU,
+        S_BLANK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACK2,
+        S_BLANK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK};
 
     game g2 = game_new(test);
 
     square solution_test[DEFAULT_SIZE * DEFAULT_SIZE] = {
-        S_LIGHTBULB, S_BLANK,     S_BLACK1,    S_LIGHTBULB, S_BLANK,
-        S_BLANK,     S_BLANK,     S_BLANK,     S_LIGHTBULB, S_BLACK2,
-        S_BLANK,     S_BLANK,     S_BLANK,     S_LIGHTBULB, S_BLANK,
-        S_BLANK,     S_LIGHTBULB, S_BLANK,     S_BLANK,     S_BLACKU,
-        S_BLACK2,    S_BLANK,     S_BLANK,     S_BLANK,     S_BLANK,
-        S_BLANK,     S_BLANK,     S_LIGHTBULB, S_BLACK1,    S_BLACKU,
-        S_BLANK,     S_BLANK,     S_LIGHTBULB, S_BLANK,     S_BLANK,
-        S_LIGHTBULB, S_BLANK,     S_BLANK,     S_BLANK,     S_BLACK2,
-        S_LIGHTBULB, S_BLANK,     S_BLANK,     S_LIGHTBULB, S_BLANK,
-        S_BLANK,     S_BLACKU,    S_BLANK,     S_BLANK};
+        S_LIGHTBULB, S_BLANK,  S_BLACK1, S_LIGHTBULB, S_BLANK,     S_BLANK,     S_BLANK, S_BLANK,     S_LIGHTBULB,
+        S_BLACK2,    S_BLANK,  S_BLANK,  S_BLANK,     S_LIGHTBULB, S_BLANK,     S_BLANK, S_LIGHTBULB, S_BLANK,
+        S_BLANK,     S_BLACKU, S_BLACK2, S_BLANK,     S_BLANK,     S_BLANK,     S_BLANK, S_BLANK,     S_BLANK,
+        S_LIGHTBULB, S_BLACK1, S_BLACKU, S_BLANK,     S_BLANK,     S_LIGHTBULB, S_BLANK, S_BLANK,     S_LIGHTBULB,
+        S_BLANK,     S_BLANK,  S_BLANK,  S_BLACK2,    S_LIGHTBULB, S_BLANK,     S_BLANK, S_LIGHTBULB, S_BLANK,
+        S_BLANK,     S_BLACKU, S_BLANK,  S_BLANK};
     game sol_test = game_new(solution_test);
 
     if (game_is_over(sol_test)) {
@@ -231,33 +213,28 @@ bool test_game_is_over() {
 
 bool test_game_is_blanck() {
     square test[DEFAULT_SIZE * DEFAULT_SIZE] = {
-        S_LIGHTBULB, S_BLANK,  S_BLACK1, S_MARK,  S_BLANK,  S_BLANK,  S_BLANK,
-        S_BLANK,     S_BLANK,  S_BLACK2, S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,
-        S_BLANK,     S_BLANK,  S_BLANK,  S_BLANK, S_BLANK,  S_BLACKU, S_BLACK2,
-        S_BLANK,     S_BLANK,  S_BLANK,  S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,
-        S_BLACK1,    S_BLACKU, S_BLANK,  S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,
-        S_BLANK,     S_BLANK,  S_BLACK4, S_BLANK, S_BLACK3, S_BLANK,  S_BLANK,
-        S_BLANK,     S_BLANK,  S_BLANK,  S_BLANK, S_BLACKU, S_BLANK,  S_BLANK};
+        S_LIGHTBULB, S_BLANK, S_BLACK1, S_MARK,  S_BLANK, S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,  S_BLACK2,
+        S_BLANK,     S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,  S_BLACKU,
+        S_BLACK2,    S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK,  S_BLACK1, S_BLACKU,
+        S_BLANK,     S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLACK4, S_BLANK,  S_BLACK3,
+        S_BLANK,     S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK,  S_BLANK};
 
     game g2 = game_new(test);
     game_update_flags(g2);
 
-    bool oktest = !game_is_blank(g2, 0, 0) && game_is_blank(g2, 0, 1) &&
-                  !game_is_blank(g2, 0, 2) && !game_is_blank(g2, 0, 3) &&
-                  !game_is_blank(g2, 1, 2) && !game_is_blank(g2, 4, 1) &&
+    bool oktest = !game_is_blank(g2, 0, 0) && game_is_blank(g2, 0, 1) && !game_is_blank(g2, 0, 2) &&
+                  !game_is_blank(g2, 0, 3) && !game_is_blank(g2, 1, 2) && !game_is_blank(g2, 4, 1) &&
                   !game_is_blank(g2, 5, 2) && !game_is_blank(g2, 5, 4);
     game_delete(g2);
     return oktest;
 }
 bool test_game_delete() {
     square test[DEFAULT_SIZE * DEFAULT_SIZE] = {
-        S_BLANK,  S_BLANK,  S_BLACK1, S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,
-        S_BLANK,  S_BLANK,  S_BLACK2, S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,
-        S_BLANK,  S_BLANK,  S_BLANK,  S_BLANK, S_BLANK,  S_BLACKU, S_BLACK2,
-        S_BLANK,  S_BLANK,  S_BLANK,  S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,
-        S_BLACK1, S_BLACKU, S_BLANK,  S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,
-        S_BLANK,  S_BLANK,  S_BLANK,  S_BLANK, S_BLACK2, S_BLANK,  S_BLANK,
-        S_BLANK,  S_BLANK,  S_BLANK,  S_BLANK, S_BLACKU, S_BLANK,  S_BLANK};
+        S_BLANK,  S_BLANK, S_BLACK1, S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACK2,
+        S_BLANK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACKU,
+        S_BLACK2, S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLACK1, S_BLACKU,
+        S_BLANK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACK2,
+        S_BLANK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK};
     game g2 = game_new(test);
     if (g2 == NULL) {
         return false;
@@ -268,15 +245,11 @@ bool test_game_delete() {
 
 bool test_game_copy() {
     square test[DEFAULT_SIZE * DEFAULT_SIZE] = {
-        S_LIGHTBULB, S_LIGHTBULB, S_BLACK1, S_MARK,   S_BLANK,  S_BLANK,
-        S_BLANK,     S_BLANK,     S_BLANK,  S_BLACK2, S_BLANK,  S_BLANK,
-        S_BLANK,     S_BLANK,     S_BLANK,  S_BLANK,  S_BLANK,  S_BLANK,
-        S_BLANK,     S_BLACK0,    S_BLACK2, S_BLANK,  S_BLANK,  S_BLANK,
-        S_BLANK,     S_BLANK,     S_BLANK,  S_BLANK,  S_BLACK3, S_BLACKU,
-        S_BLANK,     S_BLANK,     S_BLANK,  S_BLANK,  S_BLANK,  S_BLANK,
-        S_BLANK,     S_BLANK,     S_BLANK,  S_BLACK4, S_BLANK,  S_BLANK,
-        S_BLANK,     S_BLANK,     S_BLANK,  S_BLANK,  S_BLACKU, S_BLANK,
-        S_BLANK};
+        S_LIGHTBULB, S_LIGHTBULB, S_BLACK1, S_MARK,  S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACK2,
+        S_BLANK,     S_BLANK,     S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACK0,
+        S_BLACK2,    S_BLANK,     S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLACK3, S_BLACKU,
+        S_BLANK,     S_BLANK,     S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACK4,
+        S_BLANK,     S_BLANK,     S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK};
 
     game g2 = game_new(test);
     if (g2 == NULL) {
