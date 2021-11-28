@@ -100,13 +100,35 @@ bool game_is_blank(cgame g, uint i, uint j) { return true; }
 
 bool game_is_lightbulb(cgame g, uint i, uint j) { return true; }
 
-bool game_is_black(cgame g, uint i, uint j) { return true; }
+bool game_is_black(cgame g, uint i, uint j) {
+    checkmem(g);
+
+    square tiles = g->tab[i][j];
+    char mask = 247;  // 11110111
+    tiles = tiles | mask;
+    tiles = tiles - mask;
+    fprintf(stderr, "val[%d][%d] = %d\n", i, j, tiles);
+    if (tiles == 8) {
+        return true;
+    }
+    else{
+        return false;
+    }
+}
 
 int game_get_black_number(cgame g, uint i, uint j) { return 1; }
 
 bool game_is_marked(cgame g, uint i, uint j) { return true; }
 
-bool game_is_lighted(cgame g, uint i, uint j) { return true; }
+bool game_is_lighted(cgame g, uint i, uint j) {
+    checkmem(g);
+
+    square tiles = g->tab[i][j];
+    char mask = 239;  // 11101111
+    tiles = tiles | mask;
+    tiles = tiles - mask;
+    return (tiles == 16);
+}
 
 bool game_has_error(cgame g, uint i, uint j) { return true; }
 
@@ -118,4 +140,8 @@ void game_update_flags(game g) {}
 
 bool game_is_over(cgame g) { return true; }
 
-void game_restart(game g) {}
+void game_restart(game g) {
+    checkmem(g);
+
+    
+}
