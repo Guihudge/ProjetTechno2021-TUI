@@ -139,6 +139,10 @@ bool test_game_default() {
 
     game default_game = game_default();
 
+    if(default_game == NULL){
+        return false;
+    }
+
     bool ok = game_equal(test_game, default_game);
     game_delete(test_game);
     game_delete(default_game);
@@ -275,6 +279,10 @@ bool test_game_equal() {
 /*test_game_new_empty*/
 bool test_game_new_empty() {
     game blank_game = game_new_empty();
+
+    if (blank_game == NULL){
+        return false;
+    }
 
     for (int i = 0; i < DEFAULT_SIZE; i++) {
         for (int y = 0; y < DEFAULT_SIZE; y++) {
