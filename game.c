@@ -110,8 +110,7 @@ bool game_is_black(cgame g, uint i, uint j) {
     fprintf(stderr, "val[%d][%d] = %d\n", i, j, tiles);
     if (tiles == 8) {
         return true;
-    }
-    else{
+    } else {
         return false;
     }
 }
@@ -140,8 +139,4 @@ void game_update_flags(game g) {}
 
 bool game_is_over(cgame g) { return true; }
 
-void game_restart(game g) {
-    checkmem(g);
-
-    
-}
+void game_restart(game g) { checkmem(g); }
