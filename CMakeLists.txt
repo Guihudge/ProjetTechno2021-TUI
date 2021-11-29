@@ -11,7 +11,7 @@ enable_testing()
 set(CMAKE_C_FLAGS "-std=c99 -Wall")
 
 #cration des libraire
-add_library(game game_aux.c game.c)
+add_library(game game_aux.c game.c auxiliars.c)
 
 #création de l'éxécutable
 add_executable(game_text game_text.c)
