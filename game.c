@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "auxiliars.h"
 struct game_s {
     square **tab;
     uint nb_row;
@@ -52,7 +53,11 @@ game game_new(square *init_tab) {
     return g;
 }
 
-game game_new_empty(void) { return NULL; }
+game game_new_empty(void) { 
+    square game_square[DEFAULT_SIZE * DEFAULT_SIZE] = {S_BLANK};
+
+    return game_new(game_square);
+ }
 
 game game_copy(cgame g) { return NULL; }
 
@@ -83,7 +88,12 @@ void game_delete(game g) {
 
 void game_set_square(game g, uint i, uint j, square s) {}
 
-square game_get_square(cgame g, uint i, uint j) { return S_BLANK; }
+square game_get_square(cgame g, uint i, uint j) { 
+    is_viable_pointer(g, "pointer");
+    check_coordinates(g, i, j, __func__);
+
+    return g->tab[i][j];
+}
 
 square game_get_state(cgame g, uint i, uint j) {
     checkmem(g);
