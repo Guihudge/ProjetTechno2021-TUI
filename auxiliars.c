@@ -15,7 +15,7 @@ void pointer_error(void) {
 }
 
 void is_viable_pointer(const void *pointer, const char *type) {
-    if (!pointer) {
+    if (pointer == NULL) {
         if (strcmp("memory", type) == 0)
             memory_error();
         else if (strcmp("pointer", type) == 0)
@@ -27,8 +27,8 @@ void is_viable_pointer(const void *pointer, const char *type) {
     }
 }
 
-void check_coordinates(cgame g, uint i, uint j, const char *fonction) {
-    if (i >= DEFAULT_SIZE || j >= DEFAULT_SIZE) {
+void check_coordinates(uint i, uint j, const char *fonction) {
+    if (i >= DEFAULT_SIZE || j >= DEFAULT_SIZE || i < 0 || j < 0) {
         fprintf(stderr, "Wrong arguments (%d,%d) for (%d,%d) inside %s call\n", i, j, DEFAULT_SIZE, DEFAULT_SIZE,
                 fonction);
         exit(EXIT_FAILURE);

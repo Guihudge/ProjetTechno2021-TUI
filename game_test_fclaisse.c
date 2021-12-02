@@ -256,7 +256,7 @@ bool test_game_restart(void) {
 
     g_true = game_default();
 
-    if(g_true == NULL) exit(EXIT_FAILURE);
+    if (g_true == NULL) exit(EXIT_FAILURE);
 
     bool failed = false;
 

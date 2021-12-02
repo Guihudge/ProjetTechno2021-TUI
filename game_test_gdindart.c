@@ -139,7 +139,7 @@ bool test_game_default() {
 
     game default_game = game_default();
 
-    if(default_game == NULL){
+    if (default_game == NULL) {
         return false;
     }
 
@@ -280,7 +280,7 @@ bool test_game_equal() {
 bool test_game_new_empty() {
     game blank_game = game_new_empty();
 
-    if (blank_game == NULL){
+    if (blank_game == NULL) {
         return false;
     }
 
