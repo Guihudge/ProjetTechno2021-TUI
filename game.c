@@ -12,7 +12,6 @@ struct game_s {
 };
 
 game create_game_struct(int nrow, int ncol) {
-
     game ngame = malloc(sizeof(struct game_s));
     is_viable_pointer(ngame, "memory");
 
@@ -71,10 +70,14 @@ void game_delete(game g) {
     is_viable_pointer(g, "pointer");
 
     // Rajouter des conditions pour ne pas free sur pointeur NULL
-    for (uint x = 0; x < g->nb_row; x++) {
-        free(g->tab[x]);
+    if (g->tab != NULL) {
+        for (uint x = 0; x < g->nb_row; x++) {
+            if (g->tab[x] != NULL) {
+                free(g->tab[x]);
+            }
+        }
+        free(g->tab);
     }
-    free(g->tab);
     free(g);
 }
 
@@ -92,10 +95,7 @@ square game_get_state(cgame g, uint i, uint j) {
     check_coordinates(i, j, __func__);
 
     square tiles = g->tab[i][j];
-    // Utiliser les DEFINE dans game.h
-    char mask_flags = 48;  // 00110000
-    tiles = tiles | mask_flags;
-    tiles = tiles - 48;
+    tiles = tiles & S_MASK;
     return tiles;
 }
 
@@ -110,17 +110,8 @@ bool game_is_black(cgame g, uint i, uint j) {
     check_coordinates(i, j, __func__);
 
     square tiles = g->tab[i][j];
-    // Utiliser les DEFINE dans game.h
-    char mask = (char)247;  // 11110111
-    tiles = tiles | mask;
-    tiles = tiles - mask;
-    fprintf(stderr, "val[%d][%d] = %d\n", i, j, tiles);
-    // return tiles == 8 ?
-    if (tiles == 8) {
-        return true;
-    } else {
-        return false;
-    }
+    tiles = tiles & S_BLACK;
+    return (tiles == S_BLACK);
 }
 
 int game_get_black_number(cgame g, uint i, uint j) { return 1; }
@@ -132,10 +123,8 @@ bool game_is_lighted(cgame g, uint i, uint j) {
     check_coordinates(i, j, __func__);
 
     square tiles = g->tab[i][j];
-    char mask = (char)239;  // 11101111
-    tiles = tiles | mask;
-    tiles = tiles - mask;
-    return (tiles == 16);
+    tiles = tiles & F_LIGHTED;
+    return (tiles == F_LIGHTED);
 }
 
 bool game_has_error(cgame g, uint i, uint j) { return true; }
@@ -148,4 +137,13 @@ void game_update_flags(game g) {}
 
 bool game_is_over(cgame g) { return true; }
 
-void game_restart(game g) { is_viable_pointer(g, "pointer"); }
+void game_restart(game g) {
+    is_viable_pointer(g, "pointer");
+    for (uint x = 0; x < g->nb_row; x++) {
+        for (uint y = 0; y < g->nb_col; y++) {
+            if (!game_is_black(g, x, y)) {
+                g->tab[x][y] = 0;
+            }
+        }
+    }
+}
