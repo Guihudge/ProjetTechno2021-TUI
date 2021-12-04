@@ -99,18 +99,23 @@ square game_get_state(cgame g, uint i, uint j) {
     return tiles;
 }
 
-square game_get_flags(cgame g, uint i, uint j) { 
+square game_get_flags(cgame g, uint i, uint j) {
     is_viable_pointer(g, "pointer");
     check_coordinates(i, j, __func__);
 
     square tile = game_get_square(g, i, j);
 
     return tile & F_MASK;
- }
+}
 
 bool game_is_blank(cgame g, uint i, uint j) { return true; }
 
-bool game_is_lightbulb(cgame g, uint i, uint j) { return true; }
+bool game_is_lightbulb(cgame g, uint i, uint j) {
+    is_viable_pointer(g, "pointer");
+    check_coordinates(i, j, __func__);
+
+    return game_get_state(g, i, j) == S_LIGHTBULB;
+}
 
 bool game_is_black(cgame g, uint i, uint j) {
     is_viable_pointer(g, "pointer");
