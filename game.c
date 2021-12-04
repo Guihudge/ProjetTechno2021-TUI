@@ -141,7 +141,24 @@ bool game_is_lighted(cgame g, uint i, uint j) {
 
 bool game_has_error(cgame g, uint i, uint j) { return true; }
 
-bool game_check_move(cgame g, uint i, uint j, square s) { return true; }
+bool game_check_move(cgame g, uint i, uint j, square s) {
+    is_viable_pointer(g, "pointer");
+
+    if(s != S_BLANK && s != S_LIGHTBULB && s != S_MARK) {
+        printf("error state");
+        return false;
+    }
+    if(i >= DEFAULT_SIZE || i < 0 || j >= DEFAULT_SIZE || j < 0) {
+        printf("error coordinates");
+        return false;
+    }
+    if(game_is_black(g, i, j)) {
+        printf("error black wall");
+        return false;
+    }
+
+    return true;
+}
 
 void game_play_move(game g, uint i, uint j, square s) {}
 

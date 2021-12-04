@@ -28,7 +28,7 @@ void is_viable_pointer(const void *pointer, const char *type) {
 }
 
 void check_coordinates(uint i, uint j, const char *fonction) {
-    if (i >= DEFAULT_SIZE || j >= DEFAULT_SIZE || i < 0 || j < 0) {
+    if (i >= DEFAULT_SIZE || j >= DEFAULT_SIZE) {
         fprintf(stderr, "Wrong arguments (%d,%d) for (%d,%d) inside %s call\n", i, j, DEFAULT_SIZE, DEFAULT_SIZE,
                 fonction);
         exit(EXIT_FAILURE);
