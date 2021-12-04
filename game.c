@@ -99,7 +99,14 @@ square game_get_state(cgame g, uint i, uint j) {
     return tiles;
 }
 
-square game_get_flags(cgame g, uint i, uint j) { return S_BLANK; }
+square game_get_flags(cgame g, uint i, uint j) { 
+    is_viable_pointer(g, "pointer");
+    check_coordinates(i, j, __func__);
+
+    square tile = game_get_square(g, i, j);
+
+    return tile & F_MASK;
+ }
 
 bool game_is_blank(cgame g, uint i, uint j) { return true; }
 
