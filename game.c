@@ -11,6 +11,63 @@ struct game_s {
     uint nb_col;
 };
 
+void reset_flags(game g) {
+    is_viable_pointer(g, "pointer");
+
+    for(uint i = 0; i < g->nb_row; i++) {
+        for(uint j = 0; j < g->nb_col; j++) {
+            game_set_square(g, i, j, game_get_state(g, i, j));
+        }
+    }
+}
+
+bool check_black_wall(cgame g, uint i, uint j) {
+    is_viable_pointer(g, "pointer");
+    check_coordinates(i, j, __func__);
+
+    int black_number = game_get_black_number(g, i, j);
+    uint lightbulb_number = 0;
+
+    if(black_number == -1) return false;
+
+    if(j > 0 && game_is_lightbulb(g, i, j--)) lightbulb_number++;
+    if(j < DEFAULT_SIZE - 1 && game_is_lightbulb(g, i, j++)) lightbulb_number++;
+    if(i > 0 && game_is_lightbulb(g, i--, j)) lightbulb_number++;
+    if(i < DEFAULT_SIZE - 1 && game_is_lightbulb(g, i, j)) lightbulb_number++;
+
+    return lightbulb_number > black_number;
+}
+
+void update_row(game g, uint i, uint j) {
+    is_viable_pointer(g, "pointer");
+    check_coordinates(i, j, __func__);
+
+    for(uint y = i; y < g->nb_row; y++) {
+        if(game_is_black(g, y, j)) break;
+        else g->tab[y][j] = g->tab[y][j] | F_LIGHTED;
+    }
+
+    for(uint y = i; y >= 0; y--) {
+        if(game_is_black(g, y, j)) break;
+        else g->tab[y][j] = g->tab[y][j] | F_LIGHTED;
+    }
+}
+
+void update_col(game g, uint i, uint j) {
+    is_viable_pointer(g, "pointer");
+    check_coordinates(i, j, __func__);
+
+    for(uint x = j; x < g->nb_col; x++) {
+        if(game_is_black(g, i, x)) break;
+        else g->tab[i][x] = g->tab[i][x] | F_LIGHTED;
+    }
+
+    for(uint x = j; x >= 0; x--) {
+        if(game_is_black(g, i, x)) break;
+        else g->tab[i][x] = g->tab[i][x] | F_LIGHTED;
+    }
+}
+
 game create_game_struct(int nrow, int ncol) {
     game ngame = malloc(sizeof(struct game_s));
     is_viable_pointer(ngame, "memory");
@@ -171,7 +228,50 @@ void game_play_move(game g, uint i, uint j, square s) {
     game_update_flags(g);
 }
 
-void game_update_flags(game g) {}
+void game_update_flags(game g) {
+    is_viable_pointer(g, "pointer");
+
+    reset_flags(g);
+
+    uint lightbulb_row = 0;
+    uint lightbulb_col = 0;
+
+    for(uint i = 0; i < g->nb_row; i++) {
+        for(uint j = 0; j < g->nb_col; j++) {
+            if(game_is_black(g, i, j) && check_black_wall(g, i, j)) {
+                g->tab[i][j] = g->tab[i][j] | F_ERROR;
+            }
+            else if(game_is_lightbulb(g, i, j)) {
+                update_col(g, i, j);
+                update_row(g, i, j);
+            }
+        }
+    }
+
+    for(uint i = 0; i < g->nb_row; i++) {
+        for(uint j = 0; j < g->nb_col; j++) {
+            if(game_is_black(g, i, j)) lightbulb_col = 0;
+            if(game_is_lightbulb(g, i, j) && lightbulb_col) {
+                g->tab[i][j] = g->tab[i][j] | F_ERROR;
+                g->tab[i][lightbulb_col] = g->tab[i][lightbulb_col] | F_ERROR;
+            }
+            if(game_is_lightbulb(g, i, j)) lightbulb_col = j;
+        }
+        lightbulb_col = 0;
+    }
+
+    for(uint j = 0; j < g->nb_col; j++) {
+        for(uint i = 0; i < g->nb_row; i++) {
+            if(game_is_black(g, i, j)) lightbulb_row = 0;
+            if(game_is_lightbulb(g, i, j) && lightbulb_row) {
+                g->tab[i][j] = g->tab[i][j] | F_ERROR;
+                g->tab[i][lightbulb_row] = g->tab[i][lightbulb_row] | F_ERROR;
+            }
+            if(game_is_lightbulb(g, i, j)) lightbulb_row = i;
+        }
+        lightbulb_row = 0;
+    }
+}
 
 bool game_is_over(cgame g) { return true; }
 
