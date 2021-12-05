@@ -160,7 +160,16 @@ bool game_check_move(cgame g, uint i, uint j, square s) {
     return true;
 }
 
-void game_play_move(game g, uint i, uint j, square s) {}
+void game_play_move(game g, uint i, uint j, square s) {
+    is_viable_pointer(g, "pointer");
+    check_coordinates(i, j, __func__);
+
+    if(!game_check_move(g, i, j, s)) 
+        exit(EXIT_FAILURE);
+
+    game_set_square(g, i, j, s);
+    game_update_flags(g);
+}
 
 void game_update_flags(game g) {}
 

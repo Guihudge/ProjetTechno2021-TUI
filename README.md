@@ -1,6 +1,6 @@
 # lightup-a41d
 
-## Test:
+## Test
 
 - @fclaisse
   - dummy
@@ -43,7 +43,6 @@
   - game_is_lightbulb
   - game_play_move
   - game_check_move
-
 - @gdindart
   - game_new
   - game_equal
@@ -60,7 +59,8 @@
   - game_is_marked
   - game_has_error
   - game_is_over
-## Membres du groupe:
+
+## Membres du groupe
 
 - @fclaisse
 - @gdindart
