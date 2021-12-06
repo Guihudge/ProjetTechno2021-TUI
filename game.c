@@ -70,7 +70,9 @@ void update_col(game g, uint i, uint j) {
 
 game create_game_struct(int nrow, int ncol) {
     game ngame = malloc(sizeof(struct game_s));
-    is_viable_pointer(ngame, "memory");
+    if (ngame == NULL){
+        pointer_error();
+    }
 
     ngame->tab = malloc(sizeof(square *) * nrow);
     is_viable_pointer(ngame->tab, "memory");
@@ -307,7 +309,7 @@ bool game_is_over(cgame g) {
     is_viable_pointer(g, "pointer");
     for (uint x = 0; x < g->nb_col; x++) {
         for (uint y = 0; y < g->nb_row; y++){
-            if (!game_is_black(g, x, y) && !game_is_lighted(g, x, y) || game_has_error(g, x, y)){
+            if ((!game_is_black(g, x, y) && !game_is_lighted(g, x, y)) || game_has_error(g, x, y)){
                 return false;
             }
             
