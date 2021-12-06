@@ -175,7 +175,7 @@ bool game_is_blank(cgame g, uint i, uint j) {
     } else {
         return false;
     }
- }
+}
 
 bool game_is_lightbulb(cgame g, uint i, uint j) {
     is_viable_pointer(g, "pointer");
@@ -195,7 +195,17 @@ bool game_is_black(cgame g, uint i, uint j) {
 
 int game_get_black_number(cgame g, uint i, uint j) { return 1; }
 
-bool game_is_marked(cgame g, uint i, uint j) { return true; }
+bool game_is_marked(cgame g, uint i, uint j) { 
+    is_viable_pointer(g, "pointer");
+    check_coordinates(i, j, __func__);
+
+    square tiles = g->tab[i][j];
+    if (tiles & S_MARK == S_MARK){
+        return true;
+    } else {
+        return false;
+    } 
+}
 
 bool game_is_lighted(cgame g, uint i, uint j) {
     is_viable_pointer(g, "pointer");
