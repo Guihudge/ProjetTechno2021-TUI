@@ -25,6 +25,7 @@ bool test_game_update_flags() {
     game test_game = game_default();
     game_set_square(test_game, 0, 6, S_LIGHTBULB);
 
+    //print_bool(ok, "calling update flags, ok = ");
     // update flags
     game_update_flags(test_game);
 
@@ -52,6 +53,8 @@ bool test_game_update_flags() {
             break;
         }
         ok = ok && !game_is_lighted(test_game, x_check, 6);
+        fprintf(stderr, "coord (%d, 6), ", x_check);
+        print_bool(ok, "ok = ");
         x_check++;
     }
     print_bool(ok, "after 'colone après le mur' ok = ");
@@ -63,6 +66,8 @@ bool test_game_update_flags() {
             break;
         }
         ok = ok && game_is_lighted(test_game, 0, y_check);
+        fprintf(stderr, "coord (0, %d), ", y_check);
+        print_bool(ok, "ok = ");
         y_check--;
     }
     print_bool(ok, "after 'ligne avant le mur' ok = ");
@@ -73,6 +78,8 @@ bool test_game_update_flags() {
             break;
         }
         ok = ok && !game_is_lighted(test_game, 0, y_check);
+        fprintf(stderr, "coord (0, %d), ", y_check);
+        print_bool(ok, "ok = ");
         y_check--;
     }
     print_bool(ok, "after 'ligne après le mur' ok = ");
