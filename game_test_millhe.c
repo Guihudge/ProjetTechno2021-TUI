@@ -64,14 +64,14 @@ bool test_game_get_black_number() {
         S_BLANK,     S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK,  S_BLANK};
 
     game g2 = game_new(test);
-    //game_update_flags(g2);
+    // game_update_flags(g2);
     int t1 = game_get_black_number(g2, 0, 2);
     int t2 = game_get_black_number(g2, 1, 2);
     int t3 = game_get_black_number(g2, 5, 4);
     int t4 = game_get_black_number(g2, 5, 2);
     int t = game_get_black_number(g2, 4, 1);
     int t5 = game_get_black_number(g2, 6, 4);
-    fprintf(stderr,"t = %d, t1 = %d, t2 = %d, t3 = %d, t4 = %d, t5 = %d\n", t, t1, t2, t3, t4, t5);
+    fprintf(stderr, "t = %d, t1 = %d, t2 = %d, t3 = %d, t4 = %d, t5 = %d\n", t, t1, t2, t3, t4, t5);
     if (t != 0 || t1 != 1 || t2 != 2 || t3 != 3 || t4 != 4 || t5 != -1) {
         game_delete(g2);
         return false;

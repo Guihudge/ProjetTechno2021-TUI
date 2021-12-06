@@ -99,13 +99,11 @@ bool test_game_set_square(void) {
 
 bool test_game_is_lightbulb(void) {
     square test_square[DEFAULT_SIZE * DEFAULT_SIZE] = {
-        S_LIGHTBULB, S_LIGHTBULB, S_BLACK1, S_BLANK, S_BLANK, S_BLANK,  S_LIGHTBULB,
-        S_BLANK,     S_BLANK,     S_BLACK2, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, 
-        S_BLANK,     S_BLANK,     S_BLANK,  S_BLANK, S_BLANK, S_BLACKU, S_BLACK2,
-        S_BLANK,     S_BLANK,     S_BLANK,  S_BLANK, S_BLANK, S_BLANK,  S_BLANK, 
-        S_BLACK1,    S_BLACKU,    S_BLANK,  S_BLANK, S_BLANK, S_BLANK,  S_BLANK, 
-        S_BLANK,     S_BLANK,     S_BLANK,  S_BLANK, S_BLACK2,S_BLANK,  S_BLANK,
-        S_MARK,      S_BLANK,     S_BLANK,  S_BLANK, S_BLACKU,S_BLANK,  S_BLANK};
+        S_LIGHTBULB, S_LIGHTBULB, S_BLACK1, S_BLANK, S_BLANK, S_BLANK, S_LIGHTBULB, S_BLANK, S_BLANK,  S_BLACK2,
+        S_BLANK,     S_BLANK,     S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,     S_BLANK, S_BLANK,  S_BLACKU,
+        S_BLACK2,    S_BLANK,     S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,     S_BLANK, S_BLACK1, S_BLACKU,
+        S_BLANK,     S_BLANK,     S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,     S_BLANK, S_BLANK,  S_BLACK2,
+        S_BLANK,     S_BLANK,     S_MARK,   S_BLANK, S_BLANK, S_BLANK, S_BLACKU,    S_BLANK, S_BLANK};
 
     game test_game = game_new(test_square);
 

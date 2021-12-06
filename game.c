@@ -344,9 +344,6 @@ void game_update_flags(game g) {
 
     reset_flags(g);
 
-    uint lightbulb_row = 0;
-    uint lightbulb_col = 0;
-
     for (uint i = 0; i < g->nb_row; i++) {
         for (uint j = 0; j < g->nb_col; j++) {
             if (game_is_black(g, i, j) && check_black_wall(g, i, j)) {

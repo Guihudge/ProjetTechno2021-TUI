@@ -25,7 +25,7 @@ bool test_game_update_flags() {
     game test_game = game_default();
     game_set_square(test_game, 0, 6, S_LIGHTBULB);
 
-    //print_bool(ok, "calling update flags, ok = ");
+    // print_bool(ok, "calling update flags, ok = ");
     // update flags
     game_update_flags(test_game);
 
