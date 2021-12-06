@@ -165,7 +165,17 @@ square game_get_flags(cgame g, uint i, uint j) {
     return tile & F_MASK;
 }
 
-bool game_is_blank(cgame g, uint i, uint j) { return true; }
+bool game_is_blank(cgame g, uint i, uint j) { 
+    is_viable_pointer(g, "pointer");
+    check_coordinates(i, j, __func__);
+
+    square tiles = g->tab[i][j];
+    if (tiles & S_BLANK == S_BLANK){
+        return true;
+    } else {
+        return false;
+    }
+ }
 
 bool game_is_lightbulb(cgame g, uint i, uint j) {
     is_viable_pointer(g, "pointer");
