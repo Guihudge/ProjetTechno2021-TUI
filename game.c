@@ -205,7 +205,18 @@ bool game_is_black(cgame g, uint i, uint j) {
     return (tiles == S_BLACK);
 }
 
-int game_get_black_number(cgame g, uint i, uint j) { return 1; }
+int game_get_black_number(cgame g, uint i, uint j) {
+    is_viable_pointer(g, "pointer");
+    check_coordinates(i, j, __func__);
+
+    square tiles = game_get_square(g, i, j);
+    if ((tiles & S_BLACK0) == S_BLACK0){ return 0 ;}
+    if ((tiles & S_BLACK1) == S_BLACK1){ return 1 ;}
+    if ((tiles & S_BLACK2) == S_BLACK2){ return 2 ;}
+    if ((tiles & S_BLACK3) == S_BLACK3){ return 3 ;}
+    if ((tiles & S_BLACK4) == S_BLACK4){ return 4 ;}
+    if ((tiles & S_BLACKU) == S_BLACKU){ return -1 ;}
+}
 
 bool game_is_marked(cgame g, uint i, uint j) { 
     is_viable_pointer(g, "pointer");
