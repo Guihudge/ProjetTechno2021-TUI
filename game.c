@@ -43,13 +43,13 @@ bool check_black_wall(cgame g, uint i, uint j) {
         start_y = j - 1;
     }
 
-    if (i + 1 >= g -> nb_col) {
-        end_x = g -> nb_col - 1;
+    if (i + 1 >= g->nb_col) {
+        end_x = g->nb_col - 1;
     } else {
         end_x = i + 1;
     }
-    if (j + 1 >= g -> nb_row) {
-        end_y = g -> nb_row - 1;
+    if (j + 1 >= g->nb_row) {
+        end_y = g->nb_row - 1;
     } else {
         end_y = j + 1;
     }
@@ -360,26 +360,35 @@ void game_update_flags(game g) {
 
     for (uint i = 0; i < g->nb_row; i++) {
         for (uint j = 0; j < g->nb_col; j++) {
-            if (game_is_black(g, i, j)) lightbulb_col = 0;
-            if (game_is_lightbulb(g, i, j) && lightbulb_col) {
-                g->tab[i][j] = g->tab[i][j] | F_ERROR;
-                g->tab[i][lightbulb_col] = g->tab[i][lightbulb_col] | F_ERROR;
+            if (game_is_lightbulb(g, i, j)) {
+                int x_check = i;
+                int y_check = j;
+                while (x_check < DEFAULT_SIZE)  // colone avant le mur
+                {
+                    if (game_is_black(g, x_check, j)) {
+                        break;
+                    }
+                    if (game_is_lightbulb(g, x_check, j) && x_check != i){
+                        fprintf(stderr, "Error on (%d, %d) x\n", x_check, j);
+                        g -> tab[x_check][j] = g -> tab[x_check][j] | F_ERROR;
+                        g -> tab[i][j] = g -> tab[i][j] | F_ERROR;
+                    }
+                    x_check++;
+                }
+                while (y_check < DEFAULT_SIZE)  // colone avant le mur
+                {
+                    if (game_is_black(g, i, y_check)) {
+                        break;
+                    }
+                    if (game_is_lightbulb(g, i, y_check) && y_check != j){
+                        fprintf(stderr, "Error on (%d, %d) y \n", i, y_check);
+                        g -> tab[i][y_check] = g -> tab[i][y_check] | F_ERROR;
+                        g -> tab[i][j] = g -> tab[i][j] | F_ERROR;
+                    }
+                    y_check++;
+                }
             }
-            if (game_is_lightbulb(g, i, j)) lightbulb_col = j;
         }
-        lightbulb_col = 0;
-    }
-
-    for (uint j = 0; j < g->nb_col; j++) {
-        for (uint i = 0; i < g->nb_row; i++) {
-            if (game_is_black(g, i, j)) lightbulb_row = 0;
-            if (game_is_lightbulb(g, i, j) && lightbulb_row) {
-                g->tab[i][j] = g->tab[i][j] | F_ERROR;
-                g->tab[i][lightbulb_row] = g->tab[i][lightbulb_row] | F_ERROR;
-            }
-            if (game_is_lightbulb(g, i, j)) lightbulb_row = i;
-        }
-        lightbulb_row = 0;
     }
 }
 
