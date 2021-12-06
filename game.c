@@ -159,7 +159,12 @@ void game_delete(game g) {
     free(g);
 }
 
-void game_set_square(game g, uint i, uint j, square s) {}
+void game_set_square(game g, uint i, uint j, square s) {
+    is_viable_pointer(g, "pointer");
+    check_coordinates(i, j, __func__);
+
+    g->tab[i][j] = s;
+}
 
 square game_get_square(cgame g, uint i, uint j) {
     is_viable_pointer(g, "pointer");
