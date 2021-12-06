@@ -216,7 +216,17 @@ bool game_is_lighted(cgame g, uint i, uint j) {
     return (tiles == F_LIGHTED);
 }
 
-bool game_has_error(cgame g, uint i, uint j) { return true; }
+bool game_has_error(cgame g, uint i, uint j) { 
+    is_viable_pointer(g, "pointer");
+    check_coordinates(i, j, __func__);
+
+    square tiles = g->tab[i][j];
+    if (tiles & F_ERROR == F_ERROR) { 
+        return true;
+    }else {
+        return false;
+    }
+}
 
 bool game_check_move(cgame g, uint i, uint j, square s) {
     is_viable_pointer(g, "pointer");
