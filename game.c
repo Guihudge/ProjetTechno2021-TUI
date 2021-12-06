@@ -170,7 +170,7 @@ bool game_is_blank(cgame g, uint i, uint j) {
     check_coordinates(i, j, __func__);
 
     square tiles = g->tab[i][j];
-    if (tiles & S_BLANK == S_BLANK){
+    if ((tiles & S_BLANK) == S_BLANK){
         return true;
     } else {
         return false;
@@ -200,7 +200,7 @@ bool game_is_marked(cgame g, uint i, uint j) {
     check_coordinates(i, j, __func__);
 
     square tiles = g->tab[i][j];
-    if (tiles & S_MARK == S_MARK){
+    if ((tiles & S_MARK) == S_MARK){
         return true;
     } else {
         return false;
@@ -221,7 +221,7 @@ bool game_has_error(cgame g, uint i, uint j) {
     check_coordinates(i, j, __func__);
 
     square tiles = g->tab[i][j];
-    if (tiles & F_ERROR == F_ERROR) { 
+    if ((tiles & F_ERROR) == F_ERROR) { 
         return true;
     }else {
         return false;
@@ -303,7 +303,18 @@ void game_update_flags(game g) {
     }
 }
 
-bool game_is_over(cgame g) { return true; }
+bool game_is_over(cgame g) { 
+    is_viable_pointer(g, "pointer");
+    for (uint x = 0; x < g->nb_col) {
+        for (uint y = 0; y < g->nb_row; y++){
+            if (!game_is_black(g, x, y) && !game_is_lighted(g, x, y) || game_has_error(g, x, y)){
+                return false;
+            }
+            
+        }
+    }
+    return true;
+}
 
 void game_restart(game g) {
     is_viable_pointer(g, "pointer");
