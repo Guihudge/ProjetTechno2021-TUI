@@ -305,7 +305,7 @@ void game_update_flags(game g) {
 
 bool game_is_over(cgame g) { 
     is_viable_pointer(g, "pointer");
-    for (uint x = 0; x < g->nb_col) {
+    for (uint x = 0; x < g->nb_col; x++) {
         for (uint y = 0; y < g->nb_row; y++){
             if (!game_is_black(g, x, y) && !game_is_lighted(g, x, y) || game_has_error(g, x, y)){
                 return false;
