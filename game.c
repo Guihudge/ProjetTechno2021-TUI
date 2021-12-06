@@ -368,10 +368,10 @@ void game_update_flags(game g) {
                     if (game_is_black(g, x_check, j)) {
                         break;
                     }
-                    if (game_is_lightbulb(g, x_check, j) && x_check != i){
+                    if (game_is_lightbulb(g, x_check, j) && x_check != i) {
                         fprintf(stderr, "Error on (%d, %d) x\n", x_check, j);
-                        g -> tab[x_check][j] = g -> tab[x_check][j] | F_ERROR;
-                        g -> tab[i][j] = g -> tab[i][j] | F_ERROR;
+                        g->tab[x_check][j] = g->tab[x_check][j] | F_ERROR;
+                        g->tab[i][j] = g->tab[i][j] | F_ERROR;
                     }
                     x_check++;
                 }
@@ -380,10 +380,10 @@ void game_update_flags(game g) {
                     if (game_is_black(g, i, y_check)) {
                         break;
                     }
-                    if (game_is_lightbulb(g, i, y_check) && y_check != j){
+                    if (game_is_lightbulb(g, i, y_check) && y_check != j) {
                         fprintf(stderr, "Error on (%d, %d) y \n", i, y_check);
-                        g -> tab[i][y_check] = g -> tab[i][y_check] | F_ERROR;
-                        g -> tab[i][j] = g -> tab[i][j] | F_ERROR;
+                        g->tab[i][y_check] = g->tab[i][y_check] | F_ERROR;
+                        g->tab[i][j] = g->tab[i][j] | F_ERROR;
                     }
                     y_check++;
                 }
