@@ -108,7 +108,17 @@ game game_new_empty(void) {
     return game_new(game_square);
 }
 
-game game_copy(cgame g) { return NULL; }
+game game_copy(cgame g) {
+    is_viable_pointer(g, "pointer");
+    game copy = create_game_struct(DEFAULT_SIZE, DEFAULT_SIZE);
+
+    for (uint x = 0; x < g -> nb_row; x++) {
+        for (uint y = 0; y < g -> nb_col; y++) {
+            copy->tab[x][y] = g->tab[x][y];
+        }
+    }
+    return copy;
+}
 
 bool game_equal(cgame g1, cgame g2) {
     is_viable_pointer(g1, "pointer");
