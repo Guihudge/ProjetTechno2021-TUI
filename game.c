@@ -33,7 +33,7 @@ bool check_black_wall(cgame g, uint i, uint j) {
     if (j > 0 && game_is_lightbulb(g, i, j--)) lightbulb_number++;
     if (j < DEFAULT_SIZE - 1 && game_is_lightbulb(g, i, j++)) lightbulb_number++;
     if (i > 0 && game_is_lightbulb(g, i--, j)) lightbulb_number++;
-    if (i < DEFAULT_SIZE - 1 && game_is_lightbulb(g, i, j)) lightbulb_number++;
+    if (i < DEFAULT_SIZE - 1 && game_is_lightbulb(g, i++, j)) lightbulb_number++;
 
     return lightbulb_number > black_number;
 }
@@ -49,7 +49,7 @@ void update_row(game g, uint i, uint j) {
             g->tab[y][j] = g->tab[y][j] | F_LIGHTED;
     }
 
-    for (uint y = i; y >= 0; y--) {
+    for (uint y = i; y > 0; y--) {
         if (game_is_black(g, y, j))
             break;
         else
@@ -69,7 +69,7 @@ void update_col(game g, uint i, uint j) {
         }
     }
 
-    for (uint x = j; x >= 0; x--) {
+    for (uint x = j; x > 0; x--) {
         if (game_is_black(g, i, x))
             break;
         else
@@ -208,6 +208,9 @@ bool game_is_lightbulb(cgame g, uint i, uint j) {
     check_coordinates(i, j, __func__);
 
     square tiles  = g -> tab[i][j];
+    if(tiles & S_BLACK) {
+        return false;
+    } 
     tiles = tiles & S_LIGHTBULB;
     return (tiles == S_LIGHTBULB);
 }
