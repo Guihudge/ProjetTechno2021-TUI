@@ -30,10 +30,39 @@ bool check_black_wall(cgame g, uint i, uint j) {
 
     if (black_number == -1) return false;
 
-    if (j > 0 && game_is_lightbulb(g, i, j--)) lightbulb_number++;
-    if (j < DEFAULT_SIZE - 1 && game_is_lightbulb(g, i, j++)) lightbulb_number++;
-    if (i > 0 && game_is_lightbulb(g, i--, j)) lightbulb_number++;
-    if (i < DEFAULT_SIZE - 1 && game_is_lightbulb(g, i++, j)) lightbulb_number++;
+    int start_x, start_y, end_x, end_y;
+
+    if (i == 0) {
+        start_x = 0;
+    } else {
+        start_x = i - 1;
+    }
+    if (j == 0) {
+        start_y = 0;
+    } else {
+        start_y = j - 1;
+    }
+
+    if (i + 1 >= g -> nb_col) {
+        end_x = g -> nb_col - 1;
+    } else {
+        end_x = i + 1;
+    }
+    if (j + 1 >= g -> nb_row) {
+        end_y = g -> nb_row - 1;
+    } else {
+        end_y = j + 1;
+    }
+
+    for (int cx = start_x; cx <= end_x; cx++) {
+        for (int cy = start_y; cy <= end_y; cy++) {
+            if (game_is_lightbulb(g, cx, cy) && (cx == i || cy == j)) {
+                lightbulb_number++;
+            }
+        }
+    }
+
+    fprintf(stderr, "(%d, %d) -> %d lightbulb, max %d\n", i, j, lightbulb_number, black_number);
 
     return lightbulb_number > black_number;
 }
@@ -196,21 +225,17 @@ bool game_is_blank(cgame g, uint i, uint j) {
     check_coordinates(i, j, __func__);
 
     square tiles = g->tab[i][j];
-    if ((tiles & S_BLANK) == S_BLANK) {
-        return true;
-    } else {
-        return false;
-    }
+    return (tiles == S_BLANK || tiles == F_LIGHTED || tiles == F_ERROR);
 }
 
 bool game_is_lightbulb(cgame g, uint i, uint j) {
     is_viable_pointer(g, "pointer");
     check_coordinates(i, j, __func__);
 
-    square tiles  = g -> tab[i][j];
-    if(tiles & S_BLACK) {
+    square tiles = g->tab[i][j];
+    if (tiles & S_BLACK) {
         return false;
-    } 
+    }
     tiles = tiles & S_LIGHTBULB;
     return (tiles == S_LIGHTBULB);
 }
@@ -327,7 +352,6 @@ void game_update_flags(game g) {
             if (game_is_black(g, i, j) && check_black_wall(g, i, j)) {
                 g->tab[i][j] = g->tab[i][j] | F_ERROR;
             } else if (game_is_lightbulb(g, i, j)) {
-                fprintf(stderr, "Lightbulb found at (%d, %d)\n", i, j); // bug at game_is_lightbulb!!
                 update_col(g, i, j);
                 update_row(g, i, j);
             }

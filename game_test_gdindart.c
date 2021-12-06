@@ -119,6 +119,8 @@ bool test_game_update_flags() {
     game_update_flags(test_game);
 
     if (!game_has_error(test_game, 4, 0) || game_is_lighted(test_game, 4, 0)) {
+        print_bool(!game_has_error(test_game, 4, 0), "error!");
+        print_bool(game_is_lighted(test_game, 4, 0), "lighted");
         fprintf(stderr, "test 6");
         ok = false;
     }
