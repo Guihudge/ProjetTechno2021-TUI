@@ -31,6 +31,7 @@ bool test_game_update_flags() {
     int x_check, y_check;
     x_check = 0;
     y_check = 6;
+    print_bool(ok, "start test, ok = ");
 
     while (x_check < DEFAULT_SIZE)  // colone avant le mur
     {
@@ -39,8 +40,11 @@ bool test_game_update_flags() {
             break;
         }
         ok = ok && game_is_lighted(test_game, x_check, 6);
+        fprintf(stderr, "coord (%d, 6), ", x_check);
+        print_bool(ok, "ok = ");
         x_check++;
     }
+    print_bool(ok, "after 'colone avant le mur' ok = ");
 
     while (x_check < DEFAULT_SIZE)  // colone après le mur
     {
@@ -50,6 +54,7 @@ bool test_game_update_flags() {
         ok = ok && !game_is_lighted(test_game, x_check, 6);
         x_check++;
     }
+    print_bool(ok, "after 'colone après le mur' ok = ");
 
     while (y_check >= 0)  // ligne avant le mur
     {
@@ -60,6 +65,7 @@ bool test_game_update_flags() {
         ok = ok && game_is_lighted(test_game, 0, y_check);
         y_check--;
     }
+    print_bool(ok, "after 'ligne avant le mur' ok = ");
 
     while (y_check >= 0)  // ligne après le mur
     {
@@ -69,25 +75,27 @@ bool test_game_update_flags() {
         ok = ok && !game_is_lighted(test_game, 0, y_check);
         y_check--;
     }
+    print_bool(ok, "after 'ligne après le mur' ok = ");
     // Error flags
     game_set_square(test_game, 0, 3, S_LIGHTBULB);
 
     game_update_flags(test_game);
+    print_bool(ok, "Beofre test list: ");
 
     if (!game_has_error(test_game, 0, 3) || !game_is_lighted(test_game, 0, 3)) {
-        fprintf(stderr, "test 1");
+        fprintf(stderr, "test 1\n");
         ok = false;
     }
     if (!game_has_error(test_game, 0, 6) || !game_is_lighted(test_game, 0, 6)) {
-        fprintf(stderr, "test 2");
+        fprintf(stderr, "test 2\n");
         ok = false;
     }
     if (game_has_error(test_game, 0, 4) || !game_is_lighted(test_game, 0, 4)) {
-        fprintf(stderr, "test 3");
+        fprintf(stderr, "test 3\n");
         ok = false;
     }
     if (game_has_error(test_game, 0, 5) || !game_is_lighted(test_game, 0, 5)) {
-        fprintf(stderr, "test 4");
+        fprintf(stderr, "test 4\n");
         ok = false;
     }
 
@@ -95,7 +103,7 @@ bool test_game_update_flags() {
     game_update_flags(test_game);
 
     if (game_has_error(test_game, 0, 3) || !game_is_lighted(test_game, 0, 3)) {
-        fprintf(stderr, "test 5");
+        fprintf(stderr, "test 5\n");
         ok = false;
     }
 
