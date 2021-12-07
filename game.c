@@ -77,12 +77,13 @@ void update_row(game g, uint i, uint j) {
         else
             g->tab[y][j] = g->tab[y][j] | F_LIGHTED;
     }
-
-    for (uint y = i; y > 0; y--) {
+    int y = i;
+    while(y >= 0) {
         if (game_is_black(g, y, j))
             break;
         else
             g->tab[y][j] = g->tab[y][j] | F_LIGHTED;
+        y --;
     }
 }
 
@@ -97,12 +98,13 @@ void update_col(game g, uint i, uint j) {
             g->tab[i][x] = g->tab[i][x] | F_LIGHTED;
         }
     }
-
-    for (uint x = j; x > 0; x--) {
+    int x = j;
+    while(x >= 0) {
         if (game_is_black(g, i, x))
             break;
         else
             g->tab[i][x] = g->tab[i][x] | F_LIGHTED;
+        x --;
     }
 }
 
