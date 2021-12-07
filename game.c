@@ -62,8 +62,6 @@ bool check_black_wall(cgame g, uint i, uint j) {
         }
     }
 
-    fprintf(stderr, "(%d, %d) -> %d lightbulb, max %d\n", i, j, lightbulb_number, black_number);
-
     return lightbulb_number > black_number;
 }
 
@@ -368,7 +366,6 @@ void game_update_flags(game g) {
                         break;
                     }
                     if (game_is_lightbulb(g, x_check, j) && x_check != i) {
-                        fprintf(stderr, "Error on (%d, %d) x\n", x_check, j);
                         g->tab[x_check][j] = g->tab[x_check][j] | F_ERROR;
                         g->tab[i][j] = g->tab[i][j] | F_ERROR;
                     }
@@ -380,7 +377,6 @@ void game_update_flags(game g) {
                         break;
                     }
                     if (game_is_lightbulb(g, i, y_check) && y_check != j) {
-                        fprintf(stderr, "Error on (%d, %d) y \n", i, y_check);
                         g->tab[i][y_check] = g->tab[i][y_check] | F_ERROR;
                         g->tab[i][j] = g->tab[i][j] | F_ERROR;
                     }
