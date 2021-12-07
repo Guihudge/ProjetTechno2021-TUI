@@ -410,6 +410,10 @@ void game_restart(game g) {
             if (!game_is_black(g, x, y)) {
                 g->tab[x][y] = 0;
             }
+            else{
+                
+                g ->tab[x][y] = g -> tab[x][y] & S_MASK;
+            }
         }
     }
 }
