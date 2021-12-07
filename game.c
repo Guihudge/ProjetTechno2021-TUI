@@ -78,12 +78,12 @@ void update_row(game g, uint i, uint j) {
             g->tab[y][j] = g->tab[y][j] | F_LIGHTED;
     }
     int y = i;
-    while(y >= 0) {
+    while (y >= 0) {
         if (game_is_black(g, y, j))
             break;
         else
             g->tab[y][j] = g->tab[y][j] | F_LIGHTED;
-        y --;
+        y--;
     }
 }
 
@@ -99,12 +99,12 @@ void update_col(game g, uint i, uint j) {
         }
     }
     int x = j;
-    while(x >= 0) {
+    while (x >= 0) {
         if (game_is_black(g, i, x))
             break;
         else
             g->tab[i][x] = g->tab[i][x] | F_LIGHTED;
-        x --;
+        x--;
     }
 }
 
@@ -409,10 +409,8 @@ void game_restart(game g) {
         for (uint y = 0; y < g->nb_col; y++) {
             if (!game_is_black(g, x, y)) {
                 g->tab[x][y] = 0;
-            }
-            else{
-                
-                g ->tab[x][y] = g -> tab[x][y] & S_MASK;
+            } else {
+                g->tab[x][y] = g->tab[x][y] & S_MASK;
             }
         }
     }
