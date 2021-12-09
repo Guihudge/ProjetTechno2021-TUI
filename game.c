@@ -372,7 +372,9 @@ void game_play_move(game g, uint i, uint j, square s) {
     is_viable_pointer(g, "pointer");
     check_coordinates(i, j, __func__);
 
-    if (!game_check_move(g, i, j, s)) exit(EXIT_FAILURE);
+    if (!game_check_move(g, i, j, s))  {
+        exit(EXIT_FAILURE);
+    }
 
     game_set_square(g, i, j, s);
     game_update_flags(g);
@@ -393,6 +395,7 @@ void game_update_flags(game g) {
         }
     }
 
+    // update error flags on black wall
     for (uint i = 0; i < g->nb_row; i++) {
         for (uint j = 0; j < g->nb_col; j++) {
             if (game_is_black(g, i, j) && check_black_wall(g, i, j)) {
@@ -400,37 +403,6 @@ void game_update_flags(game g) {
             }
         }
     }
-
-    /*for (uint i = 0; i < g->nb_row; i++) {
-        for (uint j = 0; j < g->nb_col; j++) {
-            if (game_is_lightbulb(g, i, j)) {
-                int x_check = i;
-                int y_check = j;
-                while (x_check < DEFAULT_SIZE)  // colone avant le mur
-                {
-                    if (game_is_black(g, x_check, j)) {
-                        break;
-                    }
-                    if (game_is_lightbulb(g, x_check, j) && x_check != i) {
-                        g->tab[x_check][j] = g->tab[x_check][j] | F_ERROR;
-                        g->tab[i][j] = g->tab[i][j] | F_ERROR;
-                    }
-                    x_check++;
-                }
-                while (y_check < DEFAULT_SIZE)  // colone avant le mur
-                {
-                    if (game_is_black(g, i, y_check)) {
-                        break;
-                    }
-                    if (game_is_lightbulb(g, i, y_check) && y_check != j) {
-                        g->tab[i][y_check] = g->tab[i][y_check] | F_ERROR;
-                        g->tab[i][j] = g->tab[i][j] | F_ERROR;
-                    }
-                    y_check++;
-                }
-            }
-        }
-    }*/
 }
 
 bool game_is_over(cgame g) {
