@@ -27,6 +27,8 @@ bool check_black_wall(cgame g, uint i, uint j) {
 
     int black_number = game_get_black_number(g, i, j);
     uint lightbulb_number = 0;
+    uint lighted_number = 0;
+    uint blank_number = 0;
 
     if (black_number == -1) return false;
 
@@ -57,12 +59,25 @@ bool check_black_wall(cgame g, uint i, uint j) {
     for (int cx = start_x; cx <= end_x; cx++) {
         for (int cy = start_y; cy <= end_y; cy++) {
             if (game_is_lightbulb(g, cx, cy) && (cx == i || cy == j)) {
-                lightbulb_number++;
-            }
+                lightbulb_number++;}
+            else if (game_is_lighted(g, cx, cy) && (cx == i || cy == j)) {
+                lighted_number++;}
+            else if (game_is_blank(g, cx, cy) && (cx == i || cy == j)) {
+                blank_number++;}
         }
     }
+    uint totale = lightbulb_number+lighted_number+blank_number;
+    bool ret = false;
 
-    return lightbulb_number > black_number;
+    fprintf(stderr, "coord (%d,%d): lightbulb: %d, lighted: %d, blanck: %d \n", i, j, lightbulb_number, lighted_number,blank_number);
+
+    if (lightbulb_number > black_number){
+        return true;
+    }
+    if ((blank_number+lightbulb_number) < black_number) {
+        return true;
+    }
+    return ret;
 }
 
 void update_row(game g, uint i, uint j) {
@@ -376,15 +391,15 @@ void game_update_flags(game g) {
             }
         }
     }
-
+    
     for(uint i = 0; i < g->nb_row; i++) {
-        for(uint j = 0; g->nb_col; j++) {
-            if(game_is_black(g, i, j)) {
-                
+        for(uint j = 0; j < g->nb_col; j++) {
+            if(game_is_black(g, i, j) && check_black_wall(g, i, j)) {
+                g->tab[i][j] |= F_ERROR;
             }
         }
     }
-
+    
     /*for (uint i = 0; i < g->nb_row; i++) {
         for (uint j = 0; j < g->nb_col; j++) {
             if (game_is_lightbulb(g, i, j)) {
