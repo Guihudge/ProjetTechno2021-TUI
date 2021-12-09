@@ -67,7 +67,6 @@ bool check_black_wall(cgame g, uint i, uint j) {
             }
         }
     }
-    uint totale = lightbulb_number + lighted_number + blank_number;
     bool ret = false;
 
     fprintf(stderr, "coord (%d,%d): lightbulb: %d, lighted: %d, blanck: %d \n", i, j, lightbulb_number, lighted_number,
