@@ -69,18 +69,30 @@ void update_row(game g, uint i, uint j) {
     is_viable_pointer(g, "pointer");
     check_coordinates(i, j, __func__);
 
-    for (uint y = i; y < g->nb_row; y++) {
-        if (game_is_black(g, y, j))
-            break;
-        else
-            g->tab[y][j] = g->tab[y][j] | F_LIGHTED;
-    }
     int y = i;
+    while(y < g->nb_row) {
+        if(game_is_black(g, y, j)) {
+            break;
+        } else {
+            g->tab[y][j] |= F_LIGHTED;
+            if(y != i && game_is_lightbulb(g, y, j)) {
+                g->tab[y][j] |= F_ERROR;
+                g->tab[i][j] |= F_ERROR;
+            }
+        }
+        y++;
+    }
+    y = i;
     while (y >= 0) {
         if (game_is_black(g, y, j))
             break;
-        else
-            g->tab[y][j] = g->tab[y][j] | F_LIGHTED;
+        else {
+            g->tab[y][j] |= F_LIGHTED;
+            if(y != i && game_is_lightbulb(g, y, j)) {
+                g->tab[y][j] |= F_ERROR;
+                g->tab[i][j] |= F_ERROR;
+            }
+        }
         y--;
     }
 }
@@ -89,19 +101,30 @@ void update_col(game g, uint i, uint j) {
     is_viable_pointer(g, "pointer");
     check_coordinates(i, j, __func__);
 
-    for (uint x = j; x < g->nb_col; x++) {
-        if (game_is_black(g, i, x)) {
+    int x = j;
+    while(x < g->nb_col) {
+        if(game_is_black(g, i, x)) {
             break;
         } else {
-            g->tab[i][x] = g->tab[i][x] | F_LIGHTED;
+            g->tab[i][x] |= F_LIGHTED;
+            if(x != j && game_is_lightbulb(g, i, x)) {
+                g->tab[i][x] |= F_ERROR;
+                g->tab[i][j] |= F_ERROR;
+            }
         }
+        x++;
     }
-    int x = j;
+    x = j;
     while (x >= 0) {
         if (game_is_black(g, i, x))
             break;
-        else
-            g->tab[i][x] = g->tab[i][x] | F_LIGHTED;
+        else {
+            g->tab[i][x] |= F_LIGHTED;
+            if(x != j && game_is_lightbulb(g, i, x)) {
+                g->tab[i][x] |= F_ERROR;
+                g->tab[i][j] |= F_ERROR;
+            }
+        } 
         x--;
     }
 }
@@ -344,18 +367,25 @@ void game_update_flags(game g) {
 
     reset_flags(g);
 
-    for (uint i = 0; i < g->nb_row; i++) {
-        for (uint j = 0; j < g->nb_col; j++) {
-            if (game_is_black(g, i, j) && check_black_wall(g, i, j)) {
-                g->tab[i][j] = g->tab[i][j] | F_ERROR;
-            } else if (game_is_lightbulb(g, i, j)) {
-                update_col(g, i, j);
+    // update error and lighted flags for lightbulb
+    for(uint i = 0; i < g->nb_row; i++) {
+        for(uint j = 0; j < g->nb_col; j++) {
+            if(game_is_lightbulb(g, i, j)) {
                 update_row(g, i, j);
+                update_col(g, i, j);
             }
         }
     }
 
-    for (uint i = 0; i < g->nb_row; i++) {
+    for(uint i = 0; i < g->nb_row; i++) {
+        for(uint j = 0; g->nb_col; j++) {
+            if(game_is_black(g, i, j)) {
+                
+            }
+        }
+    }
+
+    /*for (uint i = 0; i < g->nb_row; i++) {
         for (uint j = 0; j < g->nb_col; j++) {
             if (game_is_lightbulb(g, i, j)) {
                 int x_check = i;
@@ -384,7 +414,7 @@ void game_update_flags(game g) {
                 }
             }
         }
-    }
+    }*/
 }
 
 bool game_is_over(cgame g) {
