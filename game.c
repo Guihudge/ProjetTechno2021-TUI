@@ -146,16 +146,16 @@ void update_col(game g, uint i, uint j) {
 }
 
 game create_game_struct(int nrow, int ncol) {
-    game ngame = (game) malloc(sizeof(struct game_s));
+    game ngame = (game)malloc(sizeof(struct game_s));
     if (ngame == NULL) {
         pointer_error();
     }
 
-    ngame->tab = (square**) malloc(sizeof(square *) * nrow);
+    ngame->tab = (square **)malloc(sizeof(square *) * nrow);
     is_viable_pointer(ngame->tab, "memory");
 
     for (uint x = 0; x < nrow; x++) {
-        ngame->tab[x] = (square*) malloc(sizeof(square) * ncol);
+        ngame->tab[x] = (square *)malloc(sizeof(square) * ncol);
         is_viable_pointer(ngame->tab[x], "memory");
     }
 
@@ -366,7 +366,7 @@ void game_play_move(game g, uint i, uint j, square s) {
     is_viable_pointer(g, "pointer");
     check_coordinates(i, j, __func__);
 
-    if (!game_check_move(g, i, j, s))  {
+    if (!game_check_move(g, i, j, s)) {
         exit(EXIT_FAILURE);
     }
 
