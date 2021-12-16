@@ -6,6 +6,7 @@
 
 #include "game.h"
 #include "game_aux.h"
+#include "game_ext.h"
 
 /*Util fonction*/
 void print_bool(bool ok, char *text) {

@@ -65,3 +65,33 @@
 - @fclaisse
 - @gdindart
 - @millhe
+
+## V2
+### game_ext.c
+- @fclaisse
+  - game_new_ext
+  - game_redo
+- @gdindart
+  - game_nb_rows
+  - game_nb_cols
+  - game_is_wrapping
+- @millhe
+  - game_new_empty_ext
+  - game_undo
+
+
+### test game_ext.c
+- @fclaisse
+  - game_new_ext
+  - game_redo
+- @gdindart
+  - game_nb_rows
+  - game_nb_cols
+  - game_is_wrapping
+- @millhe
+  - game_new_empty_ext
+  - game_undo
+
+
+### update game.c game_aux.c et adaptation tests
+- @gdindart

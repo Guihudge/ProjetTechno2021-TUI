@@ -5,6 +5,7 @@
 
 #include "game.h"
 #include "game_aux.h"
+#include "game_ext.h"
 
 bool test_dummy() { return true; }
 

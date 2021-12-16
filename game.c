@@ -5,6 +5,7 @@
 
 #include "auxiliars.h"
 #include "game_struct.h"
+#include "game_ext.h"
 
 void reset_flags(game g) {
     is_viable_pointer(g, "pointer");

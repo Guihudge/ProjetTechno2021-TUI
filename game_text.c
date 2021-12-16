@@ -4,6 +4,7 @@
 
 #include "game.h"
 #include "game_aux.h"
+#include "game_ext.h"
 
 void crit_error(char *err) {
     fprintf(stderr, "[CRITICAL] %s\n", err);
