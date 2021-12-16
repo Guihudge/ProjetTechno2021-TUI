@@ -156,6 +156,7 @@ game create_game_struct(int nrow, int ncol) {
 
     ngame->nb_col = ncol;
     ngame->nb_row = nrow;
+    ngame -> warpping = false;
 
     return ngame;
 }

@@ -7,6 +7,7 @@ struct game_s {
     square **tab;
     uint nb_row;
     uint nb_col;
+    bool warpping;
 };
 
 #endif
