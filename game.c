@@ -4,12 +4,7 @@
 #include <stdlib.h>
 
 #include "auxiliars.h"
-
-struct game_s {
-    square **tab;
-    uint nb_row;
-    uint nb_col;
-};
+#include "game_struct.h"
 
 void reset_flags(game g) {
     is_viable_pointer(g, "pointer");
