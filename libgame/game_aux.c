@@ -12,14 +12,14 @@ void game_print(cgame g) {
     }
 
     printf("   ");
-    for (uint i = 0; i < DEFAULT_SIZE; i++) printf("%u", i);
+    for (uint i = 0; i < game_nb_cols(g); i++) printf("%u", i);
     printf("\n   ");
-    for (uint i = 0; i < DEFAULT_SIZE; i++) printf("-");
+    for (uint i = 0; i < game_nb_cols(g); i++) printf("-");
     printf("\n");
 
-    for (uint i = 0; i < DEFAULT_SIZE; i++) {
+    for (uint i = 0; i < game_nb_cols(g); i++) {
         printf("%u |", i);
-        for (uint j = 0; j < DEFAULT_SIZE; j++) {
+        for (uint j = 0; j < game_nb_rows(g); j++) {
             square tiles = game_get_square(g, i, j);
             if (tiles > 16) {
                 tiles = tiles - game_get_flags(g, i, j);

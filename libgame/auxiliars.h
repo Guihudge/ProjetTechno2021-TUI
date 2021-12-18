@@ -30,13 +30,14 @@ void is_viable_pointer(const void *pointer, const char *type);
 
 /**
  * @brief Check that coordinates are valid for the game and exit the program in case of error.
+ * @param g game pointer.
  * @param i Row index.
  * @param j Column index.
  * @param fonction The string taht correspond to the fonction where check_coordinates been called.
  * @pre @p fonction Must correspond to the fonction.
  * @deprecated Ne pas utiliser dans les test
  **/
-void check_coordinates(uint i, uint j, const char *fonction);
+void check_coordinates(cgame g, uint i, uint j, const char *fonction);
 
 /**
  * @brief Deletes games in a tab of a given size and prints an error message.

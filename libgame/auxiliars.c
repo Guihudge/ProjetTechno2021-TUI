@@ -1,9 +1,10 @@
 #include "auxiliars.h"
-#include "game_ext.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "game_ext.h"
 
 void memory_error(void) {
     fprintf(stderr, "Memory error\n");
@@ -28,9 +29,9 @@ void is_viable_pointer(const void *pointer, const char *type) {
     }
 }
 
-void check_coordinates(uint i, uint j, const char *fonction) {
-    if (i >= DEFAULT_SIZE || j >= DEFAULT_SIZE) {
-        fprintf(stderr, "Wrong arguments (%d,%d) for (%d,%d) inside %s call\n", i, j, DEFAULT_SIZE, DEFAULT_SIZE,
+void check_coordinates(cgame g, uint i, uint j, const char *fonction) {
+    if (i >= game_nb_rows(g) || j >= game_nb_cols(g)) {
+        fprintf(stderr, "Wrong arguments (%d,%d) for (%d,%d) inside %s call\n", i, j, game_nb_rows(g), game_nb_cols(g),
                 fonction);
         exit(EXIT_FAILURE);
     }
