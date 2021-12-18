@@ -188,8 +188,8 @@ bool test_game_is_over() {
     }
     game_play_move(sol_test, 0, 1, S_BLANK);
 
-    for (int i = 0; i < DEFAULT_SIZE; i++) {
-        for (int j = 0; j < DEFAULT_SIZE; j++) {
+    for (int i = 0; i < game_nb_cols(sol_test); i++) {
+        for (int j = 0; j < game_nb_rows(sol_test); j++) {
             if (game_is_lightbulb(sol_test, i, j)) {
                 game_play_move(g2, i, j, S_LIGHTBULB);
                 if (!game_equal(g2, sol_test)) {

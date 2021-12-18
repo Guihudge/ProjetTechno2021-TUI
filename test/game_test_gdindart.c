@@ -35,7 +35,7 @@ bool test_game_update_flags() {
     y_check = 6;
     print_bool(ok, "start test, ok = ");
 
-    while (x_check < DEFAULT_SIZE)  // colone avant le mur
+    while (x_check < game_nb_cols(test_game))  // colone avant le mur
     {
         if (game_is_black(test_game, x_check, 6)) {
             x_check++;
@@ -48,7 +48,7 @@ bool test_game_update_flags() {
     }
     print_bool(ok, "after 'colone avant le mur' ok = ");
 
-    while (x_check < DEFAULT_SIZE)  // colone après le mur
+    while (x_check < game_nb_cols(test_game))  // colone après le mur
     {
         if (game_is_black(test_game, x_check, 6)) {
             break;
@@ -131,8 +131,8 @@ bool test_game_update_flags() {
     game empty_game = game_new_empty();
     game_update_flags(empty_game);
 
-    for (int i = 0; i < DEFAULT_SIZE; i++) {
-        for (int y = 0; y < DEFAULT_SIZE; y++) {
+    for (int i = 0; i < game_nb_cols(empty_game); i++) {
+        for (int y = 0; y < game_nb_rows(empty_game); y++) {
             if (game_get_flags(empty_game, i, y) != 0) {
                 ok = false;
             }
@@ -224,8 +224,8 @@ bool test_game_is_black() {
     char check = (char)255;
     bool ok = true;
 
-    for (int i = 0; i < DEFAULT_SIZE; i++) {
-        for (int y = 0; y < DEFAULT_SIZE; y++) {
+    for (int i = 0; i < game_nb_cols(test_game); i++) {
+        for (int y = 0; y < game_nb_rows(test_game); y++) {
             char tiles = game_get_square(test_game, i, y);
             ok = ok && (((tiles | mask) == check) == game_is_black(test_game, i, y));
         }
@@ -238,8 +238,8 @@ bool test_game_is_black() {
 bool test_game_get_square() {
     game test_game = game_default_solution();
 
-    for (int i = 0; i < DEFAULT_SIZE; i++) {
-        for (int y = 0; y < DEFAULT_SIZE; y++) {
+    for (int i = 0; i < game_nb_cols(test_game); i++) {
+        for (int y = 0; y < game_nb_rows(test_game); y++) {
             char val = game_get_flags(test_game, i, y) + game_get_state(test_game, i, y);
 
             if (game_get_square(test_game, i, y) != val) {
@@ -302,8 +302,8 @@ bool test_game_new_empty() {
         return false;
     }
 
-    for (int i = 0; i < DEFAULT_SIZE; i++) {
-        for (int y = 0; y < DEFAULT_SIZE; y++) {
+    for (int i = 0; i < game_nb_cols(blank_game); i++) {
+        for (int y = 0; y < game_nb_rows(blank_game); y++) {
             if (game_get_square(blank_game, i, y) != S_BLANK) {
                 return false;
             }

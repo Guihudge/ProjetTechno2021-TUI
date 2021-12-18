@@ -62,9 +62,9 @@ bool test_game_new(void) {
         return false;
     }
 
-    for (uint i = 0; i < DEFAULT_SIZE; i++) {
-        for (uint j = 0; j < DEFAULT_SIZE; j++) {
-            if (game_get_square(test_game, i, j) != game_default[i * DEFAULT_SIZE + j]) {
+    for (uint i = 0; i < game_nb_cols(test_game); i++) {
+        for (uint j = 0; j < game_nb_rows(test_game); j++) {
+            if (game_get_square(test_game, i, j) != game_default[i * game_nb_cols(test_game) + j]) {
                 game_delete(test_game);
                 return false;
             }
@@ -80,8 +80,8 @@ bool test_game_new(void) {
 bool test_game_set_square(void) {
     game test_game = game_new_empty();
 
-    for (int i = 0; i < DEFAULT_SIZE; i++) {
-        for (int y = 0; y < DEFAULT_SIZE; y++) {
+    for (int i = 0; i < game_nb_cols(test_game); i++) {
+        for (int y = 0; y < game_nb_rows(test_game); y++) {
             char val = rand() % 256;
             game_set_square(test_game, i, y, val);
 
@@ -261,8 +261,8 @@ bool test_game_restart(void) {
 
     bool failed = false;
 
-    for (uint i = 0; i < DEFAULT_SIZE; i++) {
-        for (uint j = 0; j < DEFAULT_SIZE; j++) {
+    for (uint i = 0; i < game_nb_cols(g_true); i++) {
+        for (uint j = 0; j < game_nb_rows(g_true); j++) {
             if (game_get_square(g_true, i, j) == S_BLANK) {
                 game_play_move(g_true, i, j, S_MARK);
             }
@@ -278,9 +278,9 @@ bool test_game_restart(void) {
     if (g1 == NULL || g2 == NULL || g_true2 == NULL) exit(EXIT_FAILURE);
 
     if (!game_equal(g1, g2)) {
-        for (uint i = 0; i < DEFAULT_SIZE; i++) {
-            for (uint j = 0; j < DEFAULT_SIZE; j++) {
-                if (game_get_square(g1, i, j) != squares[i * DEFAULT_SIZE + j]) {
+        for (uint i = 0; i < game_nb_cols(g_true); i++) {
+            for (uint j = 0; j < game_nb_rows(g_true); j++) {
+                if (game_get_square(g1, i, j) != squares[i * game_nb_cols(g_true) + j]) {
                     failed = true;
                 }
             }
