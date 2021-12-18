@@ -33,7 +33,7 @@
   - game_delete
   - game_copy
 
-## GAME.C
+## game.c
 
 - @fclaisse
   - game_new_empty
@@ -67,7 +67,9 @@
 - @millhe
 
 ## V2
+
 ### game_ext.c
+
 - @fclaisse
   - game_new_ext
   - game_redo
@@ -78,9 +80,9 @@
 - @millhe
   - game_new_empty_ext
   - game_undo
-
 
 ### test game_ext.c
+
 - @fclaisse
   - game_new_ext
   - game_redo
@@ -92,6 +94,6 @@
   - game_new_empty_ext
   - game_undo
 
-
 ### update game.c game_aux.c et adaptation tests
+
 - @gdindart
