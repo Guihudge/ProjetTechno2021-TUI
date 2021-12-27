@@ -12,11 +12,13 @@ set(CMAKE_C_FLAGS "-std=c99 -Wall")
 
 #add Subdirectory
 add_subdirectory(libgame)
+add_subdirectory(libpilefile)
 
 #création de l'éxécutable
 add_executable(game_text game_text.c)
 
 #on lie les librairie
 target_link_libraries(game_text game)
+target_link_libraries(game_text pilefile)
 
 add_subdirectory(test)
