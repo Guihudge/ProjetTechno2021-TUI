@@ -1,8 +1,8 @@
+#include "stack.h"
+
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <assert.h>
-
-#include "stack.h"
 
 move_stack stack_new_empty(void) { return NULL; }
 
@@ -11,7 +11,7 @@ bool stack_is_empty(move_stack stack) { return stack == NULL; }
 move_stack stack_push_head(move_stack stack, move data) {
     assert(data);
 
-    move_stack new = (move_stack) malloc(sizeof(struct move_stack_s));
+    move_stack new = (move_stack)malloc(sizeof(struct move_stack_s));
     assert(new);
 
     new->data = data;
@@ -48,7 +48,7 @@ move_stack stack_clear(move_stack stack) {
 void stack_free(move_stack stack) {
     move_stack to_be_deleted = stack;
 
-    while(to_be_deleted != NULL) {
+    while (to_be_deleted != NULL) {
         stack = stack->next;
         free(to_be_deleted->data);
         free(to_be_deleted);
