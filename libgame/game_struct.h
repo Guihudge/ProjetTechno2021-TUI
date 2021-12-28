@@ -2,9 +2,9 @@
 #define __GAMESTRUCT_H__
 
 #include "game.h"
-#include "../libpilefile/pile.h"
 
 typedef struct history_s* history;
+typedef struct move_stack_s* move_stack;
 typedef struct move_s* move;
 
 struct game_s {
@@ -16,13 +16,18 @@ struct game_s {
 };
 
 struct history_s {
-    pile_obj undo;
-    pile_obj redo;
+    move_stack undo;
+    move_stack redo;
+};
+
+struct move_stack_s {
+    move data;
+    move_stack next;
 };
 
 struct move_s {
-    uint j;
     uint i;
+    uint j;
     square s;
 };
 

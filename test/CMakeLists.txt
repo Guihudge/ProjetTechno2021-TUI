@@ -8,6 +8,8 @@ set(CMAKE_C_FLAGS "-std=c99 -Wall")
 
 # cmake add_subdirectory(../libgame)
 
+include_directories(../libstack)
+
 add_executable(game_test_fclaisse game_test_fclaisse.c)
 add_executable(game_test_gdindart game_test_gdindart.c)
 add_executable(game_test_millhe game_test_millhe.c)
@@ -15,6 +17,10 @@ add_executable(game_test_millhe game_test_millhe.c)
 target_link_libraries(game_test_gdindart game)
 target_link_libraries(game_test_millhe game)
 target_link_libraries(game_test_fclaisse game)
+
+target_link_libraries(game_test_gdindart stack)
+target_link_libraries(game_test_millhe stack)
+target_link_libraries(game_test_fclaisse stack)
 
 # Ajout des tests
 # fclaisse
@@ -52,4 +58,3 @@ add_test(test_millhe_game_is_over ./game_test_millhe game_is_over)
 add_test(test_millhe_game_is_blanck ./game_test_millhe game_is_blanck)
 add_test(test_millhe_game_delete ./game_test_millhe game_delete)
 add_test(test_millhe_game_copy ./game_test_millhe game_copy)
-
