@@ -23,7 +23,7 @@ struct history_s {
 struct move_s {
     uint j;
     uint i;
-    square move;
+    square s;
 };
 
 #endif
