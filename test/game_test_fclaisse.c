@@ -16,7 +16,7 @@ bool test_dummy(void) { return true; }
 
 bool test_game_default_solution(void) {
     game default_solution = game_default_solution();
-    square square_default_solution_test[DEFAULT_SIZE * DEFAULT_SIZE] = {
+    square square_default_solution_test[] = {
         S_LIGHTBULB, S_BLANK,  S_BLACK1, S_LIGHTBULB, S_BLANK,     S_BLANK,     S_BLANK, S_BLANK,     S_LIGHTBULB,
         S_BLACK2,    S_BLANK,  S_BLANK,  S_BLANK,     S_LIGHTBULB, S_BLANK,     S_BLANK, S_LIGHTBULB, S_BLANK,
         S_BLANK,     S_BLACKU, S_BLACK2, S_BLANK,     S_BLANK,     S_BLANK,     S_BLANK, S_BLANK,     S_BLANK,
@@ -48,7 +48,7 @@ bool test_game_default_solution(void) {
 /* ********** TEST GAME NEW ********** */
 
 bool test_game_new(void) {
-    square game_default[DEFAULT_SIZE * DEFAULT_SIZE] = {
+    square game_default[] = {
         S_BLANK,  S_BLANK, S_BLACK1, S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACK2,
         S_BLANK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACKU,
         S_BLACK2, S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLACK1, S_BLACKU,
@@ -99,7 +99,7 @@ bool test_game_set_square(void) {
 /* ********** TEST GAME IS LIGHTBULB ********** */
 
 bool test_game_is_lightbulb(void) {
-    square test_square[DEFAULT_SIZE * DEFAULT_SIZE] = {
+    square test_square[] = {
         S_LIGHTBULB, S_LIGHTBULB, S_BLACK1, S_BLANK, S_BLANK, S_BLANK, S_LIGHTBULB, S_BLANK, S_BLANK,  S_BLACK2,
         S_BLANK,     S_BLANK,     S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,     S_BLANK, S_BLANK,  S_BLACKU,
         S_BLACK2,    S_BLANK,     S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,     S_BLANK, S_BLACK1, S_BLACKU,
@@ -136,7 +136,7 @@ bool test_game_is_lightbulb(void) {
 /* ********** TEST GAME IS LIGHTED ********** */
 
 bool test_game_is_lighted(void) {
-    square test_square[DEFAULT_SIZE * DEFAULT_SIZE] = {
+    square test_square[] = {
         S_LIGHTBULB, S_LIGHTBULB, S_BLACK1, S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACK2,
         S_BLANK,     S_BLANK,     S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACKU,
         S_BLACK2,    S_BLANK,     S_MARK,   S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLACK1, S_BLACKU,
@@ -161,7 +161,7 @@ bool test_game_is_lighted(void) {
 /* ********** TEST GAME CHECK MOVE ********** */
 
 bool test_game_check_move(void) {
-    square test_square[DEFAULT_SIZE * DEFAULT_SIZE] = {
+    square test_square[] = {
         S_LIGHTBULB, S_LIGHTBULB, S_BLACK1, S_LIGHTBULB, S_MARK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACK2,
         S_BLANK,     S_BLANK,     S_BLANK,  S_LIGHTBULB, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACKU,
         S_BLACK2,    S_BLANK,     S_BLANK,  S_BLANK,     S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLACK1, S_BLACKU,
@@ -199,14 +199,14 @@ bool test_game_check_move(void) {
 /* ********** TEST GAME PLAY MOVE ********** */
 
 bool test_game_play_move(void) {
-    square test_square[DEFAULT_SIZE * DEFAULT_SIZE] = {
+    square test_square[] = {
         S_BLANK,  S_BLANK, S_BLACK1, S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACK2,
         S_BLANK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACKU,
         S_BLACK2, S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLACK1, S_BLACKU,
         S_BLANK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACK2,
         S_BLANK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK};
 
-    square solution_square[DEFAULT_SIZE * DEFAULT_SIZE] = {
+    square solution_square[] = {
         S_LIGHTBULB, S_BLANK,  S_BLACK1, S_LIGHTBULB, S_BLANK,     S_BLANK,     S_BLANK, S_BLANK,     S_LIGHTBULB,
         S_BLACK2,    S_BLANK,  S_BLANK,  S_BLANK,     S_LIGHTBULB, S_BLANK,     S_BLANK, S_LIGHTBULB, S_BLANK,
         S_BLANK,     S_BLACKU, S_BLACK2, S_BLANK,     S_BLANK,     S_BLANK,     S_BLANK, S_BLANK,     S_BLANK,
@@ -244,7 +244,7 @@ bool test_game_play_move(void) {
 /* ********** TEST GAME RESTART ********** */
 
 bool test_game_restart(void) {
-    square squares[DEFAULT_SIZE * DEFAULT_SIZE] = {
+    square squares[] = {
         S_BLANK,  S_BLANK, S_BLACK1, S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACK2,
         S_BLANK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACKU,
         S_BLACK2, S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLACK1, S_BLACKU,

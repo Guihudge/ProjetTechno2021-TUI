@@ -10,7 +10,7 @@
 bool test_dummy() { return true; }
 
 bool test_game_print() {
-    square test[DEFAULT_SIZE * DEFAULT_SIZE] = {
+    square test[] = {
         S_LIGHTBULB, S_BLANK, S_BLACK1, S_MARK,  S_BLANK, S_BLANK, S_BLANK,  S_BLANK,     S_BLANK,    S_BLACK2,
         S_BLANK,     S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK,     S_BLANK,    S_BLACKU,
         S_BLACK2,    S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_LIGHTBULB, S_BLACK1,   S_BLACK0,
@@ -23,7 +23,7 @@ bool test_game_print() {
 }
 
 bool test_game_get_flags() {
-    square test_jeu[DEFAULT_SIZE * DEFAULT_SIZE] = {
+    square test_jeu[] = {
         S_LIGHTBULB, S_BLANK, S_BLACK1, S_MARK,  S_BLANK, S_BLANK, S_BLANK,  S_BLANK,     S_BLANK,    S_BLACK2,
         S_BLANK,     S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK,     S_BLANK,    S_BLACKU,
         S_BLACK2,    S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_LIGHTBULB, S_BLACK1,   S_BLACK0,
@@ -57,7 +57,7 @@ bool test_game_get_flags() {
 }
 
 bool test_game_get_black_number() {
-    square test[DEFAULT_SIZE * DEFAULT_SIZE] = {
+    square test[] = {
         S_LIGHTBULB, S_BLANK, S_BLACK1, S_MARK,  S_BLANK, S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,  S_BLACK2,
         S_BLANK,     S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,  S_BLACKU,
         S_BLACK2,    S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK,  S_BLACK1, S_BLACK0,
@@ -82,7 +82,7 @@ bool test_game_get_black_number() {
 }
 
 bool test_game_get_state() {
-    square test[DEFAULT_SIZE * DEFAULT_SIZE] = {
+    square test[] = {
         S_LIGHTBULB, S_BLANK, S_BLACK1, S_MARK,  S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,  S_BLANK,  S_BLACK2,
         S_BLANK,     S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLACK0, S_BLANK,  S_BLANK,  S_BLANK,  S_BLACKU,
         S_BLACK2,    S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,  S_BLACK1, S_BLACKU,
@@ -141,7 +141,7 @@ bool test_game_get_state() {
 }
 
 bool test_game_is_over() {
-    square test[DEFAULT_SIZE * DEFAULT_SIZE] = {
+    square test[] = {
         S_BLANK,  S_BLANK, S_BLACK1, S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACK2,
         S_BLANK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACKU,
         S_BLACK2, S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLACK1, S_BLACKU,
@@ -150,7 +150,7 @@ bool test_game_is_over() {
 
     game g2 = game_new(test);
 
-    square solution_test[DEFAULT_SIZE * DEFAULT_SIZE] = {
+    square solution_test[] = {
         S_LIGHTBULB, S_BLANK,  S_BLACK1, S_LIGHTBULB, S_BLANK,     S_BLANK,     S_BLANK, S_BLANK,     S_LIGHTBULB,
         S_BLACK2,    S_BLANK,  S_BLANK,  S_BLANK,     S_LIGHTBULB, S_BLANK,     S_BLANK, S_LIGHTBULB, S_BLANK,
         S_BLANK,     S_BLACKU, S_BLACK2, S_BLANK,     S_BLANK,     S_BLANK,     S_BLANK, S_BLANK,     S_BLANK,
@@ -214,7 +214,7 @@ bool test_game_is_over() {
 }
 
 bool test_game_is_blanck() {
-    square test[DEFAULT_SIZE * DEFAULT_SIZE] = {
+    square test[] = {
         S_LIGHTBULB, S_BLANK, S_BLACK1, S_MARK,  S_BLANK, S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,  S_BLACK2,
         S_BLANK,     S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,  S_BLACKU,
         S_BLACK2,    S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK,  S_BLACK1, S_BLACKU,
@@ -231,7 +231,7 @@ bool test_game_is_blanck() {
     return oktest;
 }
 bool test_game_delete() {
-    square test[DEFAULT_SIZE * DEFAULT_SIZE] = {
+    square test[] = {
         S_BLANK,  S_BLANK, S_BLACK1, S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACK2,
         S_BLANK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACKU,
         S_BLACK2, S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLACK1, S_BLACKU,
@@ -246,7 +246,7 @@ bool test_game_delete() {
 }
 
 bool test_game_copy() {
-    square test[DEFAULT_SIZE * DEFAULT_SIZE] = {
+    square test[] = {
         S_LIGHTBULB, S_LIGHTBULB, S_BLACK1, S_MARK,  S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACK2,
         S_BLANK,     S_BLANK,     S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACK0,
         S_BLACK2,    S_BLANK,     S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLACK3, S_BLACKU,

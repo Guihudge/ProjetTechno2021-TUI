@@ -21,4 +21,5 @@ add_executable(game_text game_text.c)
 target_link_libraries(game_text game)
 target_link_libraries(game_text pilefile)
 
+#on ajoute les tests
 add_subdirectory(test)
