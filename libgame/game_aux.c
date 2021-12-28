@@ -73,12 +73,12 @@ void game_print(cgame g) {
 
 game game_default(void) {
     // new blank game
-    square init_value[] = {
-        S_BLANK,  S_BLANK, S_BLACK1, S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACK2,
-        S_BLANK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACKU,
-        S_BLACK2, S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLACK1, S_BLACKU,
-        S_BLANK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACK2,
-        S_BLANK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK};
+    square init_value[] = {S_BLANK,  S_BLANK,  S_BLACK1, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+                           S_BLACK2, S_BLANK,  S_BLANK,  S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+                           S_BLANK,  S_BLACKU, S_BLACK2, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+                           S_BLANK,  S_BLACK1, S_BLACKU, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+                           S_BLANK,  S_BLANK,  S_BLANK,  S_BLACK2, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+                           S_BLANK,  S_BLACKU, S_BLANK,  S_BLANK};
 
     game new = game_new(init_value);
     return new;
@@ -86,13 +86,13 @@ game game_default(void) {
 
 game game_default_solution(void) {
     // Base solution tab
-    square solution_value[] = {
-        S_LIGHTBULB, S_BLANK,  S_BLACK1, S_LIGHTBULB, S_BLANK,     S_BLANK,     S_BLANK, S_BLANK,     S_LIGHTBULB,
-        S_BLACK2,    S_BLANK,  S_BLANK,  S_BLANK,     S_LIGHTBULB, S_BLANK,     S_BLANK, S_LIGHTBULB, S_BLANK,
-        S_BLANK,     S_BLACKU, S_BLACK2, S_BLANK,     S_BLANK,     S_BLANK,     S_BLANK, S_BLANK,     S_BLANK,
-        S_LIGHTBULB, S_BLACK1, S_BLACKU, S_BLANK,     S_BLANK,     S_LIGHTBULB, S_BLANK, S_BLANK,     S_LIGHTBULB,
-        S_BLANK,     S_BLANK,  S_BLANK,  S_BLACK2,    S_LIGHTBULB, S_BLANK,     S_BLANK, S_LIGHTBULB, S_BLANK,
-        S_BLANK,     S_BLACKU, S_BLANK,  S_BLANK};
+    square solution_value[] = {S_LIGHTBULB, S_BLANK,  S_BLACK1, S_LIGHTBULB, S_BLANK,  S_BLANK,     S_BLANK,  S_BLANK,
+                               S_LIGHTBULB, S_BLACK2, S_BLANK,  S_BLANK,     S_BLANK,  S_LIGHTBULB, S_BLANK,  S_BLANK,
+                               S_LIGHTBULB, S_BLANK,  S_BLANK,  S_BLACKU,    S_BLACK2, S_BLANK,     S_BLANK,  S_BLANK,
+                               S_BLANK,     S_BLANK,  S_BLANK,  S_LIGHTBULB, S_BLACK1, S_BLACKU,    S_BLANK,  S_BLANK,
+                               S_LIGHTBULB, S_BLANK,  S_BLANK,  S_LIGHTBULB, S_BLANK,  S_BLANK,     S_BLANK,  S_BLACK2,
+                               S_LIGHTBULB, S_BLANK,  S_BLANK,  S_LIGHTBULB, S_BLANK,  S_BLANK,     S_BLACKU, S_BLANK,
+                               S_BLANK};
 
     game solution_game = game_new(solution_value);
     game_update_flags(solution_game);

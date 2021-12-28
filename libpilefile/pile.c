@@ -1,10 +1,10 @@
+#include "pile.h"
+
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "list.h"
-#include "pile.h"
-
 
 obj valeur_pile(pile_obj P) {
     if (pile_vide(P)) {

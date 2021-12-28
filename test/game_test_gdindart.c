@@ -146,12 +146,12 @@ bool test_game_update_flags() {
 /*test_game_default*/
 bool test_game_default() {
     // create test game
-    square init_value_test[] = {
-        S_BLANK,  S_BLANK, S_BLACK1, S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACK2,
-        S_BLANK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACKU,
-        S_BLACK2, S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLACK1, S_BLACKU,
-        S_BLANK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACK2,
-        S_BLANK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK};
+    square init_value_test[] = {S_BLANK,  S_BLANK,  S_BLACK1, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+                                S_BLACK2, S_BLANK,  S_BLANK,  S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+                                S_BLANK,  S_BLACKU, S_BLACK2, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+                                S_BLANK,  S_BLACK1, S_BLACKU, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+                                S_BLANK,  S_BLANK,  S_BLANK,  S_BLACK2, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+                                S_BLANK,  S_BLACKU, S_BLANK,  S_BLANK};
 
     game test_game = game_new(init_value_test);
 
@@ -193,12 +193,12 @@ bool test_game_has_error() {
 
 /*test_game_is_marked*/
 bool test_game_is_marked() {
-    square init_test_value[] = {
-        S_BLANK,  S_BLANK, S_BLACK1, S_BLANK, S_MARK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACK2,
-        S_BLANK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACKU,
-        S_BLACK2, S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_MARK,  S_BLANK,  S_BLANK, S_BLACK1, S_BLACKU,
-        S_BLANK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACK2,
-        S_BLANK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK};
+    square init_test_value[] = {S_BLANK,  S_BLANK,  S_BLACK1, S_BLANK,  S_MARK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+                                S_BLACK2, S_BLANK,  S_BLANK,  S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+                                S_BLANK,  S_BLACKU, S_BLACK2, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_MARK,  S_BLANK,
+                                S_BLANK,  S_BLACK1, S_BLACKU, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+                                S_BLANK,  S_BLANK,  S_BLANK,  S_BLACK2, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+                                S_BLANK,  S_BLACKU, S_BLANK,  S_BLANK};
 
     game test_game = game_new(init_test_value);
     game_update_flags(test_game);
@@ -210,12 +210,12 @@ bool test_game_is_marked() {
 
 /*test_game_is_black*/
 bool test_game_is_black() {
-    square init_test_value[] = {
-        S_BLANK,  S_BLANK, S_BLACK1, S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACK2,
-        S_BLANK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACKU,
-        S_BLACK2, S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLACK1, S_BLACKU,
-        S_BLANK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACK2,
-        S_BLANK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK};
+    square init_test_value[] = {S_BLANK,  S_BLANK,  S_BLACK1, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+                                S_BLACK2, S_BLANK,  S_BLANK,  S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+                                S_BLANK,  S_BLACKU, S_BLACK2, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+                                S_BLANK,  S_BLACK1, S_BLACKU, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+                                S_BLANK,  S_BLANK,  S_BLANK,  S_BLACK2, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+                                S_BLANK,  S_BLACKU, S_BLANK,  S_BLANK};
 
     game test_game = game_new(init_test_value);
     game_update_flags(test_game);
@@ -263,13 +263,13 @@ bool test_game_equal() {
     game diff1_game = game_default_solution();
     game_update_flags(diff1_game);
 
-    square solution_value[] = {
-        S_LIGHTBULB, S_BLANK,  S_BLACK1, S_LIGHTBULB, S_BLANK,     S_BLANK,     S_BLANK, S_BLANK,     S_LIGHTBULB,
-        S_BLACK2,    S_BLANK,  S_BLANK,  S_BLANK,     S_LIGHTBULB, S_BLANK,     S_BLANK, S_LIGHTBULB, S_BLANK,
-        S_BLANK,     S_BLACKU, S_BLACK2, S_BLANK,     S_BLANK,     S_BLANK,     S_BLANK, S_BLANK,     S_BLANK,
-        S_LIGHTBULB, S_BLACK1, S_BLACKU, S_BLANK,     S_BLANK,     S_LIGHTBULB, S_BLANK, S_BLANK,     S_LIGHTBULB,
-        S_BLANK,     S_BLANK,  S_BLANK,  S_BLACK2,    S_LIGHTBULB, S_BLANK,     S_BLANK, S_LIGHTBULB, S_BLANK,
-        S_BLANK,     S_BLACKU, S_BLANK,  S_BLANK};
+    square solution_value[] = {S_LIGHTBULB, S_BLANK,  S_BLACK1, S_LIGHTBULB, S_BLANK,  S_BLANK,     S_BLANK,  S_BLANK,
+                               S_LIGHTBULB, S_BLACK2, S_BLANK,  S_BLANK,     S_BLANK,  S_LIGHTBULB, S_BLANK,  S_BLANK,
+                               S_LIGHTBULB, S_BLANK,  S_BLANK,  S_BLACKU,    S_BLACK2, S_BLANK,     S_BLANK,  S_BLANK,
+                               S_BLANK,     S_BLANK,  S_BLANK,  S_LIGHTBULB, S_BLACK1, S_BLACKU,    S_BLANK,  S_BLANK,
+                               S_LIGHTBULB, S_BLANK,  S_BLANK,  S_LIGHTBULB, S_BLANK,  S_BLANK,     S_BLANK,  S_BLACK2,
+                               S_LIGHTBULB, S_BLANK,  S_BLANK,  S_LIGHTBULB, S_BLANK,  S_BLANK,     S_BLACKU, S_BLANK,
+                               S_BLANK};
 
     game diff2_game = game_new(solution_value);
 

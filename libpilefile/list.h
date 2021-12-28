@@ -12,7 +12,6 @@ struct listeSC_obj {
 
 typedef struct listeSC_obj* listeSC_obj;
 
-
 bool est_vide(listeSC_obj l);
 listeSC_obj creer_vide();
 obj donnee(listeSC_obj l);

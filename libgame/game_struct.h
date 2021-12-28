@@ -7,14 +7,14 @@ typedef struct history_s* history;
 typedef struct move_pile_s* move_pile;
 
 struct game_s {
-    square **tab;
+    square** tab;
     uint nb_row;
     uint nb_col;
     bool warpping;
     history move;
 };
 
-struct history_s{
+struct history_s {
     move_pile undo;
     move_pile redo;
 };

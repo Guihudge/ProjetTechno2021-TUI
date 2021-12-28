@@ -174,8 +174,8 @@ game game_new(square *squares) {
 }
 
 game game_new_empty(void) {
-    square game_square[DEFAULT_SIZE*DEFAULT_SIZE] = { //jsp comment l'enlever
-        S_BLANK};
+    square game_square[DEFAULT_SIZE * DEFAULT_SIZE] = {// jsp comment l'enlever
+                                                       S_BLANK};
 
     return game_new(game_square);
 }

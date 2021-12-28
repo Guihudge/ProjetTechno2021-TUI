@@ -1,8 +1,8 @@
+#include "list.h"
+
 #include <assert.h>
 #include <stdbool.h>
 #include <stdlib.h>
-
-#include "list.h"
 
 bool est_vide(listeSC_obj l) { return l == NULL; }
 
