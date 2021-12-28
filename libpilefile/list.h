@@ -16,7 +16,7 @@ bool est_vide(listeSC_obj l);
 listeSC_obj creer_vide();
 obj donnee(listeSC_obj l);
 listeSC_obj suivant(listeSC_obj l);
-static listeSC_obj creer(obj d);
+listeSC_obj creer(obj d);
 void liberer(listeSC_obj l);
 listeSC_obj inserer(listeSC_obj l, obj d);
 listeSC_obj inserer_apres(listeSC_obj l, listeSC_obj p, obj d);

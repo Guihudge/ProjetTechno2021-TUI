@@ -18,7 +18,7 @@ listeSC_obj suivant(listeSC_obj l) {
     return l->suivant;
 }
 
-static listeSC_obj creer(obj d) {
+listeSC_obj creer(obj d) {
     listeSC_obj l = (listeSC_obj)malloc(sizeof(struct listeSC_obj));
     assert(l);
     l->donnee = d;

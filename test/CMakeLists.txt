@@ -38,6 +38,9 @@ add_test(test_gdindart_game_is_black ./game_test_gdindart game_is_black)
 add_test(test_gdindart_game_get_square ./game_test_gdindart game_get_square)
 add_test(test_gdindart_game_equal ./game_test_gdindart game_equal)
 add_test(test_gdindart_game_new_empty ./game_test_gdindart game_new_empty)
+add_test(test_gdindart_game_nb_rows ./game_test_gdindart game_nb_rows)
+add_test(test_gdindart_game_nb_cols ./game_test_gdindart game_nb_cols)
+add_test(test_gdindart_game_is_wrapping ./game_test_gdindart game_is_wrapping)
 
 #millhe
 add_test(test_millhe_dummy ./game_test_millhe dummy)

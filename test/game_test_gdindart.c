@@ -313,6 +313,9 @@ bool test_game_new_empty() {
     return true;
 }
 
+bool test_game_nb_rows(){ return true;}
+bool test_game_nb_cols(){ return true;}
+bool test_game_is_wrapping(){ return true;}
 /*Dummy test*/
 
 bool test_dummy() { return true; }
@@ -351,6 +354,12 @@ int main(int argc, char *argv[]) {
         passed = test_game_equal();
     } else if (strcmp("game_new_empty", argv[1]) == 0) {
         passed = test_game_new_empty();
+    } else if (strcmp("game_nb_rows", argv[1]) == 0) {
+        passed = test_game_nb_rows();
+    } else if (strcmp("game_nb_cols", argv[1]) == 0) {
+        passed = test_game_nb_cols();
+    } else if (strcmp("game_is_wrapping", argv[1]) == 0) {
+        passed = test_game_is_wrapping();
     } else {
         fprintf(stderr, "Error: unkown test name %s\n", argv[1]);
         exit(EXIT_FAILURE);
