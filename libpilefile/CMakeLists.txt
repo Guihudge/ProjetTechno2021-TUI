@@ -4,8 +4,8 @@ project(PileFile C)
 
 set(CMAKE_C_FLAGS "-std=c99 -Wall")
 
-set(SRCS file.c pile.c)
-set(HEADERS file.h pile.h)
+set(SRCS list.c pile.c)
+set(HEADERS list.h pile.h)
 
 add_library(pilefile ${SRCS} ${HEADERS})
 
