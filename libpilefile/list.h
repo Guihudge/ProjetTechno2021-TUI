@@ -3,7 +3,7 @@
 
 #include "../libgame/game_struct.h"
 
-typedef move_pile obj;
+typedef move obj;
 
 struct listeSC_obj {
     obj donnee;

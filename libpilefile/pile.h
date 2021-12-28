@@ -2,6 +2,10 @@
 #define __PILE_H__
 
 #include "list.h"
+#include "../libgame/game_struct.h"
+#include "../libgame/game.h"
+
+typedef obj move;
 
 typedef listeSC_obj pile_obj;
 obj valeur_pile(pile_obj P);

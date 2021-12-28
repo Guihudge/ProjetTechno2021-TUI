@@ -313,9 +313,9 @@ bool test_game_new_empty() {
     return true;
 }
 
-bool test_game_nb_rows(){ return true;}
-bool test_game_nb_cols(){ return true;}
-bool test_game_is_wrapping(){ return true;}
+bool test_game_nb_rows(){ return true;} //TODO: à faire
+bool test_game_nb_cols(){ return true;} //TODO: à faire
+bool test_game_is_wrapping(){ return true;} //TODO: à faire
 /*Dummy test*/
 
 bool test_dummy() { return true; }
