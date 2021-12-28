@@ -67,13 +67,13 @@ void game_print(cgame g) {
         printf("|\n");
     }
     printf("   ");
-    for (uint i = 0; i < DEFAULT_SIZE; i++) printf("-");
+    for (uint i = 0; i < game_nb_rows(g); i++) printf("-");
     printf("\n");
 }
 
 game game_default(void) {
     // new blank game
-    square init_value[DEFAULT_SIZE * DEFAULT_SIZE] = {
+    square init_value[] = {
         S_BLANK,  S_BLANK, S_BLACK1, S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACK2,
         S_BLANK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACKU,
         S_BLACK2, S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLACK1, S_BLACKU,
@@ -86,7 +86,7 @@ game game_default(void) {
 
 game game_default_solution(void) {
     // Base solution tab
-    square solution_value[DEFAULT_SIZE * DEFAULT_SIZE] = {
+    square solution_value[] = {
         S_LIGHTBULB, S_BLANK,  S_BLACK1, S_LIGHTBULB, S_BLANK,     S_BLANK,     S_BLANK, S_BLANK,     S_LIGHTBULB,
         S_BLACK2,    S_BLANK,  S_BLANK,  S_BLANK,     S_LIGHTBULB, S_BLANK,     S_BLANK, S_LIGHTBULB, S_BLANK,
         S_BLANK,     S_BLACKU, S_BLACK2, S_BLANK,     S_BLANK,     S_BLANK,     S_BLANK, S_BLANK,     S_BLANK,

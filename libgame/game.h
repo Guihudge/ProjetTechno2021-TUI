@@ -17,6 +17,7 @@ typedef unsigned int uint;
 /**
  * @brief Size of the default game grid.
  **/
+
 #define DEFAULT_SIZE 7
 
 /**
