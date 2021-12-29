@@ -1,9 +1,11 @@
 cmake_minimum_required(VERSION 3.0)
 
-project(libgame)
+#nom sous projet
+project(libgame C)
 
 set(CMAKE_C_FLAGS "-std=c99 -Wall")
 
+#définition des sousrces et headers
 set(SRCS
     game_aux.c 
     game.c 
@@ -19,4 +21,5 @@ set(HEADERS
     game_struct.h
 )
 
+#création de la lib
 add_library(game ${SRCS} ${HEADERS})

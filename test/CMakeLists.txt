@@ -1,26 +1,29 @@
 cmake_minimum_required(VERSION 3.0)
 
+#nom sous projet
 project(game_test C)
 
 include(CTest)
 enable_testing()
 set(CMAKE_C_FLAGS "-std=c99 -Wall")
 
-# cmake add_subdirectory(../libgame)
-
-include_directories(../libstack)
-
+#on crée les éxécutables de tests
 add_executable(game_test_fclaisse game_test_fclaisse.c)
 add_executable(game_test_gdindart game_test_gdindart.c)
 add_executable(game_test_millhe game_test_millhe.c)
+add_executable(stack_test stack_test.c)
 
+#note : pas besoin d'indiquer les dossiers des lib car déjà inclue dans le cmake principale (celui à la racine du projet)
+#on link la lib game
 target_link_libraries(game_test_gdindart game)
 target_link_libraries(game_test_millhe game)
 target_link_libraries(game_test_fclaisse game)
 
+#on link la lib stack
 target_link_libraries(game_test_gdindart stack)
 target_link_libraries(game_test_millhe stack)
 target_link_libraries(game_test_fclaisse stack)
+target_link_libraries(stack_test stack)
 
 # Ajout des tests
 # fclaisse
@@ -58,3 +61,12 @@ add_test(test_millhe_game_is_over ./game_test_millhe game_is_over)
 add_test(test_millhe_game_is_blanck ./game_test_millhe game_is_blanck)
 add_test(test_millhe_game_delete ./game_test_millhe game_delete)
 add_test(test_millhe_game_copy ./game_test_millhe game_copy)
+
+#libstack
+add_test(stack_test_new_empty ./stack_test stack_new_empty)
+add_test(stack_test_is_empty ./stack_test stack_is_empty)
+add_test(stack_test_push_head ./stack_test stack_push_head)
+add_test(stack_test_pop_head ./stack_test stack_pop_head)
+add_test(stack_test_peek_head ./stack_test stack_peek_head)
+add_test(stack_test_clear ./stack_test stack_clear)
+add_test(stack_test_free ./stack_test stack_free)
