@@ -1,3 +1,9 @@
+/**
+ * @file game_struct.h
+ * @brief Basic game structur.
+ * 
+ * */
+
 #ifndef __GAMESTRUCT_H__
 #define __GAMESTRUCT_H__
 
@@ -22,7 +28,7 @@ typedef struct move_stack_s* move_stack;
 typedef struct move_s* move;
 
 /**
- * @brief main gamestruct
+ * @brief Main struct used by the game
  *
  */
 struct game_s {
@@ -30,7 +36,7 @@ struct game_s {
     uint nb_row;   /**< number of rows*/
     uint nb_col;   /**< number of cols*/
     bool warpping; /**< warpping or not warping, this is the question*/
-    history move;  /**< a link to hitory struct*/
+    history move;  /**< a link to history struct*/
 };
 
 /**
@@ -43,7 +49,7 @@ struct history_s {
 };
 
 /**
- * @brief move_stack is a structure like a simpel chained list
+ * @brief move_stack is a structure like a simple chained list
  *
  */
 struct move_stack_s {

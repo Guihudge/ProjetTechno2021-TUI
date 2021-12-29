@@ -1,3 +1,8 @@
+/**
+ * @file auxiliars.h
+ * @brief Auxiliars function mainly for error gestion
+ * */
+
 #ifndef __AUXILIARS_H__
 #define __AUXILIARS_H__
 
