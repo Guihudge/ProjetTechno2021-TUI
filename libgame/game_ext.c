@@ -34,8 +34,8 @@ history add_move(history hist, char* pile, uint i, uint j, square s) {
     } else if (strcmp(pile, "redo") == 0) {
         hist->redo = stack_push_head(hist->redo, m);
     } else {
-        exit(EXIT_FAILURE);
         fprintf(stderr, "Error on history!!");
+        exit(EXIT_FAILURE);
     }
 
     return hist;
