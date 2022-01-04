@@ -10,17 +10,18 @@
 
 #include "game.h"
 
+/* ne marche pas
 #if defined(__APPLE__) && defined(__MACH__)
-#include <malloc/malloc.h>
-#define MALLOCSIZE malloc_size
+    #include <malloc/malloc.h>
+    #define MALLOCSIZE malloc_size
 #elif defined(__unix__) && defined(__linux__)
-#include <malloc.h>
-#define MALLOCSIZE malloc_usable_size
-// on est pas sur pour windows
+    #include <malloc.h>
+    #define MALLOCSIZE malloc_usable_size
 #elif defined(_WIN32)
-#include <malloc.h>
-#define MALLOCSIZE _msize
+    #include <malloc.h>
+    #define MALLOCSIZE _msize
 #endif
+*/
 
 /**
  * @brief Prints an error message and exit the program in connection with memory allocation error.
@@ -69,5 +70,7 @@ void check_coordinates(cgame g, uint i, uint j, const char *fonction);
  * @return The given boolean.
  **/
 bool delete_and_exit(bool exit, game *games, uint size, char *error);
+
+game create_game_struct(uint nb_rows, uint nb_cols);
 
 #endif

@@ -138,44 +138,16 @@ void update_col(game g, uint i, uint j) {
     }
 }
 
-game create_game_struct(int nrow, int ncol) {
-    game ngame = (game)malloc(sizeof(struct game_s));
-    if (ngame == NULL) {
-        pointer_error(__FILE__, __LINE__);
-    }
-
-    ngame->tab = (square **)malloc(sizeof(square *) * nrow);
-    is_viable_pointer(ngame->tab, "memory", __FILE__, __LINE__);
-
-    for (uint x = 0; x < nrow; x++) {
-        ngame->tab[x] = (square *)malloc(sizeof(square) * ncol);
-        is_viable_pointer(ngame->tab[x], "memory", __FILE__, __LINE__);
-    }
-
-    ngame->nb_col = ncol;
-    ngame->nb_row = nrow;
-    ngame->warpping = false;
-
-    return ngame;
-}
-
 game game_new(square *squares) {
     is_viable_pointer(squares, "pointer", __FILE__, __LINE__);
 
-    game g = create_game_struct(DEFAULT_SIZE, DEFAULT_SIZE);  // création du jeu par défault donc on laisse DEFAULT_SIZE
-
-    for (uint x = 0; x < g->nb_row; x++) {
-        for (uint y = 0; y < g->nb_col; y++) {
-            g->tab[x][y] = squares[x * g->nb_col + y];
-        }
-    }
+    game g = game_new_ext(DEFAULT_SIZE, DEFAULT_SIZE, squares, false);
 
     return g;
 }
 
 game game_new_empty(void) {
-    square game_square[DEFAULT_SIZE * DEFAULT_SIZE] = {// jsp comment l'enlever
-                                                       S_BLANK};
+    square game_square[DEFAULT_SIZE * DEFAULT_SIZE] = {S_BLANK};
 
     return game_new(game_square);
 }

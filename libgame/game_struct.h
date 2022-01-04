@@ -35,7 +35,7 @@ struct game_s {
     square** tab;  /**< 2D tab for store game flags and tiles*/
     uint nb_row;   /**< number of rows*/
     uint nb_col;   /**< number of cols*/
-    bool warpping; /**< warpping or not warping, this is the question*/
+    bool wrapping; /**< wrapping or not warping, this is the question*/
     history move;  /**< a link to history struct*/
 };
 

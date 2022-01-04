@@ -5,6 +5,7 @@
 #include <string.h>
 
 #include "game_ext.h"
+#include "game_struct.h"
 
 void memory_error(char *file, int line) {
     fprintf(stderr, "Memory error in file %s at line %d\n", file, line);
@@ -45,4 +46,21 @@ bool delete_and_exit(bool exit, game *games, uint size, char *error) {
         fprintf(stderr, "%s\n", error);
     }
     return exit;
+}
+
+game create_game_struct(uint nrow, uint ncol) {
+    game ngame = (game)malloc(sizeof(struct game_s));
+    if (ngame == NULL) {
+        pointer_error(__FILE__, __LINE__);
+    }
+
+    ngame->tab = (square **)malloc(sizeof(square *) * nrow);
+    is_viable_pointer(ngame->tab, "memory", __FILE__, __LINE__);
+
+    for (uint x = 0; x < nrow; x++) {
+        ngame->tab[x] = (square *)malloc(sizeof(square) * ncol);
+        is_viable_pointer(ngame->tab[x], "memory", __FILE__, __LINE__);
+    }
+
+    return ngame;
 }
