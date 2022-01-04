@@ -44,7 +44,7 @@ history add_move(history hist, char* pile, uint i, uint j, square s) {
 game game_new_ext(uint nb_rows, uint nb_cols, square* squares, bool wrapping) { 
     
     if(MALLOCSIZE(squares) < nb_cols * nb_rows) { 
-        fprintf("game_size %u > squares_size %u\n", nb_rows * nb_cols, MALLOCSIZE(squares)); 
+        fprintf(stderr, "game_size %u > squares_size %zu\n", nb_rows * nb_cols, MALLOCSIZE(squares)); 
         exit(EXIT_FAILURE);    
     }
     
@@ -90,6 +90,10 @@ bool game_is_wrapping(cgame g) {
     return g->warpping;
 }
 
-void game_undo(game g) {}
+void game_undo(game g) {
 
-void game_redo(game g) {}
+}
+
+void game_redo(game g) {
+
+}
