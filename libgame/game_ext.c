@@ -46,7 +46,6 @@ game game_new_ext(uint nb_rows, uint nb_cols, square* squares, bool wrapping) {
         fprintf(stderr, "game_size %u > squares_size %zu\n", nb_rows * nb_cols, MALLOCSIZE(squares));
         exit(EXIT_FAILURE);
     }
-<<<<<<< HEAD
     
     game new_game = (game) malloc(sizeof(struct game_s));
     is_viable_pointer(new_game, "memory", __FILE__, __LINE__);
@@ -57,18 +56,6 @@ game game_new_ext(uint nb_rows, uint nb_cols, square* squares, bool wrapping) {
     for(uint i = 0; i < nb_rows; i++) {
         new_game->tab[i] = (square*) malloc(sizeof(square) + nb_cols);
         is_viable_pointer(new_game->tab[i], "memory", __FILE__, __LINE__);
-=======
-
-    game new_game = (game)malloc(sizeof(struct game_s));
-    is_viable_pointer(new_game, "memory");
-
-    new_game->tab = (square**)malloc(sizeof(square*) * nb_rows);
-    is_viable_pointer(new_game->tab, "memory");
-
-    for (uint i = 0; i < nb_rows; i++) {
-        new_game->tab[i] = (square*)malloc(sizeof(square) + nb_cols);
-        is_viable_pointer(new_game->tab[i], "memory");
->>>>>>> f20fe9f179fe6bbba8e047bed9ebb1b6667a1d6a
     }
 
     for (uint i = 0; i < nb_rows; i++) {
