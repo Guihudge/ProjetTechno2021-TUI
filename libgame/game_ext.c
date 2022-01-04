@@ -95,5 +95,12 @@ void game_undo(game g) {
 }
 
 void game_redo(game g) {
+    is_viable_pointer(g, "pointer");
+    is_viable_pointer(g->move, "pointer");
 
+    if(stack_is_empty(g->move->redo)) { return; }
+    else { 
+        move redo = stack_peek_head(g->move->redo);
+        game_play_move(g, redo->i, redo->j, redo->s); 
+    }
 }
