@@ -10,6 +10,18 @@
 
 #include "game.h"
 
+#if defined(__APPLE__) && defined(__MACH__)
+    #include <malloc/malloc.h>
+    #define MALLOCSIZE malloc_size
+#elif  defined(__unix__)
+    #include <malloc.h>
+    #define MALLOCSIZE malloc_usable_size
+// on est pas sur pour windows
+#elif defined(_WIN32)
+    #include <malloc.h>
+    #define MALLOCSIZE _msize
+#endif
+
 /**
  * @brief Prints an error message and exit the program in connection with memory allocation error.
  * @deprecated Ne pas utiliser dans les test

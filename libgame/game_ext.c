@@ -41,7 +41,37 @@ history add_move(history hist, char* pile, uint i, uint j, square s) {
     return hist;
 }
 
-game game_new_ext(uint nb_rows, uint nb_cols, square* squares, bool wrapping) { return NULL; }
+game game_new_ext(uint nb_rows, uint nb_cols, square* squares, bool wrapping) { 
+    
+    if(MALLOCSIZE(squares) < nb_cols * nb_rows) { 
+        fprintf("game_size %u > squares_size %u\n", nb_rows * nb_cols, MALLOCSIZE(squares)); 
+        exit(EXIT_FAILURE);    
+    }
+    
+    game new_game = (game) malloc(sizeof(struct game_s));
+    is_viable_pointer(new_game, "memory");
+
+    new_game->tab = (square**) malloc(sizeof(square*) * nb_rows);
+    is_viable_pointer(new_game->tab, "memory");
+
+    for(uint i = 0; i < nb_rows; i++) {
+        new_game->tab[i] = (square*) malloc(sizeof(square) + nb_cols);
+        is_viable_pointer(new_game->tab[i], "memory");
+    }
+
+    for(uint i = 0; i < nb_rows; i++) {
+        for(uint j = 0; j < nb_cols; j++) {
+            new_game->tab[i][j] = squares[i + nb_cols + j];
+        }
+    }
+
+    new_game->nb_row = nb_rows;
+    new_game->nb_col = nb_cols;
+    new_game->warpping = wrapping;
+    new_game->move = init_game_history();
+
+    return new_game;
+}
 
 game game_new_empty_ext(uint nb_rows, uint nb_cols, bool wrapping) { return NULL; }
 
