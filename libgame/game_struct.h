@@ -1,7 +1,7 @@
 /**
  * @file game_struct.h
  * @brief Basic game structur.
- * 
+ *
  * */
 
 #ifndef __GAMESTRUCT_H__
