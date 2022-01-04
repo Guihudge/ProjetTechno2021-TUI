@@ -6,24 +6,24 @@
 
 #include "game_ext.h"
 
-void memory_error(void) {
-    fprintf(stderr, "Memory error\n");
+void memory_error(char *file, int line) {
+    fprintf(stderr, "Memory error in file %s at line %d\n", file, line);
     exit(EXIT_FAILURE);
 }
 
-void pointer_error(void) {
-    fprintf(stderr, "Pointeur error\n");
+void pointer_error(char *file, int line) {
+    fprintf(stderr, "Pointeur error in file %s at line %d\n", file, line);
     exit(EXIT_FAILURE);
 }
 
-void is_viable_pointer(const void *pointer, const char *type) {
+void is_viable_pointer(const void *pointer, const char *type, char *file, int line) {
     if (pointer == NULL) {
         if (strcmp("memory", type) == 0)
-            memory_error();
+            memory_error(file, line);
         else if (strcmp("pointer", type) == 0)
-            pointer_error();
+            pointer_error(file, line);
         else {
-            fprintf(stderr, "Unknown error type by fonction %s\n", __func__);
+            fprintf(stderr, "Unknown error type by fonction %s providing %s at line %d\n", __func__, file, line);
             exit(EXIT_FAILURE);
         }
     }

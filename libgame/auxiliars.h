@@ -26,13 +26,13 @@
  * @brief Prints an error message and exit the program in connection with memory allocation error.
  * @deprecated Ne pas utiliser dans les test
  **/
-void memory_error();
+void memory_error(char *file, int line);
 
 /**
  * @brief Prints an error message and exit the program in connection with memory pointer error.
  * @deprecated Ne pas utiliser dans les test
  **/
-void pointer_error();
+void pointer_error(char *file, int line);
 
 /**
  * @brief Check viability of a pointer and exit the program with the error message associated
@@ -43,7 +43,7 @@ void pointer_error();
  * @pre @p type Must be exactly "pointer" or "memory".
  * @deprecated Ne pas utiliser dans les test
  **/
-void is_viable_pointer(const void *pointer, const char *type);
+void is_viable_pointer(const void *pointer, const char *type, char *file, int line);
 
 /**
  * @brief Check that coordinates are valid for the game and exit the program in case of error.

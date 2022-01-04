@@ -8,7 +8,7 @@
 #include "game_struct.h"
 
 void reset_flags(game g) {
-    is_viable_pointer(g, "pointer");
+    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
 
     for (uint i = 0; i < g->nb_row; i++) {
         for (uint j = 0; j < g->nb_col; j++) {
@@ -18,7 +18,7 @@ void reset_flags(game g) {
 }
 
 bool check_black_wall(cgame g, uint i, uint j) {
-    is_viable_pointer(g, "pointer");
+    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
     check_coordinates(g, i, j, __func__);
 
     int black_number = game_get_black_number(g, i, j);
@@ -75,7 +75,7 @@ bool check_black_wall(cgame g, uint i, uint j) {
 }
 
 void update_row(game g, uint i, uint j) {
-    is_viable_pointer(g, "pointer");
+    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
     check_coordinates(g, i, j, __func__);
 
     int y = i;
@@ -107,7 +107,7 @@ void update_row(game g, uint i, uint j) {
 }
 
 void update_col(game g, uint i, uint j) {
-    is_viable_pointer(g, "pointer");
+    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
     check_coordinates(g, i, j, __func__);
 
     int x = j;
@@ -141,15 +141,15 @@ void update_col(game g, uint i, uint j) {
 game create_game_struct(int nrow, int ncol) {
     game ngame = (game)malloc(sizeof(struct game_s));
     if (ngame == NULL) {
-        pointer_error();
+        pointer_error(__FILE__, __LINE__);
     }
 
     ngame->tab = (square **)malloc(sizeof(square *) * nrow);
-    is_viable_pointer(ngame->tab, "memory");
+    is_viable_pointer(ngame->tab, "memory", __FILE__, __LINE__);
 
     for (uint x = 0; x < nrow; x++) {
         ngame->tab[x] = (square *)malloc(sizeof(square) * ncol);
-        is_viable_pointer(ngame->tab[x], "memory");
+        is_viable_pointer(ngame->tab[x], "memory", __FILE__, __LINE__);
     }
 
     ngame->nb_col = ncol;
@@ -160,7 +160,7 @@ game create_game_struct(int nrow, int ncol) {
 }
 
 game game_new(square *squares) {
-    is_viable_pointer(squares, "pointer");
+    is_viable_pointer(squares, "pointer", __FILE__, __LINE__);
 
     game g = create_game_struct(DEFAULT_SIZE, DEFAULT_SIZE);  // création du jeu par défault donc on laisse DEFAULT_SIZE
 
@@ -181,7 +181,7 @@ game game_new_empty(void) {
 }
 
 game game_copy(cgame g) {
-    is_viable_pointer(g, "pointer");
+    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
 
     game copy = create_game_struct(g->nb_row, g->nb_col);
 
@@ -195,8 +195,8 @@ game game_copy(cgame g) {
 }
 
 bool game_equal(cgame g1, cgame g2) {
-    is_viable_pointer(g1, "pointer");
-    is_viable_pointer(g2, "pointer");
+    is_viable_pointer(g1, "pointer", __FILE__, __LINE__);
+    is_viable_pointer(g2, "pointer", __FILE__, __LINE__);
 
     for (uint x = 0; x < g1->nb_row; x++) {
         for (uint y = 0; y < g1->nb_col; y++) {
@@ -210,7 +210,7 @@ bool game_equal(cgame g1, cgame g2) {
 }
 
 void game_delete(game g) {
-    is_viable_pointer(g, "pointer");
+    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
 
     if (g->tab != NULL) {
         for (uint x = 0; x < g->nb_row; x++) {
@@ -224,21 +224,21 @@ void game_delete(game g) {
 }
 
 void game_set_square(game g, uint i, uint j, square s) {
-    is_viable_pointer(g, "pointer");
+    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
     check_coordinates(g, i, j, __func__);
 
     g->tab[i][j] = s;
 }
 
 square game_get_square(cgame g, uint i, uint j) {
-    is_viable_pointer(g, "pointer");
+    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
     check_coordinates(g, i, j, __func__);
 
     return g->tab[i][j];
 }
 
 square game_get_state(cgame g, uint i, uint j) {
-    is_viable_pointer(g, "pointer");
+    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
     check_coordinates(g, i, j, __func__);
 
     square tiles = g->tab[i][j];
@@ -247,7 +247,7 @@ square game_get_state(cgame g, uint i, uint j) {
 }
 
 square game_get_flags(cgame g, uint i, uint j) {
-    is_viable_pointer(g, "pointer");
+    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
     check_coordinates(g, i, j, __func__);
 
     square tiles = g->tab[i][j];
@@ -256,7 +256,7 @@ square game_get_flags(cgame g, uint i, uint j) {
 }
 
 bool game_is_blank(cgame g, uint i, uint j) {
-    is_viable_pointer(g, "pointer");
+    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
     check_coordinates(g, i, j, __func__);
 
     square tiles = g->tab[i][j];
@@ -265,7 +265,7 @@ bool game_is_blank(cgame g, uint i, uint j) {
 }
 
 bool game_is_lightbulb(cgame g, uint i, uint j) {
-    is_viable_pointer(g, "pointer");
+    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
     check_coordinates(g, i, j, __func__);
 
     square tiles = g->tab[i][j];
@@ -277,7 +277,7 @@ bool game_is_lightbulb(cgame g, uint i, uint j) {
 }
 
 bool game_is_black(cgame g, uint i, uint j) {
-    is_viable_pointer(g, "pointer");
+    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
     check_coordinates(g, i, j, __func__);
 
     square tiles = g->tab[i][j];
@@ -286,7 +286,7 @@ bool game_is_black(cgame g, uint i, uint j) {
 }
 
 int game_get_black_number(cgame g, uint i, uint j) {
-    is_viable_pointer(g, "pointer");
+    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
     check_coordinates(g, i, j, __func__);
 
     square tiles = game_get_square(g, i, j);
@@ -314,7 +314,7 @@ int game_get_black_number(cgame g, uint i, uint j) {
 }
 
 bool game_is_marked(cgame g, uint i, uint j) {
-    is_viable_pointer(g, "pointer");
+    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
     check_coordinates(g, i, j, __func__);
 
     square tiles = g->tab[i][j];
@@ -323,7 +323,7 @@ bool game_is_marked(cgame g, uint i, uint j) {
 }
 
 bool game_is_lighted(cgame g, uint i, uint j) {
-    is_viable_pointer(g, "pointer");
+    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
     check_coordinates(g, i, j, __func__);
 
     square tiles = g->tab[i][j];
@@ -332,7 +332,7 @@ bool game_is_lighted(cgame g, uint i, uint j) {
 }
 
 bool game_has_error(cgame g, uint i, uint j) {
-    is_viable_pointer(g, "pointer");
+    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
     check_coordinates(g, i, j, __func__);
 
     square tiles = g->tab[i][j];
@@ -341,7 +341,7 @@ bool game_has_error(cgame g, uint i, uint j) {
 }
 
 bool game_check_move(cgame g, uint i, uint j, square s) {
-    is_viable_pointer(g, "pointer");
+    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
 
     if (s != S_BLANK && s != S_LIGHTBULB && s != S_MARK) {
         return false;
@@ -358,7 +358,7 @@ bool game_check_move(cgame g, uint i, uint j, square s) {
 }
 
 void game_play_move(game g, uint i, uint j, square s) {
-    is_viable_pointer(g, "pointer");
+    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
     check_coordinates(g, i, j, __func__);
 
     if (!game_check_move(g, i, j, s)) {
@@ -370,7 +370,7 @@ void game_play_move(game g, uint i, uint j, square s) {
 }
 
 void game_update_flags(game g) {
-    is_viable_pointer(g, "pointer");
+    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
 
     reset_flags(g);
 
@@ -395,7 +395,7 @@ void game_update_flags(game g) {
 }
 
 bool game_is_over(cgame g) {
-    is_viable_pointer(g, "pointer");
+    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
 
     for (uint x = 0; x < g->nb_row; x++) {
         for (uint y = 0; y < g->nb_col; y++) {
@@ -408,7 +408,7 @@ bool game_is_over(cgame g) {
 }
 
 void game_restart(game g) {
-    is_viable_pointer(g, "pointer");
+    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
 
     for (uint x = 0; x < g->nb_row; x++) {
         for (uint y = 0; y < g->nb_col; y++) {

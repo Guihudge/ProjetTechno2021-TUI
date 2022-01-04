@@ -24,8 +24,8 @@ move create_move(uint i, uint j, square s) {
 }
 
 history add_move(history hist, char* pile, uint i, uint j, square s) {
-    is_viable_pointer(hist, "pointer");
-    is_viable_pointer(pile, "pointer");
+    is_viable_pointer(hist, "pointer", __FILE__, __LINE__);
+    is_viable_pointer(pile, "pointer", __FILE__, __LINE__);
 
     move m = create_move(i, j, s);
 
@@ -49,14 +49,14 @@ game game_new_ext(uint nb_rows, uint nb_cols, square* squares, bool wrapping) {
     }
     
     game new_game = (game) malloc(sizeof(struct game_s));
-    is_viable_pointer(new_game, "memory");
+    is_viable_pointer(new_game, "memory", __FILE__, __LINE__);
 
     new_game->tab = (square**) malloc(sizeof(square*) * nb_rows);
-    is_viable_pointer(new_game->tab, "memory");
+    is_viable_pointer(new_game->tab, "memory", __FILE__, __LINE__);
 
     for(uint i = 0; i < nb_rows; i++) {
         new_game->tab[i] = (square*) malloc(sizeof(square) + nb_cols);
-        is_viable_pointer(new_game->tab[i], "memory");
+        is_viable_pointer(new_game->tab[i], "memory", __FILE__, __LINE__);
     }
 
     for(uint i = 0; i < nb_rows; i++) {
@@ -76,17 +76,17 @@ game game_new_ext(uint nb_rows, uint nb_cols, square* squares, bool wrapping) {
 game game_new_empty_ext(uint nb_rows, uint nb_cols, bool wrapping) { return NULL; }
 
 uint game_nb_rows(cgame g) {
-    is_viable_pointer(g, "pointer");
+    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
     return g->nb_row;
 }
 
 uint game_nb_cols(cgame g) {
-    is_viable_pointer(g, "pointer");
+    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
     return g->nb_col;
 }
 
 bool game_is_wrapping(cgame g) {
-    is_viable_pointer(g, "pointer");
+    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
     return g->warpping;
 }
 
@@ -95,8 +95,8 @@ void game_undo(game g) {
 }
 
 void game_redo(game g) {
-    is_viable_pointer(g, "pointer");
-    is_viable_pointer(g->move, "pointer");
+    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
+    is_viable_pointer(g->move, "pointer", __FILE__, __LINE__);
 
     if(stack_is_empty(g->move->redo)) { return; }
     else { 
