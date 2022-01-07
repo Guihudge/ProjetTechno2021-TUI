@@ -4,9 +4,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "../libstack/stack.h"
 #include "game_ext.h"
 #include "game_struct.h"
-#include "../libstack/stack.h"
 
 history init_game_history() {
     history hist = (history)malloc(sizeof(struct history_s));
@@ -65,12 +65,12 @@ bool delete_and_exit(bool exit, game *games, uint size, char *error) {
 }
 
 game create_game_struct(uint nrow, uint ncol) {
-    game ngame = (game) malloc(sizeof(struct game_s));
+    game ngame = (game)malloc(sizeof(struct game_s));
     if (ngame == NULL) {
         pointer_error(__FILE__, __LINE__);
     }
 
-    ngame->tab = (square **) malloc(sizeof(square *) * nrow);
+    ngame->tab = (square **)malloc(sizeof(square *) * nrow);
     is_viable_pointer(ngame->tab, "memory", __FILE__, __LINE__);
 
     for (uint x = 0; x < nrow; x++) {

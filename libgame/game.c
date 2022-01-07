@@ -156,19 +156,18 @@ game game_new_empty(void) {
 game game_copy(cgame g) {
     is_viable_pointer(g, "pointer", __FILE__, __LINE__);
 
-    square tmp_tab[g->nb_row * g -> nb_col];
+    square tmp_tab[g->nb_row * g->nb_col];
     game copy = game_new_ext(g->nb_row, g->nb_col, tmp_tab, g->wrapping);
 
-    
     for (uint x = 0; x < g->nb_row; x++) {
         for (uint y = 0; y < g->nb_col; y++) {
             copy->tab[x][y] = g->tab[x][y];
         }
     }
-    
+
     copy->move->undo = stack_copy(g->move->undo);
     copy->move->redo = stack_copy(g->move->redo);
-    
+
     return copy;
 }
 

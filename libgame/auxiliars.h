@@ -25,19 +25,19 @@
 */
 
 /**
- * @brief 
- * 
- * @return history 
+ * @brief
+ *
+ * @return history
  */
 history init_game_history();
 
 /**
  * @brief Create a move object
- * 
+ *
  * @param i row
  * @param j cols
  * @param s tiles
- * @return move 
+ * @return move
  */
 move create_move(uint i, uint j, square s);
 /**

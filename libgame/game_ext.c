@@ -53,7 +53,17 @@ game game_new_ext(uint nb_rows, uint nb_cols, square* squares, bool wrapping) {
     return new_game;
 }
 
-game game_new_empty_ext(uint nb_rows, uint nb_cols, bool wrapping) { return NULL; }
+game game_new_empty_ext(uint nb_rows, uint nb_cols, bool wrapping) {
+    uint size = nb_rows * nb_cols;
+    square* tab = malloc(sizeof(square) * (size));
+    for (uint i = 0; i < size; i++) {
+        tab[i] = S_BLANK;
+    }
+
+    game ngame = game_new_ext(nb_rows, nb_cols, tab, wrapping);
+    free(tab);
+    return ngame;
+}
 
 uint game_nb_rows(cgame g) {
     is_viable_pointer(g, "pointer", __FILE__, __LINE__);
