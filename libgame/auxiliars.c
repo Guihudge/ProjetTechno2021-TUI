@@ -78,7 +78,5 @@ game create_game_struct(uint nrow, uint ncol) {
         is_viable_pointer(ngame->tab[x], "memory", __FILE__, __LINE__);
     }
 
-    ngame -> move = init_game_history();
-
     return ngame;
 }
