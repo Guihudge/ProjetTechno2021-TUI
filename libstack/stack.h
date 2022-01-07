@@ -16,6 +16,8 @@ move stack_peek_head(move_stack stack);
 
 move_stack stack_clear(move_stack stack);
 
+move_stack stack_copy (move_stack stack_init);
+
 void stack_free(move_stack);
 
 #endif

@@ -45,6 +45,31 @@ move_stack stack_clear(move_stack stack) {
     return NULL;
 }
 
+move_stack stack_copy (move_stack stack_init) {
+    move_stack tmp = stack_new_empty();
+    move_stack stack1 = stack_init;
+    move_stack stack2 = stack_new_empty();
+
+    // on vide stack1 dans tmp
+    while (!stack_is_empty(stack1))
+    {
+        stack_push_head(tmp, stack_peek_head(stack1));
+        stack_pop_head(stack1);
+    }
+    
+    // on re-remplie stack1 et stack2 avec tmp
+    while (!stack_is_empty(tmp))
+    {
+        move data = stack_peek_head(stack1);
+        
+        stack_push_head(stack1, data);
+        stack_push_head(stack2, data);
+        stack_pop_head(tmp);
+    }
+    
+    return stack2;
+}
+
 void stack_free(move_stack stack) {
     move_stack to_be_deleted = stack;
 

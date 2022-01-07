@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "../libstack/stack.h"
 #include "auxiliars.h"
 #include "game_ext.h"
 #include "game_struct.h"
@@ -163,6 +164,9 @@ game game_copy(cgame g) {
         }
     }
 
+    copy->move->undo = stack_copy(g->move->undo);
+    copy->move->redo = stack_copy(g->move->redo);
+
     return copy;
 }
 
@@ -184,6 +188,7 @@ bool game_equal(cgame g1, cgame g2) {
 void game_delete(game g) {
     is_viable_pointer(g, "pointer", __FILE__, __LINE__);
 
+    // free 2D tab
     if (g->tab != NULL) {
         for (uint x = 0; x < g->nb_row; x++) {
             if (g->tab[x] != NULL) {
@@ -191,6 +196,18 @@ void game_delete(game g) {
             }
         }
         free(g->tab);
+    }
+
+    // free hystory struct
+    if (g->move != NULL) {
+        if (g->move->redo != NULL) {
+            stack_clear(g->move->redo);
+        }
+        if (g->move->undo != NULL) {
+            stack_clear(g->move->undo);
+        }
+
+        free(g->move);
     }
     free(g);
 }

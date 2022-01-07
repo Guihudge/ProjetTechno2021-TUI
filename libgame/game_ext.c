@@ -8,21 +8,6 @@
 #include "auxiliars.h"
 #include "game_struct.h"
 
-history init_game_history() {
-    history hist = (history)malloc(sizeof(struct history_s));
-    hist->redo = stack_new_empty();
-    hist->undo = stack_new_empty();
-    return hist;
-}
-
-move create_move(uint i, uint j, square s) {
-    move m = (move)malloc(sizeof(struct move_s));
-    m->i = i;
-    m->j = j;
-    m->s = s;
-    return m;
-}
-
 history add_move(history hist, char* pile, uint i, uint j, square s) {
     is_viable_pointer(hist, "pointer", __FILE__, __LINE__);
     is_viable_pointer(pile, "pointer", __FILE__, __LINE__);
@@ -47,11 +32,11 @@ game game_new_ext(uint nb_rows, uint nb_cols, square* squares, bool wrapping) {
         exit(EXIT_FAILURE);
     }*/
 
-    if(nb_rows < 1 || nb_rows > 10 || nb_cols < 1 || nb_cols > 10) {
+    if (nb_rows < 1 || nb_rows > 10 || nb_cols < 1 || nb_cols > 10) {
         fprintf(stderr, "Invalid size of grid\n");
         exit(EXIT_FAILURE);
     }
-    
+
     game new_game = create_game_struct(nb_rows, nb_cols);
 
     for (uint i = 0; i < nb_rows; i++) {
