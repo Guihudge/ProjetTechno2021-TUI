@@ -80,7 +80,18 @@ bool game_is_wrapping(cgame g) {
     return g->wrapping;
 }
 
-void game_undo(game g) {}
+void game_undo(game g) {
+    is_viable_pointer(g, "pointeur", __FILE__, __LINE__);
+    is_viable_pointer(g->move, "pointeur", __FILE__, __LINE__);
+    if (stack_is_empty(g->move->undo)){
+        printf("you can't undo before the first move");
+    }
+    else{
+        move undo = stack_peek_head(g->move->undo);
+        game_set_square(g, undo->i, undo->j, undo->s);
+        game_update_flags(g);
+    }
+}
 
 void game_redo(game g) {
     is_viable_pointer(g, "pointer", __FILE__, __LINE__);
