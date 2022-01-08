@@ -436,6 +436,8 @@ void game_play_move(game g, uint i, uint j, square s) {
 
     game_set_square(g, i, j, s);
     game_update_flags(g);
+
+    // ajouter le mouvement dans undo et clear redo
 }
 
 void game_update_flags(game g) {
