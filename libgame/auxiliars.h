@@ -25,9 +25,9 @@
 */
 
 /**
- * @brief
+ * @brief Initialize and allocate memory for the history struct
  *
- * @return history
+ * @return history -> the new history struct
  */
 history init_game_history();
 
@@ -37,9 +37,10 @@ history init_game_history();
  * @param i row
  * @param j cols
  * @param s tiles
- * @return move
+ * @return the created move
  */
 move create_move(uint i, uint j, square s);
+
 /**
  * @brief Prints an error message and exit the program in connection with memory allocation error.
  * @deprecated Ne pas utiliser dans les test
@@ -88,6 +89,13 @@ void check_coordinates(cgame g, uint i, uint j, const char *fonction);
  **/
 bool delete_and_exit(bool exit, game *games, uint size, char *error);
 
+/**
+ * @brief Create a game struct object
+ *
+ * @param nb_rows number of rows
+ * @param nb_cols number of cols
+ * @return game the new allocated struct
+ */
 game create_game_struct(uint nb_rows, uint nb_cols);
 
 #endif
