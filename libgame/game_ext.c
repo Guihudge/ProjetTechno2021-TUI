@@ -85,8 +85,7 @@ void game_undo(game g) {
     is_viable_pointer(g->move, "pointeur", __FILE__, __LINE__);
     if (stack_is_empty(g->move->undo)){
         fprintf(stderr, "you can't undo before the first move\n");
-    }
-    else{
+    } else {
         move undo = stack_peek_head(g->move->undo);
         square s2 = game_get_state(g, undo->i, undo->j);
         game_set_square(g, undo->i, undo->j, undo->s);
@@ -102,10 +101,15 @@ void game_redo(game g) {
     is_viable_pointer(g, "pointer", __FILE__, __LINE__);
     is_viable_pointer(g->move, "pointer", __FILE__, __LINE__);
 
-    if (stack_is_empty(g->move->redo)) {
-        return;
+    if(stack_is_empty(g->move->redo)) {
+        fprintf(stderr, "you can't redo before undo\n");
     } else {
         move redo = stack_peek_head(g->move->redo);
-        game_play_move(g, redo->i, redo->j, redo->s);
+        square previousState = game_get_state(g, redo->i, redo->j);
+        game_set_square(g, redo->i, redo->j, redo->s);
+        game_update_flags(g);
+        move previousMove = create_move(redo->i, redo->j, previousState);
+        g->move->redo = stack_pop_head(g->move->redo);
+        g->move->undo = stack_push_head(g->move->undo, previousMove);
     }
 }
