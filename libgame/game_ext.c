@@ -88,13 +88,13 @@ void game_undo(game g) {
     }
     else{
         move undo = stack_peek_head(g->move->undo);
-        square s2 = game_get_square(g, undo->i, undo->j);
+        square s2 = game_get_state(g, undo->i, undo->j);
         game_set_square(g, undo->i, undo->j, undo->s);
         game_update_flags(g);
-        undo->s = s2;
+        move m1 = create_move(undo->i, undo->j, s2);
         // enlever de la pile le undo et le mettre dans la pile redo
         g->move->undo = stack_pop_head(g->move->undo);
-        g->move->redo = stack_push_head(g->move->redo, undo);
+        g->move->redo = stack_push_head(g->move->redo, m1);
     }
 }
 
