@@ -312,10 +312,81 @@ bool test_game_new_empty() {
     game_delete(blank_game);
     return true;
 }
+/*test_game_nb_rows*/
+bool test_game_nb_rows() {
+    bool test = true;
 
-bool test_game_nb_rows() { return true; }      // TODO: à faire
-bool test_game_nb_cols() { return true; }      // TODO: à faire
-bool test_game_is_wrapping() { return true; }  // TODO: à faire
+    game game_test1 = game_default();
+
+    if (game_nb_rows(game_test1) != DEFAULT_SIZE) {
+        test = test && false;
+    }
+
+    square tab1[] = {
+        S_BLANK,
+    };
+    game game_test2 = game_new_ext(1, 5, tab1, false);
+
+    if (game_nb_rows(game_test2) != 1) {
+        test = test && false;
+    }
+
+    game_delete(game_test1);
+    game_delete(game_test2);
+
+    return test;
+}
+
+/*test_game_nb_cols*/
+bool test_game_nb_cols() {
+    bool test = true;
+
+    game game_test1 = game_default();
+
+    if (game_nb_cols(game_test1) != DEFAULT_SIZE) {
+        test = test && false;
+    }
+
+    square tab1[] = {
+        S_BLANK,
+    };
+    game game_test2 = game_new_ext(1, 5, tab1, false);
+
+    if (game_nb_cols(game_test2) != 5) {
+        test = test && false;
+    }
+
+    game_delete(game_test1);
+    game_delete(game_test2);
+
+    return test;
+}
+
+/*test_game_wrapping*/
+bool test_game_is_wrapping() {
+    bool test = true;
+
+    game game_test1 = game_default();
+
+    if (game_is_wrapping(game_test1)) {
+        test = test && false;
+    }
+
+    square tab1[] = {
+        S_BLANK,
+    };
+    game game_test2 = game_new_ext(1, 5, tab1, true);
+
+    if (!game_is_wrapping(game_test2)) {
+        test = test && false;
+    }
+
+    game_delete(game_test1);
+    game_delete(game_test2);
+
+    return test;
+}
+
 /*Dummy test*/
 
 bool test_dummy() { return true; }
