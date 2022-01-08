@@ -436,6 +436,10 @@ void game_play_move(game g, uint i, uint j, square s) {
 
     game_set_square(g, i, j, s);
     game_update_flags(g);
+
+    move playerMove = create_move(i, j, s);
+    g->move->undo = stack_push_head(g->move->undo, playerMove);
+    g->move->redo = stack_clear(g->move->redo);
 }
 
 void game_update_flags(game g) {

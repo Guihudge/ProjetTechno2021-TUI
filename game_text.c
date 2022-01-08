@@ -70,14 +70,19 @@ int main(void) {
             game_delete(actual_game);
             printf("shame\n");
             return EXIT_SUCCESS;
-        } else if (cmd == 'l')
+        } else if (cmd == 'l') {
             scan_and_play_move(actual_game, S_LIGHTBULB);
-        else if (cmd == 'm')
+        } else if (cmd == 'm') {
             scan_and_play_move(actual_game, S_MARK);
-        else if (cmd == 'b')
+        } else if (cmd == 'b') {
             scan_and_play_move(actual_game, S_BLANK);
-        else
+        } else if (cmd == 'z') {
+            game_undo(actual_game);
+        } else if (cmd == 'y') {
+            game_redo(actual_game);
+        } else {
             printf("undefined command '%c', use h for help.\n", cmd);
+        }
 
         win = game_is_over(actual_game);
     }
