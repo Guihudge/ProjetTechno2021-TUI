@@ -434,12 +434,13 @@ void game_play_move(game g, uint i, uint j, square s) {
         exit(EXIT_FAILURE);
     }
 
-    game_set_square(g, i, j, s);
-    game_update_flags(g);
-
-    move playerMove = create_move(i, j, s);
+    square currentState = game_get_state(g, i, j);
+    move playerMove = create_move(i, j, currentState);
     g->move->undo = stack_push_head(g->move->undo, playerMove);
     g->move->redo = stack_clear(g->move->redo);
+
+    game_set_square(g, i, j, s);
+    game_update_flags(g);
 }
 
 void game_update_flags(game g) {
@@ -497,4 +498,7 @@ void game_restart(game g) {
             }
         }
     }
+
+    g->move->undo = stack_clear(g->move->undo);
+    g->move->redo = stack_clear(g->move->redo);
 }
