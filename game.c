@@ -3,10 +3,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "stack.h"
 #include "auxiliars.h"
 #include "game_ext.h"
 #include "game_struct.h"
+#include "stack.h"
 
 void reset_flags(game g) {
     is_viable_pointer(g, "pointer", __FILE__, __LINE__);

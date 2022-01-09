@@ -4,9 +4,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "stack.h"
 #include "game_ext.h"
 #include "game_struct.h"
+#include "stack.h"
 
 void memory_error(char *file, int line) {
     fprintf(stderr, "Memory error in file %s at line %d\n", file, line);

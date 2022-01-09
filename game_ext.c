@@ -4,9 +4,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "stack.h"
 #include "auxiliars.h"
 #include "game_struct.h"
+#include "stack.h"
 
 history add_move(history hist, char* pile, uint i, uint j, square s) {
     is_viable_pointer(hist, "pointer", __FILE__, __LINE__);
