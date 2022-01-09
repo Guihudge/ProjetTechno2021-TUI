@@ -235,7 +235,7 @@ game game_new_empty(void) {
 game game_copy(cgame g) {
     is_viable_pointer(g, "pointer", __FILE__, __LINE__);
 
-    square tmp_tab[g->nb_row * g->nb_col];
+    square *tmp_tab = (square*) malloc(sizeof(square) * g->nb_col * g->nb_row);
     game copy = game_new_ext(g->nb_row, g->nb_col, tmp_tab, g->wrapping);
 
     for (uint x = 0; x < g->nb_row; x++) {
@@ -244,8 +244,8 @@ game game_copy(cgame g) {
         }
     }
 
-    copy->move->undo = stack_copy(g->move->undo);
-    copy->move->redo = stack_copy(g->move->redo);
+    copy->move->undo = stack_new_empty();
+    copy->move->redo = stack_new_empty();
 
     return copy;
 }

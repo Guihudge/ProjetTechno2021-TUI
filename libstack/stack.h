@@ -59,13 +59,6 @@ move stack_peek_head(move_stack stack);
  */
 move_stack stack_clear(move_stack stack);
 
-/**
- * @brief copy the stack given in param
- *
- * @param stack_init the stack to copy
- * @return move_stack a copy of stack_init
- */
-move_stack stack_copy(move_stack stack_init);
 
 /**
  * @brief destriy the stack

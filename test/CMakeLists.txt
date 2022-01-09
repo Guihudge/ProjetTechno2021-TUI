@@ -36,6 +36,7 @@ add_test(test_fclaisse_game_is_lighted ./game_test_fclaisse game_is_lighted)
 add_test(test_fclaisse_game_check_move ./game_test_fclaisse game_check_move)
 add_test(test_fclaisse_game_play_move ./game_test_fclaisse game_play_move)
 add_test(test_fclaisse_game_restart ./game_test_fclaisse game_restart)
+add_test(test_fclaisse_game_redo ./game_test_fclaisse game_redo)
 
 #gdindart
 add_test(test_gdindart_dummy ./game_test_gdindart dummy)

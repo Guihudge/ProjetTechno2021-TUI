@@ -11,36 +11,6 @@
 #include "game.h"
 #include "game_struct.h"
 
-/* ne marche pas
-#if defined(__APPLE__) && defined(__MACH__)
-    #include <malloc/malloc.h>
-    #define MALLOCSIZE malloc_size
-#elif defined(__unix__) && defined(__linux__)
-    #include <malloc.h>
-    #define MALLOCSIZE malloc_usable_size
-#elif defined(_WIN32)
-    #include <malloc.h>
-    #define MALLOCSIZE _msize
-#endif
-*/
-
-/**
- * @brief Initialize and allocate memory for the history struct
- *
- * @return history -> the new history struct
- */
-history init_game_history();
-
-/**
- * @brief Create a move object
- *
- * @param i row
- * @param j cols
- * @param s tiles
- * @return the created move
- */
-move create_move(uint i, uint j, square s);
-
 /**
  * @brief Prints an error message and exit the program in connection with memory allocation error.
  * @deprecated Ne pas utiliser dans les test
@@ -97,5 +67,22 @@ bool delete_and_exit(bool exit, game *games, uint size, char *error);
  * @return game the new allocated struct
  */
 game create_game_struct(uint nb_rows, uint nb_cols);
+
+/**
+ * @brief Initialize and allocate memory for the history struct
+ *
+ * @return history -> the new history struct
+ */
+history init_game_history();
+
+/**
+ * @brief Create a move object
+ *
+ * @param i row
+ * @param j cols
+ * @param s tiles
+ * @return the created move
+ */
+move create_move(uint i, uint j, square s);
 
 #endif

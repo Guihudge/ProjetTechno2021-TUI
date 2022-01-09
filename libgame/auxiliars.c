@@ -8,21 +8,6 @@
 #include "game_ext.h"
 #include "game_struct.h"
 
-history init_game_history() {
-    history hist = (history)malloc(sizeof(struct history_s));
-    hist->redo = stack_new_empty();
-    hist->undo = stack_new_empty();
-    return hist;
-}
-
-move create_move(uint i, uint j, square s) {
-    move m = (move)malloc(sizeof(struct move_s));
-    m->i = i;
-    m->j = j;
-    m->s = s;
-    return m;
-}
-
 void memory_error(char *file, int line) {
     fprintf(stderr, "Memory error in file %s at line %d\n", file, line);
     exit(EXIT_FAILURE);
@@ -79,4 +64,19 @@ game create_game_struct(uint nrow, uint ncol) {
     }
 
     return ngame;
+}
+
+history init_game_history() {
+    history hist = (history)malloc(sizeof(struct history_s));
+    hist->redo = stack_new_empty();
+    hist->undo = stack_new_empty();
+    return hist;
+}
+
+move create_move(uint i, uint j, square s) {
+    move m = (move)malloc(sizeof(struct move_s));
+    m->i = i;
+    m->j = j;
+    m->s = s;
+    return m;
 }

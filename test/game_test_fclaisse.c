@@ -7,6 +7,7 @@
 #include "../libgame/game.h"
 #include "../libgame/game_aux.h"
 #include "../libgame/game_ext.h"
+#include "../libgame/game_struct.h"
 
 /* ********** TEST DUMMY ********** */
 
@@ -293,6 +294,47 @@ bool test_game_restart(void) {
     return !(failed);
 }
 
+/* ********** TEST GAME REDO ********** */
+bool test_game_redo(void) {
+    square test_square[DEFAULT_SIZE * DEFAULT_SIZE] = {
+        S_BLANK,  S_BLANK,  S_BLACK1, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, 
+        S_BLANK, S_BLANK, S_BLACK2, S_BLANK,  S_BLANK,  S_BLANK,  S_BLANK,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLACKU, S_BLACK2,
+        S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,  
+        S_BLACK1, S_BLACKU, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK, 
+        S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,  S_BLACK2, S_BLANK, S_BLANK, 
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLACKU, S_BLANK,  S_BLANK
+    };
+
+    game test_game = game_new_ext(DEFAULT_SIZE, DEFAULT_SIZE, test_square, false);
+
+    game_play_move(test_game, 0, 0, S_LIGHTBULB);
+    game_play_move(test_game, 0, 3, S_LIGHTBULB);
+
+    game copy = game_copy(test_game);
+
+    game_undo(test_game);
+    game_undo(test_game);
+
+    game_redo(test_game);
+    game_redo(test_game);
+
+    if(!game_equal(test_game, copy)) { return false; }
+    if(test_game->move->redo != NULL) { return false; }
+
+    game_undo(test_game);
+    game_undo(test_game);
+
+    game_play_move(test_game, 1, 1, S_LIGHTBULB);
+
+    if(test_game->move->redo != NULL) { return false; }
+
+    game_delete(test_game);
+    game_delete(copy);
+
+    return true;
+}
+
 /* ********** USAGE ********** */
 
 void usage(int argc, char *argv[]) {
@@ -327,6 +369,8 @@ int main(int argc, char *argv[]) {
         passed = test_game_play_move();
     else if (strcmp("game_restart", argv[1]) == 0)
         passed = test_game_restart();
+    else if (strcmp("game_redo", argv[1]) == 0)
+        passed = test_game_redo();
     else {
         fprintf(stderr, "Error: test \"%s\" not found!\n", argv[1]);
         exit(EXIT_FAILURE);

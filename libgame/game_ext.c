@@ -27,10 +27,6 @@ history add_move(history hist, char* pile, uint i, uint j, square s) {
 }
 
 game game_new_ext(uint nb_rows, uint nb_cols, square* squares, bool wrapping) {
-    /*if (MALLOCSIZE(squares) < nb_cols * nb_rows) {
-        fprintf(stderr, "game_size %u > squares_size %zu\n", nb_rows * nb_cols, MALLOCSIZE(squares));
-        exit(EXIT_FAILURE);
-    }*/
 
     if (nb_rows < 1 || nb_rows > 10 || nb_cols < 1 || nb_cols > 10) {
         fprintf(stderr, "Invalid size of grid\n");
@@ -83,7 +79,8 @@ bool game_is_wrapping(cgame g) {
 void game_undo(game g) {
     is_viable_pointer(g, "pointeur", __FILE__, __LINE__);
     is_viable_pointer(g->move, "pointeur", __FILE__, __LINE__);
-    if (stack_is_empty(g->move->undo)){
+
+    if (stack_is_empty(g->move->undo)) {
         fprintf(stderr, "you can't undo before the first move\n");
     } else {
         move undo = stack_peek_head(g->move->undo);
