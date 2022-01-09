@@ -23,3 +23,8 @@ set(HEADERS
 
 #création de la lib
 add_library(game ${SRCS} ${HEADERS})
+
+#copie la libraire à la racine du projet pour l'éavluateur moodle
+add_custom_command(TARGET game POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy libgame.a ../
+)
