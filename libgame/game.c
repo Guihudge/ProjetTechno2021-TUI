@@ -246,7 +246,7 @@ game game_copy(cgame g) {
 
     copy->move->undo = stack_new_empty();
     copy->move->redo = stack_new_empty();
-
+    free(tmp_tab);
     return copy;
 }
 
