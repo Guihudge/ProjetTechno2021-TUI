@@ -235,7 +235,7 @@ game game_new_empty(void) {
 game game_copy(cgame g) {
     is_viable_pointer(g, "pointer", __FILE__, __LINE__);
 
-    square *tmp_tab = (square*) malloc(sizeof(square) * g->nb_col * g->nb_row);
+    square *tmp_tab = (square *)malloc(sizeof(square) * g->nb_col * g->nb_row);
     game copy = game_new_ext(g->nb_row, g->nb_col, tmp_tab, g->wrapping);
 
     for (uint x = 0; x < g->nb_row; x++) {

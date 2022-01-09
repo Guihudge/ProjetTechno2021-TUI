@@ -297,14 +297,11 @@ bool test_game_restart(void) {
 /* ********** TEST GAME REDO ********** */
 bool test_game_redo(void) {
     square test_square[DEFAULT_SIZE * DEFAULT_SIZE] = {
-        S_BLANK,  S_BLANK,  S_BLACK1, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, 
-        S_BLANK, S_BLANK, S_BLACK2, S_BLANK,  S_BLANK,  S_BLANK,  S_BLANK,
-        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLACKU, S_BLACK2,
-        S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,  
-        S_BLACK1, S_BLACKU, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK, 
-        S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,  S_BLACK2, S_BLANK, S_BLANK, 
-        S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLACKU, S_BLANK,  S_BLANK
-    };
+        S_BLANK,  S_BLANK, S_BLACK1, S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACK2,
+        S_BLANK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACKU,
+        S_BLACK2, S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLACK1, S_BLACKU,
+        S_BLANK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLACK2,
+        S_BLANK,  S_BLANK, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK};
 
     game test_game = game_new_ext(DEFAULT_SIZE, DEFAULT_SIZE, test_square, false);
 
@@ -319,15 +316,21 @@ bool test_game_redo(void) {
     game_redo(test_game);
     game_redo(test_game);
 
-    if(!game_equal(test_game, copy)) { return false; }
-    if(test_game->move->redo != NULL) { return false; }
+    if (!game_equal(test_game, copy)) {
+        return false;
+    }
+    if (test_game->move->redo != NULL) {
+        return false;
+    }
 
     game_undo(test_game);
     game_undo(test_game);
 
     game_play_move(test_game, 1, 1, S_LIGHTBULB);
 
-    if(test_game->move->redo != NULL) { return false; }
+    if (test_game->move->redo != NULL) {
+        return false;
+    }
 
     game_delete(test_game);
     game_delete(copy);

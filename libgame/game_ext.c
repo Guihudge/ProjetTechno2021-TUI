@@ -27,7 +27,6 @@ history add_move(history hist, char* pile, uint i, uint j, square s) {
 }
 
 game game_new_ext(uint nb_rows, uint nb_cols, square* squares, bool wrapping) {
-
     if (nb_rows < 1 || nb_rows > 10 || nb_cols < 1 || nb_cols > 10) {
         fprintf(stderr, "Invalid size of grid\n");
         exit(EXIT_FAILURE);
@@ -98,7 +97,7 @@ void game_redo(game g) {
     is_viable_pointer(g, "pointer", __FILE__, __LINE__);
     is_viable_pointer(g->move, "pointer", __FILE__, __LINE__);
 
-    if(stack_is_empty(g->move->redo)) {
+    if (stack_is_empty(g->move->redo)) {
         fprintf(stderr, "you can't redo before undo\n");
     } else {
         move redo = stack_peek_head(g->move->redo);
