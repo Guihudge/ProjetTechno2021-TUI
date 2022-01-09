@@ -62,6 +62,8 @@ add_test(test_millhe_game_is_over ./game_test_millhe game_is_over)
 add_test(test_millhe_game_is_blanck ./game_test_millhe game_is_blanck)
 add_test(test_millhe_game_delete ./game_test_millhe game_delete)
 add_test(test_millhe_game_copy ./game_test_millhe game_copy)
+add_test(test_millhe_game_new_empty_ext ./game_test_millhe game_new_empty_ext)
+add_test(test_millhe_game_undo ./game_test_millhe game_undo)
 
 #libstack
 add_test(stack_test_new_empty ./stack_test stack_new_empty)

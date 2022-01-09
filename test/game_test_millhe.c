@@ -273,15 +273,16 @@ bool test_game_copy() {
     game_delete(g4);
     return oktest;
 }
+
 bool test_game_new_empty_ext(){
-    uint i = random() % 20 + 1;
-    uint j = random() % 20 + 1;
+    uint i = rand() % 20 + 1;
+    uint j = rand() % 20 + 1;
     bool wrapping = true ; 
     game test = game_new_empty_ext( i, j, wrapping);
     if (test == NULL){
         return false;
     }
-    if (game_nb_cols(test) != i || game_nb_rows(test) != j || game_is_wrapping(test) != wrapping){
+    if (game_nb_cols(test) != j || game_nb_rows(test) != i || game_is_wrapping(test) != wrapping){
         return false;
     }
     for (int l = 0; l < i; l++){
@@ -291,7 +292,45 @@ bool test_game_new_empty_ext(){
             }
         }
     }
+    game_delete(test);
     return true;
+}
+
+bool test_game_undo(){
+    square test_square[DEFAULT_SIZE * DEFAULT_SIZE] = {
+        S_BLANK,  S_BLANK,  S_BLACK1, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, 
+        S_BLANK, S_BLANK, S_BLACK2, S_BLANK,  S_BLANK,  S_BLANK,  S_BLANK,
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLACKU, S_BLACK2,
+        S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,  
+        S_BLACK1, S_BLACKU, S_BLANK,  S_BLANK, S_BLANK, S_BLANK, S_BLANK, 
+        S_BLANK, S_BLANK,  S_BLANK,  S_BLANK,  S_BLACK2, S_BLANK, S_BLANK, 
+        S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLACKU, S_BLANK,  S_BLANK
+    };
+
+    game test_game = game_new_ext(DEFAULT_SIZE, DEFAULT_SIZE, test_square, false);
+
+    game copy_test = game_copy(test_game);
+    game_play_move(test_game, 0, 0, S_LIGHTBULB);
+    game copy_test2 = game_copy(test_game);
+    game_play_move(test_game, 6, 6, S_LIGHTBULB);
+    game_undo(test_game);
+    if(!game_equal(test_game, copy_test2)){
+        game_delete(test_game);
+        game_delete(copy_test);
+        game_delete(copy_test2);
+        return false;
+    }
+    game_undo(test_game);
+    if(!game_equal(test_game, copy_test)){
+        game_delete(test_game);
+        game_delete(copy_test);
+        game_delete(copy_test2);
+        return false;
+    }
+    game_delete(test_game);
+    game_delete(copy_test);
+    game_delete(copy_test2);
+    return true ;
 }
 void usage(int argc, char *argv[]) {
     fprintf(stderr, "Usage: %s <testname> [<...>]\n", argv[0]);
@@ -324,9 +363,9 @@ int main(int argc, char *argv[]) {
         ok = test_game_copy();
     } else if (strcmp("game_new_empty_ext", argv[1]) == 0) {
         ok = test_game_new_empty_ext();
-    } //else if (strcmp("game_undo", argv[1]) == 0) {
-        //ok = test_game_undo();
-    else {
+    } else if (strcmp("game_undo", argv[1]) == 0) {
+        ok = test_game_undo();
+    }else {
         fprintf(stderr, "Error: unkown test name %s\n", argv[1]);
         exit(EXIT_FAILURE);
     }
