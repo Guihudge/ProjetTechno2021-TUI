@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../libstack/stack.h"
+#include "stack.h"
 #include "auxiliars.h"
 #include "game_struct.h"
 

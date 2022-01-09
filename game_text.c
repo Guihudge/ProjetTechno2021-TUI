@@ -2,9 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "libgame/game.h"
-#include "libgame/game_aux.h"
-#include "libgame/game_ext.h"
+#include "game.h"
+#include "game_aux.h"
+#include "game_ext.h"
 
 void crit_error(char *err) {
     fprintf(stderr, "[CRITICAL] %s\n", err);

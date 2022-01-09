@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../libstack/stack.h"
+#include "stack.h"
 #include "auxiliars.h"
 #include "game_ext.h"
 #include "game_struct.h"

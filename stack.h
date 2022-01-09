@@ -7,8 +7,8 @@
 #ifndef __STACK_H__
 #define __STACK_H__
 
-#include "../libgame/game.h"
-#include "../libgame/game_struct.h"
+#include "game.h"
+#include "game_struct.h"
 
 /**
  * @brief Create a new stack and return it
