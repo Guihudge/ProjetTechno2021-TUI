@@ -273,7 +273,26 @@ bool test_game_copy() {
     game_delete(g4);
     return oktest;
 }
-
+bool test_game_new_empty_ext(){
+    uint i = random() % 20 + 1;
+    uint j = random() % 20 + 1;
+    bool wrapping = true ; 
+    game test = game_new_empty_ext( i, j, wrapping);
+    if (test == NULL){
+        return false;
+    }
+    if (game_nb_cols(test) != i || game_nb_rows(test) != j || game_is_wrapping(test) != wrapping){
+        return false;
+    }
+    for (int l = 0; l < i; l++){
+        for (int m = 0; m < j; m++){
+            if (game_get_square(test, l, m) != S_BLANK) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
 void usage(int argc, char *argv[]) {
     fprintf(stderr, "Usage: %s <testname> [<...>]\n", argv[0]);
     exit(EXIT_FAILURE);
@@ -303,7 +322,11 @@ int main(int argc, char *argv[]) {
         ok = test_game_delete();
     } else if (strcmp("game_copy", argv[1]) == 0) {
         ok = test_game_copy();
-    } else {
+    } else if (strcmp("game_new_empty_ext", argv[1]) == 0) {
+        ok = test_game_new_empty_ext();
+    } //else if (strcmp("game_undo", argv[1]) == 0) {
+        //ok = test_game_undo();
+    else {
         fprintf(stderr, "Error: unkown test name %s\n", argv[1]);
         exit(EXIT_FAILURE);
     }
