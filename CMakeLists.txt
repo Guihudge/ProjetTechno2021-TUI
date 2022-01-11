@@ -35,6 +35,7 @@ add_library(game ${SRCS} ${HEADERS})
 
 #création de l'éxécutable
 add_executable(game_text game_text.c)
+add_executable(game_ex game_exemple.c)
 add_executable(game_test_fclaisse game_test_fclaisse.c)
 add_executable(game_test_gdindart game_test_gdindart.c)
 add_executable(game_test_millhe game_test_millhe.c)
@@ -47,6 +48,7 @@ target_link_libraries(game_test_gdindart game)
 target_link_libraries(game_test_millhe game)
 target_link_libraries(game_test_fclaisse game)
 target_link_libraries(stack_test game)
+target_link_libraries(game_ex game)
 
 #on link la lib stack
 
