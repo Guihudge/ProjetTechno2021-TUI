@@ -254,6 +254,9 @@ bool game_equal(cgame g1, cgame g2) {
     is_viable_pointer(g1, "pointer", __FILE__, __LINE__);
     is_viable_pointer(g2, "pointer", __FILE__, __LINE__);
 
+    if(g1->nb_col != g2->nb_col) { return false; }
+    if(g1->nb_row != g2->nb_row) { return false; }
+
     for (uint x = 0; x < g1->nb_row; x++) {
         for (uint y = 0; y < g1->nb_col; y++) {
             if (g1->tab[x][y] != g2->tab[x][y]) {
