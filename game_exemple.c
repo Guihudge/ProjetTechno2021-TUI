@@ -89,6 +89,7 @@ int main(void) {
     }
 
     game_print(actual_game);
+    game_delete(actual_game);
     printf("Congratulation !\n");
 
     return EXIT_SUCCESS;
