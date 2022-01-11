@@ -36,28 +36,28 @@ bool check_black_wall(cgame g, uint i, uint j) {
     if (i == 0 && !wrapping) {
         start_x = 0;
     } else if (i == 0 && wrapping) {
-        start_x = g->nb_col - 1;
+        start_x = g->nb_row - 1;
     } else {
         start_x = i - 1;
     }
     if (j == 0 && !wrapping) {
         start_y = 0;
     } else if (j == 0 && wrapping) {
-        start_y = g->nb_row - 1;
+        start_y = g->nb_col - 1;
     } else {
         start_y = j - 1;
     }
 
-    if (i + 1 >= g->nb_col && !wrapping) {
-        end_x = g->nb_col - 1;
-    } else if (i + 1 >= g->nb_col && wrapping) {
+    if (i + 1 >= g->nb_row && !wrapping) {
+        end_x = g->nb_row - 1;
+    } else if (i + 1 >= g->nb_row && wrapping) {
         end_x = 0;
     } else {
         end_x = i + 1;
     }
-    if (j + 1 >= g->nb_row && !wrapping) {
-        end_y = g->nb_row - 1;
-    } else if (j + 1 >= g->nb_row && wrapping) {
+    if (j + 1 >= g->nb_col && !wrapping) {
+        end_y = g->nb_col - 1;
+    } else if (j + 1 >= g->nb_col && wrapping) {
         end_y = 0;
     } else {
         end_y = j + 1;
