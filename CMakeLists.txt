@@ -11,13 +11,13 @@ enable_testing()
 set(CMAKE_C_FLAGS "-std=c99 -Wall")
 
 #librairie
-add_library(stack stack.c stack.h)
 
 set(SRCS
     game_aux.c 
     game.c 
     auxiliars.c 
     game_ext.c
+    stack.c
     )
 
 set(HEADERS
@@ -26,6 +26,7 @@ set(HEADERS
     auxiliars.h
     game_ext.h
     game_struct.h
+    stack.h
 )
 
 #création de la lib
@@ -42,16 +43,12 @@ add_executable(stack_test stack_test.c)
 
 #on lie les librairie
 target_link_libraries(game_text game)
-target_link_libraries(game_text stack)
 target_link_libraries(game_test_gdindart game)
 target_link_libraries(game_test_millhe game)
 target_link_libraries(game_test_fclaisse game)
+target_link_libraries(stack_test game)
 
 #on link la lib stack
-target_link_libraries(game_test_gdindart stack)
-target_link_libraries(game_test_millhe stack)
-target_link_libraries(game_test_fclaisse stack)
-target_link_libraries(stack_test stack)
 
 #on ajoute les tests
 # Ajout des tests
