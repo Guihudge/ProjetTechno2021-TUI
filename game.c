@@ -149,7 +149,11 @@ void update_row_wrapping(game g, uint i, uint j) {
                 g->tab[i][j] |= F_ERROR;
             }
         }
-        y = (y - 1) % g->nb_row;
+        if (y - 1 < 0) {
+            y = g->nb_row - 1;
+        } else {
+            y = (y - 1) % g->nb_row;
+        }
     } while (y != i);
 }
 
@@ -214,7 +218,11 @@ void update_col_wrapping(game g, uint i, uint j) {
                 g->tab[i][j] |= F_ERROR;
             }
         }
-        x = (x - 1) % g->nb_col;
+        if (x - 1 < 0) {
+            x = g->nb_col - 1;
+        } else {
+            x = (x - 1) % g->nb_col;
+        }
     } while (x != j);
 }
 

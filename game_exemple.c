@@ -44,8 +44,8 @@ void print_help() {
 
 int main(void) {
     bool win = false;
-    square test[5] = {S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK};
-    game actual_game = game_new_ext(1, 5, test, false);
+    square test[15] = {S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLACK1, S_BLANK, S_BLACK2, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK};
+    game actual_game = game_new_ext(5, 3, test, true);
 
     while (!win) {
         game_print(actual_game);
