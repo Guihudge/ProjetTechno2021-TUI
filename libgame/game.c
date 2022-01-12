@@ -36,28 +36,28 @@ bool check_black_wall(cgame g, uint i, uint j) {
     if (i == 0 && !wrapping) {
         start_x = 0;
     } else if (i == 0 && wrapping) {
-        start_x = g->nb_col - 1;
+        start_x = g->nb_row - 1;
     } else {
         start_x = i - 1;
     }
     if (j == 0 && !wrapping) {
         start_y = 0;
     } else if (j == 0 && wrapping) {
-        start_y = g->nb_row - 1;
+        start_y = g->nb_col - 1;
     } else {
         start_y = j - 1;
     }
 
-    if (i + 1 >= g->nb_col && !wrapping) {
-        end_x = g->nb_col - 1;
-    } else if (i + 1 >= g->nb_col && wrapping) {
+    if (i + 1 >= g->nb_row && !wrapping) {
+        end_x = g->nb_row - 1;
+    } else if (i + 1 >= g->nb_row && wrapping) {
         end_x = 0;
     } else {
         end_x = i + 1;
     }
-    if (j + 1 >= g->nb_row && !wrapping) {
-        end_y = g->nb_row - 1;
-    } else if (j + 1 >= g->nb_row && wrapping) {
+    if (j + 1 >= g->nb_col && !wrapping) {
+        end_y = g->nb_col - 1;
+    } else if (j + 1 >= g->nb_col && wrapping) {
         end_y = 0;
     } else {
         end_y = j + 1;
@@ -149,7 +149,12 @@ void update_row_wrapping(game g, uint i, uint j) {
                 g->tab[i][j] |= F_ERROR;
             }
         }
-        y = (y - 1) % g->nb_row;
+        if (y - 1 < 0) {
+            y = g->nb_row - 1;
+        } else {
+            y = (y - 1) % g->nb_row;
+        }
+
     } while (y != i);
 }
 
@@ -214,7 +219,12 @@ void update_col_wrapping(game g, uint i, uint j) {
                 g->tab[i][j] |= F_ERROR;
             }
         }
-        x = (x - 1) % g->nb_col;
+        if (x - 1 < 0) {
+            x = g->nb_col - 1;
+        } else {
+            x = (x - 1) % g->nb_col;
+        }
+
     } while (x != j);
 }
 
@@ -253,6 +263,16 @@ game game_copy(cgame g) {
 bool game_equal(cgame g1, cgame g2) {
     is_viable_pointer(g1, "pointer", __FILE__, __LINE__);
     is_viable_pointer(g2, "pointer", __FILE__, __LINE__);
+
+    if (g1->nb_col != g2->nb_col) {
+        return false;
+    }
+    if (g1->nb_row != g2->nb_row) {
+        return false;
+    }
+    if (g1->wrapping != g2->wrapping) {
+        return false;
+    }
 
     for (uint x = 0; x < g1->nb_row; x++) {
         for (uint y = 0; y < g1->nb_col; y++) {

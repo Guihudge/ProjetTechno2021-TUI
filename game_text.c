@@ -12,8 +12,8 @@ void crit_error(char *err) {
 }
 
 void test_error(cgame g) {
-    for (uint j = 0; j < DEFAULT_SIZE; j++) {
-        for (uint i = 0; i < DEFAULT_SIZE; i++) {
+    for (uint j = 0; j < game_nb_cols(g); j++) {
+        for (uint i = 0; i < game_nb_rows(g); i++) {
             if (game_has_error(g, i, j)) {
                 printf("Error at light bulb (%u, %u)\n", i, j);
             }
@@ -88,6 +88,7 @@ int main(void) {
     }
 
     game_print(actual_game);
+    game_delete(actual_game);
     printf("Congratulation !\n");
 
     return EXIT_SUCCESS;
