@@ -16,10 +16,9 @@ set(GameHeaders libgame/auxiliars.h libgame/game_aux.h libgame/game_ext.h libgam
 set(StackSources libstack/stack.c)
 set(StackHeaders libstack/stack.h)
 
-add_library(game ${GameSources} ${GameHeaders})
-add_library(stack ${StackSources} ${StackHeaders})
+add_library(game ${GameSources} ${StackSources} ${GameHeaders} ${StackHeaders})
 
-target_link_libraries(game stack)
+target_link_libraries(game)
 
 #création de l'éxécutable
 add_executable(game_text game_text.c)
