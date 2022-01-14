@@ -1,5 +1,6 @@
 #include "game.h"
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -29,18 +30,18 @@ bool check_black_wall(cgame g, uint i, uint j) {
 
     if (black_number == -1) return false;
 
-    int start_x, start_y, end_x, end_y;
+    int start_x, start_y, end_x, end_y;  // Init valeur des cordonnée de fin et début
 
-    bool wrapping = g->wrapping;
+    bool wrapping = g->wrapping;  // on check le wrapping
 
     if (i == 0 && !wrapping) {
-        start_x = 0;
+        start_x = 0;  // on neutralise la valeur si on va de l'autre coté de la grille et si wrapping est désactivé
     } else if (i == 0 && wrapping) {
-        start_x = g->nb_row - 1;
+        start_x = g->nb_row - 1;  // on va de l'autre coté de la grille ssi wrapping et activé
     } else {
-        start_x = i - 1;
+        start_x = i - 1;  // valeur par défaut
     }
-    if (j == 0 && !wrapping) {
+    if (j == 0 && !wrapping) {  // même principe que au-dessus
         start_y = 0;
     } else if (j == 0 && wrapping) {
         start_y = g->nb_col - 1;
@@ -48,14 +49,14 @@ bool check_black_wall(cgame g, uint i, uint j) {
         start_y = j - 1;
     }
 
-    if (i + 1 >= g->nb_row && !wrapping) {
+    if (i + 1 >= g->nb_row && !wrapping) {  // même principe que au-dessus
         end_x = g->nb_row - 1;
     } else if (i + 1 >= g->nb_row && wrapping) {
         end_x = 0;
     } else {
         end_x = i + 1;
     }
-    if (j + 1 >= g->nb_col && !wrapping) {
+    if (j + 1 >= g->nb_col && !wrapping) {  // même principe que au-dessus
         end_y = g->nb_col - 1;
     } else if (j + 1 >= g->nb_col && wrapping) {
         end_y = 0;
@@ -63,12 +64,12 @@ bool check_black_wall(cgame g, uint i, uint j) {
         end_y = j + 1;
     }
 
-    int tab_x[] = {start_x, end_x, i, i};
+    int tab_x[] = {start_x, end_x, i, i};  // on génère les couples valeurs possible
     int tab_y[] = {j, j, start_y, end_y};
 
-    for (int i = 0; i < 4; i++) {
-        int cx = tab_x[i];
-        int cy = tab_y[i];
+    for (int i = 0; i < 4; i++) {  // on vérifie chaque couple de valeur possible
+        int cx = tab_x[i];         // val en x
+        int cy = tab_y[i];         // val en y
         if (game_is_lightbulb(g, cx, cy)) {
             lightbulb_number++;
         } else if (game_is_lighted(g, cx, cy)) {
@@ -79,153 +80,113 @@ bool check_black_wall(cgame g, uint i, uint j) {
     }
     bool ret = false;
 
-    if (lightbulb_number > black_number) {
+    if (lightbulb_number > black_number) {  // cas : trop de lightbulb
         return true;
     }
-    if ((blank_number + lightbulb_number) < black_number) {
+    if ((blank_number + lightbulb_number) < black_number) {  // cas plus assez de place pour les lightbulb
         return true;
     }
     return ret;
 }
 
-void update_row(game g, uint i, uint j) {
-    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
+void update_row_cols(game g, uint i, uint j, bool row) {
+    is_viable_pointer(g, "pointer", __FILE__, __LINE__);  // gest. erreur
     check_coordinates(g, i, j, __func__);
 
-    int y = i;
-    while (y < g->nb_row) {
-        if (game_is_black(g, y, j)) {
-            break;
+    int index = row ? i : j;  // index = i si row est vrai sinon index = j
+    bool forward = true;      // && ()
+    while (index >= 0) {
+        if (row) {
+            if (index > g->nb_row - 1 || game_is_black(g, index, j)) {
+                if (forward) {
+                    index = i;
+                    forward = false;
+                } else {
+                    break;
+                }
+            } else {
+                g->tab[index][j] |= F_LIGHTED;
+                if (index != i &&
+                    game_is_lightbulb(g, index, j)) {  // si il index a une autre lightbulb on met une erreur
+                    g->tab[index][j] |= F_ERROR;
+                    g->tab[i][j] |= F_ERROR;
+                }
+            }
         } else {
-            g->tab[y][j] |= F_LIGHTED;
-            if (y != i && game_is_lightbulb(g, y, j)) {
-                g->tab[y][j] |= F_ERROR;
-                g->tab[i][j] |= F_ERROR;
+            if (index > g->nb_col - 1||game_is_black(g, i, index)) {
+                if (forward) {
+                    index = j;
+                    forward = false;
+                } else {
+                    break;
+                }
+            } else {
+                g->tab[i][index] |= F_LIGHTED;
+                if (index != j && game_is_lightbulb(g, i, index)) {
+                    g->tab[i][index] |= F_ERROR;
+                    g->tab[i][j] |= F_ERROR;
+                }
             }
         }
-        y++;
-    }
-    y = i;
-    while (y >= 0) {
-        if (game_is_black(g, y, j))
-            break;
-        else {
-            g->tab[y][j] |= F_LIGHTED;
-            if (y != i && game_is_lightbulb(g, y, j)) {
-                g->tab[y][j] |= F_ERROR;
-                g->tab[i][j] |= F_ERROR;
-            }
-        }
-        y--;
-    }
-}
-
-void update_row_wrapping(game g, uint i, uint j) {
-    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
-    check_coordinates(g, i, j, __func__);
-
-    int y = i;
-    do {
-        if (game_is_black(g, y, j)) {
-            break;
+        if (forward) {
+            index++;
         } else {
-            g->tab[y][j] |= F_LIGHTED;
-            if (y != i && game_is_lightbulb(g, y, j)) {
-                g->tab[y][j] |= F_ERROR;
-                g->tab[i][j] |= F_ERROR;
-            }
+            index--;
         }
-        y = (y + 1) % g->nb_row;
-    } while (y != i);
-
-    y = i;
-    do {
-        if (game_is_black(g, y, j)) {
-            break;
-        } else {
-            g->tab[y][j] |= F_LIGHTED;
-            if (y != i && game_is_lightbulb(g, y, j)) {
-                g->tab[y][j] |= F_ERROR;
-                g->tab[i][j] |= F_ERROR;
-            }
-        }
-        if (y - 1 < 0) {
-            y = g->nb_row - 1;
-        } else {
-            y = (y - 1) % g->nb_row;
-        }
-
-    } while (y != i);
-}
-
-void update_col(game g, uint i, uint j) {
-    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
-    check_coordinates(g, i, j, __func__);
-
-    int x = j;
-    while (x < g->nb_col) {
-        if (game_is_black(g, i, x)) {
-            break;
-        } else {
-            g->tab[i][x] |= F_LIGHTED;
-            if (x != j && game_is_lightbulb(g, i, x)) {
-                g->tab[i][x] |= F_ERROR;
-                g->tab[i][j] |= F_ERROR;
-            }
-        }
-        x++;
-    }
-    x = j;
-    while (x >= 0) {
-        if (game_is_black(g, i, x))
-            break;
-        else {
-            g->tab[i][x] |= F_LIGHTED;
-            if (x != j && game_is_lightbulb(g, i, x)) {
-                g->tab[i][x] |= F_ERROR;
-                g->tab[i][j] |= F_ERROR;
-            }
-        }
-        x--;
     }
 }
 
-void update_col_wrapping(game g, uint i, uint j) {
-    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
+void update_row_col_wrapping(game g, uint i, uint j, bool row) {
+     is_viable_pointer(g, "pointer", __FILE__, __LINE__);  // gest. erreur
     check_coordinates(g, i, j, __func__);
 
-    int x = j;
+    int stop_test_value = row ? i : j;
+    int size = row ? g-> nb_row : g -> nb_col;
+    int index = row ? i : j;  // index = i si row est vrai sinon index = j
+    bool forward = true;      // && ()
     do {
-        if (game_is_black(g, i, x)) {
-            break;
+        if (row) {
+            if (game_is_black(g, index, j)) {
+                if (forward) {
+                    index = i;
+                    forward = false;
+                } else {
+                    break;
+                }
+            } else {
+                g->tab[index][j] |= F_LIGHTED;
+                if (index != i &&
+                    game_is_lightbulb(g, index, j)) {  // si il index a une autre lightbulb on met une erreur
+                    g->tab[index][j] |= F_ERROR;
+                    g->tab[i][j] |= F_ERROR;
+                }
+            }
         } else {
-            g->tab[i][x] |= F_LIGHTED;
-            if (x != j && game_is_lightbulb(g, i, x)) {
-                g->tab[i][x] |= F_ERROR;
-                g->tab[i][j] |= F_ERROR;
+            if (game_is_black(g, i, index)) {
+                if (forward) {
+                    index = j;
+                    forward = false;
+                } else {
+                    break;
+                }
+            } else {
+                g->tab[i][index] |= F_LIGHTED;
+                if (index != j && game_is_lightbulb(g, i, index)) {
+                    g->tab[i][index] |= F_ERROR;
+                    g->tab[i][j] |= F_ERROR;
+                }
             }
         }
-        x = (x + 1) % g->nb_col;
-    } while (x != j);
-
-    x = j;
-    do {
-        if (game_is_black(g, i, x)) {
-            break;
+        if (forward) {
+            index = (index + 1) % size;
         } else {
-            g->tab[i][x] |= F_LIGHTED;
-            if (x != j && game_is_lightbulb(g, i, x)) {
-                g->tab[i][x] |= F_ERROR;
-                g->tab[i][j] |= F_ERROR;
-            }
-        }
-        if (x - 1 < 0) {
-            x = g->nb_col - 1;
+           if (index - 1 < 0) {
+            index = size - 1;
         } else {
-            x = (x - 1) % g->nb_col;
+            index = (index - 1) % size;
         }
-
-    } while (x != j);
+        }
+    } while (index != stop_test_value);
 }
 
 game game_new(square *squares) {
@@ -254,7 +215,7 @@ game game_copy(cgame g) {
         }
     }
 
-    copy->move->undo = stack_new_empty();
+    copy->move->undo = stack_new_empty();  // on init l'historique pour la copy
     copy->move->redo = stack_new_empty();
     free(tmp_tab);
     return copy;
@@ -473,11 +434,11 @@ void game_update_flags(game g) {
         for (uint j = 0; j < g->nb_col; j++) {
             if (game_is_lightbulb(g, i, j)) {
                 if (g->wrapping) {
-                    update_row_wrapping(g, i, j);
-                    update_col_wrapping(g, i, j);
+                    update_row_col_wrapping(g, i, j, true);
+                    update_row_col_wrapping(g, i, j, false);
                 } else {
-                    update_row(g, i, j);
-                    update_col(g, i, j);
+                    update_row_cols(g, i, j, true);
+                    update_row_cols(g, i, j, false);
                 }
             }
         }
