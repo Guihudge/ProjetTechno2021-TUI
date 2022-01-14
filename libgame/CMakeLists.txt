@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.0)
 #nom sous projet
 project(libgame C)
 
-set(CMAKE_C_FLAGS "-std=c99 -Wall")
+set(CMAKE_C_FLAGS "-std=c99 -Wall --coverage")
 
 #définition des sousrces et headers
 set(SRCS

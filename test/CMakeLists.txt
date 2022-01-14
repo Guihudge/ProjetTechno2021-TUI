@@ -5,7 +5,7 @@ project(game_test C)
 
 include(CTest)
 enable_testing()
-set(CMAKE_C_FLAGS "-std=c99 -Wall")
+set(CMAKE_C_FLAGS "-std=c99 -Wall --coverage")
 
 #on crée les éxécutables de tests
 add_executable(game_test_fclaisse game_test_fclaisse.c)

@@ -8,7 +8,7 @@ include(CTest)
 enable_testing()
 
 #variable
-set(CMAKE_C_FLAGS "-std=c99 -Wall")
+set(CMAKE_C_FLAGS "-std=c99 -Wall --coverage")
 
 #add Subdirectory
 add_subdirectory(libgame)

@@ -140,6 +140,19 @@ bool test_game_update_flags() {
     }
 
     game_delete(empty_game);
+
+    square test_wrapping_val[15] = {S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLACK1, S_BLANK, S_BLACK2,
+                                S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLANK};
+
+    game test_wrapping = game_new_ext(5, 3, test_wrapping_val, true);
+
+    game_set_square(test_wrapping, 1,1, S_LIGHTBULB);
+    game_set_square(test_wrapping, 2,0, S_LIGHTBULB);
+    game_set_square(test_wrapping, 3,2, S_LIGHTBULB);
+
+    game_update_flags(test_wrapping);
+    ok = ok && game_is_over(test_wrapping);
+
     return ok;
 }
 
