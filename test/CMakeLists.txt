@@ -5,6 +5,7 @@ project(game_test C)
 
 include(CTest)
 enable_testing()
+
 set(CMAKE_C_FLAGS "-std=c99 -Wall")
 
 #on crée les éxécutables de tests
@@ -18,12 +19,7 @@ add_executable(stack_test stack_test.c)
 target_link_libraries(game_test_gdindart game)
 target_link_libraries(game_test_millhe game)
 target_link_libraries(game_test_fclaisse game)
-
-#on link la lib stack
-target_link_libraries(game_test_gdindart stack)
-target_link_libraries(game_test_millhe stack)
-target_link_libraries(game_test_fclaisse stack)
-target_link_libraries(stack_test stack)
+target_link_libraries(stack_test game)
 
 # Ajout des tests
 # fclaisse
