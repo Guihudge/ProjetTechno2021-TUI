@@ -113,7 +113,7 @@ void update_row_cols(game g, uint i, uint j, bool row) {
                 }
             }
         } else {
-            if (index > g->nb_col - 1||game_is_black(g, i, index)) {
+            if (index > g->nb_col - 1 || game_is_black(g, i, index)) {
                 if (forward) {
                     index = j;
                     forward = false;
@@ -137,11 +137,11 @@ void update_row_cols(game g, uint i, uint j, bool row) {
 }
 
 void update_row_col_wrapping(game g, uint i, uint j, bool row) {
-     is_viable_pointer(g, "pointer", __FILE__, __LINE__);  // gest. erreur
+    is_viable_pointer(g, "pointer", __FILE__, __LINE__);  // gest. erreur
     check_coordinates(g, i, j, __func__);
 
     int stop_test_value = row ? i : j;
-    int size = row ? g-> nb_row : g -> nb_col;
+    int size = row ? g->nb_row : g->nb_col;
     int index = row ? i : j;  // index = i si row est vrai sinon index = j
     bool forward = true;      // && ()
     do {
@@ -180,11 +180,11 @@ void update_row_col_wrapping(game g, uint i, uint j, bool row) {
         if (forward) {
             index = (index + 1) % size;
         } else {
-           if (index - 1 < 0) {
-            index = size - 1;
-        } else {
-            index = (index - 1) % size;
-        }
+            if (index - 1 < 0) {
+                index = size - 1;
+            } else {
+                index = (index - 1) % size;
+            }
         }
     } while (index != stop_test_value);
 }
