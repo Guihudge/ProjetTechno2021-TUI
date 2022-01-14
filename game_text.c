@@ -20,7 +20,7 @@ void test_error(cgame g) {
         }
     }
 }
-
+// Récupere les valeurs données par le joueur, vérifie les coordonées et applique l'action de jeu si elle est autorisé 
 void scan_and_play_move(game g, square s) {
     uint i, j;
     scanf(" %d %d", &i, &j);
@@ -38,6 +38,8 @@ void print_help() {
     printf("- press 'l <i> <j>' to put a light buld at square (i, j)\n");
     printf("- press 'm <i> <j>' to put a mark at square (i, j)\n");
     printf("- press 'b <i> <j>' to blank square (i, j)\n");
+    printf("- press 'z' to undo\n");
+    printf("- press 'y' to redo (only after a undo)\n");
     printf("- press 'r' to restart\n");
     printf("- press 'q' to quit\n");
 }
