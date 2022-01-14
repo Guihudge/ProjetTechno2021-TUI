@@ -19,12 +19,13 @@ set(StackHeaders libstack/stack.h)
 add_library(game ${GameSources} ${GameHeaders})
 add_library(stack ${StackSources} ${StackHeaders})
 
+target_link_libraries(game stack)
+
 #création de l'éxécutable
 add_executable(game_text game_text.c)
 
 #on lie les librairie
 target_link_libraries(game_text game)
-target_link_libraries(game stack)
 
 #on ajoute les tests
 add_subdirectory(test)
