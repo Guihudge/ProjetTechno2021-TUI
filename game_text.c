@@ -20,7 +20,7 @@ void test_error(cgame g) {
         }
     }
 }
-// Récupere les valeurs données par le joueur, vérifie les coordonées et applique l'action de jeu si elle est autorisé 
+// Récupere les valeurs données par le joueur, vérifie les coordonées et applique l'action de jeu si elle est autorisé
 void scan_and_play_move(game g, square s) {
     uint i, j;
     scanf(" %d %d", &i, &j);
