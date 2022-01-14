@@ -24,7 +24,7 @@ void test_error(cgame g) {
 void scan_and_play_move(game g, square s) {
     uint i, j;
     scanf(" %d %d", &i, &j);
-    if (i < 0 || i >= DEFAULT_SIZE || j < 0 || j >= DEFAULT_SIZE) {
+    if (i < 0 || i >= game_nb_cols(g) || j < 0 || j >= game_nb_rows(g)) {
         printf("Invalid position\n");
     } else if (game_check_move(g, i, j, s)) {
         printf("> action: play move in (%u, %u)\n", i, j);
