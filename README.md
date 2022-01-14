@@ -97,3 +97,5 @@
 ### update game.c game_aux.c et adaptation tests
 
 - @gdindart
+- @millhe
+- @fclaisse
