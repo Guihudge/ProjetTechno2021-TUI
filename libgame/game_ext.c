@@ -20,7 +20,7 @@ history add_move(history hist, char* pile, uint i, uint j, square s) {
         hist->redo = stack_push_head(hist->redo, m);
     } else {
         fprintf(stderr, "Error on history!!");
-        exit(EXIT_FAILURE);
+        unknown_error(__FILE__, __LINE__);
     }
 
     return hist;
@@ -29,7 +29,7 @@ history add_move(history hist, char* pile, uint i, uint j, square s) {
 game game_new_ext(uint nb_rows, uint nb_cols, square* squares, bool wrapping) {
     if (nb_rows < 1 || nb_rows > 10 || nb_cols < 1 || nb_cols > 10) {
         fprintf(stderr, "Invalid size of grid\n");
-        exit(EXIT_FAILURE);
+        unknown_error(__FILE__, __LINE__);
     }
 
     game new_game = create_game_struct(nb_rows, nb_cols);

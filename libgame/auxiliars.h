@@ -24,6 +24,12 @@ void memory_error(char *file, int line);
 void pointer_error(char *file, int line);
 
 /**
+ * @brief Prints an error message and exit the program in connection with an unknown error.
+ * @deprecated Ne pas utiliser dans les test
+ **/
+void unknown_error(char *file, int line);
+
+/**
  * @brief Check viability of a pointer and exit the program with the error message associated
  * in case where it would be unvalid.
  * @param pointer Tab pointer that must be checked.

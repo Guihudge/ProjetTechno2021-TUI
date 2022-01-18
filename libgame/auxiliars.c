@@ -18,6 +18,11 @@ void pointer_error(char *file, int line) {
     exit(EXIT_FAILURE);
 }
 
+void unknown_error(char *file, int line) {
+    fprintf(stderr, "unknown error in file %s at line %d\n", file, line);
+    exit(EXIT_FAILURE);
+}
+
 void is_viable_pointer(const void *pointer, const char *type, char *file, int line) {
     if (pointer == NULL) {
         if (strcmp("memory", type) == 0)

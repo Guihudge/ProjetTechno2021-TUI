@@ -98,7 +98,7 @@ void update_row_cols(game g, uint i, uint j, bool row) {
     while (index >= 0) {
         if (row) {
             if (index > g->nb_row - 1 || game_is_black(g, index, j)) {
-                if (forward) {
+                if (forward) {  // permet de mettre le fonction en "Marche arrière"
                     index = i;
                     forward = false;
                 } else {
@@ -128,7 +128,7 @@ void update_row_cols(game g, uint i, uint j, bool row) {
                 }
             }
         }
-        if (forward) {
+        if (forward) {  // gestion du sens de la fonction
             index++;
         } else {
             index--;
@@ -144,10 +144,10 @@ void update_row_col_wrapping(game g, uint i, uint j, bool row) {
     int size = row ? g->nb_row : g->nb_col;
     int index = row ? i : j;  // index = i si row est vrai sinon index = j
     bool forward = true;      // && ()
-    do {
+    do {                      // utilisation d'un do while pour forcer le passage sur la première case
         if (row) {
             if (game_is_black(g, index, j)) {
-                if (forward) {
+                if (forward) {  // passage dans le sens inverse
                     index = i;
                     forward = false;
                 } else {
@@ -163,7 +163,7 @@ void update_row_col_wrapping(game g, uint i, uint j, bool row) {
             }
         } else {
             if (game_is_black(g, i, index)) {
-                if (forward) {
+                if (forward) {  // passage dans le sens inverse
                     index = j;
                     forward = false;
                 } else {
@@ -177,10 +177,10 @@ void update_row_col_wrapping(game g, uint i, uint j, bool row) {
                 }
             }
         }
-        if (forward) {
+        if (forward) {  // gestion du sens
             index = (index + 1) % size;
         } else {
-            if (index - 1 < 0) {
+            if (index - 1 < 0) {  // si on passe en négatif alors on reviens de l'autre coté de la grille
                 index = size - 1;
             } else {
                 index = (index - 1) % size;
@@ -249,7 +249,7 @@ bool game_equal(cgame g1, cgame g2) {
 void game_delete(game g) {
     is_viable_pointer(g, "pointer", __FILE__, __LINE__);
 
-    // free 2D tab
+    // léberation de grille de jeu
     if (g->tab != NULL) {
         for (uint x = 0; x < g->nb_row; x++) {
             if (g->tab[x] != NULL) {
@@ -259,7 +259,7 @@ void game_delete(game g) {
         free(g->tab);
     }
 
-    // free hystory struct
+    // libération de l'historique
     if (g->move != NULL) {
         if (g->move->redo != NULL) {
             stack_clear(g->move->redo);
@@ -359,7 +359,7 @@ int game_get_black_number(cgame g, uint i, uint j) {
     if ((tiles & S_BLACK0) == S_BLACK0) {
         return 0;
     } else {
-        exit(EXIT_FAILURE);
+        unknown_error(__FILE__, __LINE__);
     }
 }
 
@@ -412,7 +412,7 @@ void game_play_move(game g, uint i, uint j, square s) {
     check_coordinates(g, i, j, __func__);
 
     if (!game_check_move(g, i, j, s)) {
-        exit(EXIT_FAILURE);
+        unknown_error(__FILE__, __LINE__);
     }
 
     square currentState = game_get_state(g, i, j);
