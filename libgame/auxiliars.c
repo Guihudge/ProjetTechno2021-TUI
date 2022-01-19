@@ -30,8 +30,7 @@ void is_viable_pointer(const void *pointer, const char *type, char *file, int li
         else if (strcmp("pointer", type) == 0)
             pointer_error(file, line);
         else {
-            fprintf(stderr, "Unknown error type by fonction %s providing %s at line %d\n", __func__, file, line);
-            exit(EXIT_FAILURE);
+            unknown_error(file, line);
         }
     }
 }
