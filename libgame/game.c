@@ -9,6 +9,11 @@
 #include "game_ext.h"
 #include "game_struct.h"
 
+/**
+ * @brief Reset all squares without flags
+ * @param g the game to reset 
+ * @pre @p g must be a viable pointer
+ */
 void reset_flags(game g) {
     is_viable_pointer(g, "pointer", __FILE__, __LINE__);
 
@@ -19,6 +24,19 @@ void reset_flags(game g) {
     }
 }
 
+/**
+ * @brief Check if an error should be placed on a black wall
+ * @details Error if too many lightbulb around the black wall 
+ * or no place for the lightbulb missing 
+ * @param g the game
+ * @param i row index
+ * @param j colunm index
+ * @pre @p g must be a viable pointer
+ * @pre @p i < game height
+ * @pre @p j < game width
+ * @return true if has an error on the black wall
+ * @return false if hasn't an error on the black wall
+ */
 bool check_black_wall(cgame g, uint i, uint j) {
     is_viable_pointer(g, "pointer", __FILE__, __LINE__);
     check_coordinates(g, i, j, __func__);
@@ -32,16 +50,16 @@ bool check_black_wall(cgame g, uint i, uint j) {
 
     int start_x, start_y, end_x, end_y;  // Init valeur des cordonnée de fin et début
 
-    bool wrapping = g->wrapping;  // on check le wrapping
+    bool wrapping = g->wrapping;  // we check the wrapping
 
     if (i == 0 && !wrapping) {
-        start_x = 0;  // on neutralise la valeur si on va de l'autre coté de la grille et si wrapping est désactivé
+        start_x = 0;  // = 0 if we go to the other side of the grid and the wrapping is desactivate
     } else if (i == 0 && wrapping) {
-        start_x = g->nb_row - 1;  // on va de l'autre coté de la grille ssi wrapping et activé
+        start_x = g->nb_row - 1;  // we go to the other side if the wrapping is activate
     } else {
-        start_x = i - 1;  // valeur par défaut
+        start_x = i - 1;  // default value
     }
-    if (j == 0 && !wrapping) {  // même principe que au-dessus
+    if (j == 0 && !wrapping) {  // same that line 56
         start_y = 0;
     } else if (j == 0 && wrapping) {
         start_y = g->nb_col - 1;
@@ -49,14 +67,14 @@ bool check_black_wall(cgame g, uint i, uint j) {
         start_y = j - 1;
     }
 
-    if (i + 1 >= g->nb_row && !wrapping) {  // même principe que au-dessus
+    if (i + 1 >= g->nb_row && !wrapping) {  // same that line 56
         end_x = g->nb_row - 1;
     } else if (i + 1 >= g->nb_row && wrapping) {
         end_x = 0;
     } else {
         end_x = i + 1;
     }
-    if (j + 1 >= g->nb_col && !wrapping) {  // même principe que au-dessus
+    if (j + 1 >= g->nb_col && !wrapping) {  // same that line 56
         end_y = g->nb_col - 1;
     } else if (j + 1 >= g->nb_col && wrapping) {
         end_y = 0;
@@ -67,9 +85,9 @@ bool check_black_wall(cgame g, uint i, uint j) {
     int tab_x[] = {start_x, end_x, i, i};  // on génère les couples valeurs possible
     int tab_y[] = {j, j, start_y, end_y};
 
-    for (int i = 0; i < 4; i++) {  // on vérifie chaque couple de valeur possible
-        int cx = tab_x[i];         // val en x
-        int cy = tab_y[i];         // val en y
+    for (int i = 0; i < 4; i++) {  // We check every couple's value possible 
+        int cx = tab_x[i];         // x-value
+        int cy = tab_y[i];         // y-value
         if (game_is_lightbulb(g, cx, cy)) {
             lightbulb_number++;
         } else if (game_is_lighted(g, cx, cy)) {
@@ -80,25 +98,36 @@ bool check_black_wall(cgame g, uint i, uint j) {
     }
     bool ret = false;
 
-    if (lightbulb_number > black_number) {  // cas : trop de lightbulb
+    if (lightbulb_number > black_number) {  // we check if they are too many lightbulbs cas 
         return true;
     }
-    if ((blank_number + lightbulb_number) < black_number) {  // cas plus assez de place pour les lightbulb
+    if ((blank_number + lightbulb_number) < black_number) {  // we check if we haven't place for the ligthbulb cas plus assez de place pour les lightbulb
         return true;
     }
     return ret;
 }
-
+/**
+ * @brief update all flags of lightbulb, blank and marked squares
+ * @details browse the game and update the flag's column and flag's row
+ *  for the indicate lightbulb square
+ * @param g the game
+ * @param i row index
+ * @param j colunm index
+ * @param row true -> the fonction will uptade row and false -> the fonction will update colunm 
+ * @pre @p g must be a viable pointer
+ * @pre @p i < game height
+ * @pre @p j < game width
+ */
 void update_row_cols(game g, uint i, uint j, bool row) {
     is_viable_pointer(g, "pointer", __FILE__, __LINE__);  // gest. erreur
     check_coordinates(g, i, j, __func__);
 
-    int index = row ? i : j;  // index = i si row est vrai sinon index = j
-    bool forward = true;      // && ()
+    int index = row ? i : j;  // index = i if row is true else index = j
+    bool forward = true;    
     while (index >= 0) {
         if (row) {
             if (index > g->nb_row - 1 || game_is_black(g, index, j)) {
-                if (forward) {  // permet de mettre le fonction en "Marche arrière"
+                if (forward) {  // allows you to put the function in "reverse"
                     index = i;
                     forward = false;
                 } else {
@@ -107,7 +136,7 @@ void update_row_cols(game g, uint i, uint j, bool row) {
             } else {
                 g->tab[index][j] |= F_LIGHTED;
                 if (index != i &&
-                    game_is_lightbulb(g, index, j)) {  // si il index a une autre lightbulb on met une erreur
+                    game_is_lightbulb(g, index, j)) {  // if index find a other lighbulb we put an error 
                     g->tab[index][j] |= F_ERROR;
                     g->tab[i][j] |= F_ERROR;
                 }
@@ -128,7 +157,7 @@ void update_row_cols(game g, uint i, uint j, bool row) {
                 }
             }
         }
-        if (forward) {  // gestion du sens de la fonction
+        if (forward) {  // management of the function's sense 
             index++;
         } else {
             index--;
@@ -136,18 +165,30 @@ void update_row_cols(game g, uint i, uint j, bool row) {
     }
 }
 
+/**
+ * @brief update all flags of lightbulb, blank and marked squares in a wrapping game
+ * @details browse the game and update the flag's column and flag's row
+ *  for the indicate lightbulb square
+ * @param g the game
+ * @param i row index
+ * @param j colunm index
+ * @param row true -> the fonction will uptade row and false -> the fonction will update colunm 
+ * @pre @p g must be a viable pointer
+ * @pre @p i < game height
+ * @pre @p j < game width
+ */
 void update_row_col_wrapping(game g, uint i, uint j, bool row) {
     is_viable_pointer(g, "pointer", __FILE__, __LINE__);  // gest. erreur
     check_coordinates(g, i, j, __func__);
 
     int stop_test_value = row ? i : j;
     int size = row ? g->nb_row : g->nb_col;
-    int index = row ? i : j;  // index = i si row est vrai sinon index = j
-    bool forward = true;      // && ()
-    do {                      // utilisation d'un do while pour forcer le passage sur la première case
+    int index = row ? i : j;  // index = i if row is true else index = j
+    bool forward = true;      
+    do {                      // we use a "do while" to force the passage on the first case 
         if (row) {
             if (game_is_black(g, index, j)) {
-                if (forward) {  // passage dans le sens inverse
+                if (forward) {  // passage in reverse sens 
                     index = i;
                     forward = false;
                 } else {
@@ -156,14 +197,14 @@ void update_row_col_wrapping(game g, uint i, uint j, bool row) {
             } else {
                 g->tab[index][j] |= F_LIGHTED;
                 if (index != i &&
-                    game_is_lightbulb(g, index, j)) {  // si il index a une autre lightbulb on met une erreur
+                    game_is_lightbulb(g, index, j)) {  // if index find a other lighbulb we put an error
                     g->tab[index][j] |= F_ERROR;
                     g->tab[i][j] |= F_ERROR;
                 }
             }
         } else {
             if (game_is_black(g, i, index)) {
-                if (forward) {  // passage dans le sens inverse
+                if (forward) {  // passage in reverse sense
                     index = j;
                     forward = false;
                 } else {
@@ -177,10 +218,10 @@ void update_row_col_wrapping(game g, uint i, uint j, bool row) {
                 }
             }
         }
-        if (forward) {  // gestion du sens
+        if (forward) {  // sense's management
             index = (index + 1) % size;
         } else {
-            if (index - 1 < 0) {  // si on passe en négatif alors on reviens de l'autre coté de la grille
+            if (index - 1 < 0) {  // if we are in negatif so we back in other side of the grid 
                 index = size - 1;
             } else {
                 index = (index - 1) % size;
@@ -215,7 +256,7 @@ game game_copy(cgame g) {
         }
     }
 
-    copy->move->undo = stack_new_empty();  // on init l'historique pour la copy
+    copy->move->undo = stack_new_empty();  // We init the historical for the copy 
     copy->move->redo = stack_new_empty();
     free(tmp_tab);
     return copy;
@@ -249,7 +290,7 @@ bool game_equal(cgame g1, cgame g2) {
 void game_delete(game g) {
     is_viable_pointer(g, "pointer", __FILE__, __LINE__);
 
-    // léberation de grille de jeu
+    // we free the grid's game
     if (g->tab != NULL) {
         for (uint x = 0; x < g->nb_row; x++) {
             if (g->tab[x] != NULL) {
@@ -259,7 +300,7 @@ void game_delete(game g) {
         free(g->tab);
     }
 
-    // libération de l'historique
+    // free the historical
     if (g->move != NULL) {
         if (g->move->redo != NULL) {
             stack_clear(g->move->redo);
@@ -396,7 +437,7 @@ bool game_check_move(cgame g, uint i, uint j, square s) {
     if (s != S_BLANK && s != S_LIGHTBULB && s != S_MARK) {
         return false;
     }
-    // Pas besoin de i < 0 et j < 0 car ils sont de type unsigned int
+    // not need of i < 0 and j < 0 because they are unsigned int type
     if (i >= game_nb_rows(g) || j >= game_nb_cols(g)) {
         return false;
     }
