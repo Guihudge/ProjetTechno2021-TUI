@@ -11,7 +11,7 @@
 
 /**
  * @brief Reset all squares without flags
- * @param g the game to reset 
+ * @param g the game to reset
  * @pre @p g must be a viable pointer
  */
 void reset_flags(game g) {
@@ -26,8 +26,8 @@ void reset_flags(game g) {
 
 /**
  * @brief Check if an error should be placed on a black wall
- * @details Error if too many lightbulb around the black wall 
- * or no place for the lightbulb missing 
+ * @details Error if too many lightbulb around the black wall
+ * or no place for the lightbulb missing
  * @param g the game
  * @param i row index
  * @param j colunm index
@@ -85,7 +85,7 @@ bool check_black_wall(cgame g, uint i, uint j) {
     int tab_x[] = {start_x, end_x, i, i};  // on génère les couples valeurs possible
     int tab_y[] = {j, j, start_y, end_y};
 
-    for (int i = 0; i < 4; i++) {  // We check every couple's value possible 
+    for (int i = 0; i < 4; i++) {  // We check every couple's value possible
         int cx = tab_x[i];         // x-value
         int cy = tab_y[i];         // y-value
         if (game_is_lightbulb(g, cx, cy)) {
@@ -98,10 +98,11 @@ bool check_black_wall(cgame g, uint i, uint j) {
     }
     bool ret = false;
 
-    if (lightbulb_number > black_number) {  // we check if they are too many lightbulbs cas 
+    if (lightbulb_number > black_number) {  // we check if they are too many lightbulbs cas
         return true;
     }
-    if ((blank_number + lightbulb_number) < black_number) {  // we check if we haven't place for the ligthbulb cas plus assez de place pour les lightbulb
+    if ((blank_number + lightbulb_number) <
+        black_number) {  // we check if we haven't place for the ligthbulb cas plus assez de place pour les lightbulb
         return true;
     }
     return ret;
@@ -113,7 +114,7 @@ bool check_black_wall(cgame g, uint i, uint j) {
  * @param g the game
  * @param i row index
  * @param j colunm index
- * @param row true -> the fonction will uptade row and false -> the fonction will update colunm 
+ * @param row true -> the fonction will uptade row and false -> the fonction will update colunm
  * @pre @p g must be a viable pointer
  * @pre @p i < game height
  * @pre @p j < game width
@@ -123,7 +124,7 @@ void update_row_cols(game g, uint i, uint j, bool row) {
     check_coordinates(g, i, j, __func__);
 
     int index = row ? i : j;  // index = i if row is true else index = j
-    bool forward = true;    
+    bool forward = true;
     while (index >= 0) {
         if (row) {
             if (index > g->nb_row - 1 || game_is_black(g, index, j)) {
@@ -135,8 +136,7 @@ void update_row_cols(game g, uint i, uint j, bool row) {
                 }
             } else {
                 g->tab[index][j] |= F_LIGHTED;
-                if (index != i &&
-                    game_is_lightbulb(g, index, j)) {  // if index find a other lighbulb we put an error 
+                if (index != i && game_is_lightbulb(g, index, j)) {  // if index find a other lighbulb we put an error
                     g->tab[index][j] |= F_ERROR;
                     g->tab[i][j] |= F_ERROR;
                 }
@@ -157,7 +157,7 @@ void update_row_cols(game g, uint i, uint j, bool row) {
                 }
             }
         }
-        if (forward) {  // management of the function's sense 
+        if (forward) {  // management of the function's sense
             index++;
         } else {
             index--;
@@ -172,7 +172,7 @@ void update_row_cols(game g, uint i, uint j, bool row) {
  * @param g the game
  * @param i row index
  * @param j colunm index
- * @param row true -> the fonction will uptade row and false -> the fonction will update colunm 
+ * @param row true -> the fonction will uptade row and false -> the fonction will update colunm
  * @pre @p g must be a viable pointer
  * @pre @p i < game height
  * @pre @p j < game width
@@ -184,11 +184,11 @@ void update_row_col_wrapping(game g, uint i, uint j, bool row) {
     int stop_test_value = row ? i : j;
     int size = row ? g->nb_row : g->nb_col;
     int index = row ? i : j;  // index = i if row is true else index = j
-    bool forward = true;      
-    do {                      // we use a "do while" to force the passage on the first case 
+    bool forward = true;
+    do {  // we use a "do while" to force the passage on the first case
         if (row) {
             if (game_is_black(g, index, j)) {
-                if (forward) {  // passage in reverse sens 
+                if (forward) {  // passage in reverse sens
                     index = i;
                     forward = false;
                 } else {
@@ -196,8 +196,7 @@ void update_row_col_wrapping(game g, uint i, uint j, bool row) {
                 }
             } else {
                 g->tab[index][j] |= F_LIGHTED;
-                if (index != i &&
-                    game_is_lightbulb(g, index, j)) {  // if index find a other lighbulb we put an error
+                if (index != i && game_is_lightbulb(g, index, j)) {  // if index find a other lighbulb we put an error
                     g->tab[index][j] |= F_ERROR;
                     g->tab[i][j] |= F_ERROR;
                 }
@@ -221,7 +220,7 @@ void update_row_col_wrapping(game g, uint i, uint j, bool row) {
         if (forward) {  // sense's management
             index = (index + 1) % size;
         } else {
-            if (index - 1 < 0) {  // if we are in negatif so we back in other side of the grid 
+            if (index - 1 < 0) {  // if we are in negatif so we back in other side of the grid
                 index = size - 1;
             } else {
                 index = (index - 1) % size;
@@ -256,7 +255,7 @@ game game_copy(cgame g) {
         }
     }
 
-    copy->move->undo = stack_new_empty();  // We init the historical for the copy 
+    copy->move->undo = stack_new_empty();  // We init the historical for the copy
     copy->move->redo = stack_new_empty();
     free(tmp_tab);
     return copy;
