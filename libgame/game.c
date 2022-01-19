@@ -400,6 +400,7 @@ int game_get_black_number(cgame g, uint i, uint j) {
         return 0;
     } else {
         unknown_error(__FILE__, __LINE__);
+        return -404;  // remove warning from compilation(never executed)
     }
 }
 
