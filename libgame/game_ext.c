@@ -8,24 +8,6 @@
 #include "auxiliars.h"
 #include "game_struct.h"
 
-history add_move(history hist, char* pile, uint i, uint j, square s) {
-    is_viable_pointer(hist, "pointer", __FILE__, __LINE__);
-    is_viable_pointer(pile, "pointer", __FILE__, __LINE__);
-
-    move m = create_move(i, j, s);
-
-    if (strcmp(pile, "undo") == 0) {
-        hist->undo = stack_push_head(hist->undo, m);
-    } else if (strcmp(pile, "redo") == 0) {
-        hist->redo = stack_push_head(hist->redo, m);
-    } else {
-        fprintf(stderr, "Error on history!!");
-        unknown_error(__FILE__, __LINE__);
-    }
-
-    return hist;
-}
-
 game game_new_ext(uint nb_rows, uint nb_cols, square* squares, bool wrapping) {
     if (nb_rows < 1 || nb_rows > 10 || nb_cols < 1 || nb_cols > 10) {
         fprintf(stderr, "Invalid size of grid\n");

@@ -5,11 +5,10 @@
 
 #include "game.h"
 #include "game_ext.h"
+#include "auxiliars.h"
 
 void game_print(cgame g) {
-    if (g == NULL) {
-        return;
-    }
+    is_viable_pointer(g, "pointer", __FILE__, __LINE__);
 
     printf("   ");
     for (uint i = 0; i < game_nb_cols(g); i++) printf("%u", i);

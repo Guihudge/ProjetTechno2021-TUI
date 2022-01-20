@@ -8,7 +8,7 @@ include(CTest)
 enable_testing()
 
 #variable
-set(CMAKE_C_FLAGS "-std=c99 -Wall")
+set(CMAKE_C_FLAGS "-std=c99 -Wall --coverage")
 
 set(GameSources libgame/auxiliars.c libgame/game_aux.c libgame/game_ext.c libgame/game.c)
 set(GameHeaders libgame/auxiliars.h libgame/game_aux.h libgame/game_ext.h libgame/game.h libgame/game_struct.h)
