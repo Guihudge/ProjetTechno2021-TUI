@@ -11,10 +11,10 @@ bool test_dummy() { return true; }
 
 bool test_game_print() {
     square test[] = {S_LIGHTBULB, S_BLANK,  S_BLACK1, S_MARK,      S_LIGHTBULB, S_BLANK, S_LIGHTBULB, S_BLANK, S_BLANK,
-                     S_BLACK2,    S_BLANK,  S_BLANK,  S_BLANK,     S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
-                     S_BLANK,     S_BLACKU, S_BLACK2, S_BLANK,     S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
-                     S_LIGHTBULB, S_BLACK1, S_BLACK0, S_LIGHTBULB, S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
-                     S_BLANK,     S_BLACK4, S_BLANK,  S_BLACK3,    S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLANK,
+                     S_BLACK2,    S_BLANK,  S_BLANK,  S_BLANK,     S_BLANK,     S_BLANK, S_BLANK,     S_BLANK, S_BLANK,
+                     S_BLANK,     S_BLACKU, S_BLACK2, S_BLANK,     S_BLANK,     S_BLANK, S_BLANK,     S_BLANK, S_BLANK,
+                     S_LIGHTBULB, S_BLACK1, S_BLACK0, S_LIGHTBULB, S_BLANK,     S_BLANK, S_BLANK,     S_BLANK, S_BLANK,
+                     S_BLANK,     S_BLACK4, S_BLANK,  S_BLACK3,    S_BLANK,     S_BLANK, S_BLANK,     S_BLANK, S_BLANK,
                      S_BLANK,     S_BLACKU, S_BLANK,  S_LIGHTBULB};
     game g2 = game_new(test);
     game_update_flags(g2);

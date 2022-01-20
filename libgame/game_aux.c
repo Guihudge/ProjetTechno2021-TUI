@@ -3,9 +3,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "auxiliars.h"
 #include "game.h"
 #include "game_ext.h"
-#include "auxiliars.h"
 
 void game_print(cgame g) {
     is_viable_pointer(g, "pointer", __FILE__, __LINE__);
