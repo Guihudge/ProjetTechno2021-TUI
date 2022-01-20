@@ -18,8 +18,6 @@ set(StackHeaders libstack/stack.h)
 
 add_library(game ${GameSources} ${StackSources} ${GameHeaders} ${StackHeaders})
 
-target_link_libraries(game)
-
 #création de l'éxécutable
 add_executable(game_text game_text.c)
 
