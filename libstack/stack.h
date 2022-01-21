@@ -13,33 +13,35 @@
 /**
  * @brief Create a new stack and return it
  *
- * @return move_stack
+ * @return The new created stack
  */
 move_stack stack_new_empty(void);
 
 /**
- * @brief Check if stack si empty
+ * @brief Check if stack is empty
  *
- * @param stack the stick to test
+ * @param stack The stack to test
  * @return true if stack is empty
  * @return false if stack is not empty
  */
 bool stack_is_empty(move_stack stack);
 
 /**
- * @brief ad data on the head of stack
+ * @brief Add data on the head of stack
  *
- * @param stack the stack to add data
- * @param data a move struct
- * @return move_stack return the stack with new data
+ * @param stack The stack to add data on head
+ * @param data The new element to add
+ * @pre @p data must be a valid pointer towar a move struct
+ * @return The stack with new data on head
  */
 move_stack stack_push_head(move_stack stack, move data);
 
 /**
- * @brief remove the header of the stack
+ * @brief Remove the header of the stack
  *
- * @param stack the stack to add
- * @return move_stack the return stack
+ * @param stack the stack to remove header
+ * @pre @p stack must be a valid pointer towar a move_stack struct
+ * @return The new header
  */
 move_stack stack_pop_head(move_stack stack);
 
@@ -47,7 +49,8 @@ move_stack stack_pop_head(move_stack stack);
  * @brief Get the data of the head of stack
  *
  * @param stack the stack to get value
- * @return move the data on head
+ * @pre @p stack must be a valid pointer towar a move_stack struct
+ * @return The data on head
  */
 move stack_peek_head(move_stack stack);
 
@@ -55,13 +58,12 @@ move stack_peek_head(move_stack stack);
  * @brief replace an used stack to a new clean stack
  *
  * @param stack the stack to clear
- * @return move_stack an empty stack
+ * @return An empty stack
  */
 move_stack stack_clear(move_stack stack);
 
 /**
- * @brief destriy the stack
- *
+ * @brief destroy the stack
  */
 void stack_free(move_stack);
 

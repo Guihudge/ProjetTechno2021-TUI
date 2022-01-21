@@ -12,6 +12,16 @@
 #include "game_struct.h"
 
 /**
+ * @brief Minimum size of the game grid.
+ */
+#define MINSIZE 1
+
+/**
+ * @brief Maximum size of the game grid.
+ */
+#define MAXSIZE 10
+
+/**
  * @brief Prints an error message and exit the program in connection with memory allocation error.
  * @deprecated Ne pas utiliser dans les test
  **/
@@ -19,12 +29,16 @@ void memory_error(char *file, int line);
 
 /**
  * @brief Prints an error message and exit the program in connection with memory pointer error.
+ * @param file Name of the file where the function is called use __FILE__ constant.
+ * @param line Line number where the function is called use __LINE__ constant.
  * @deprecated Ne pas utiliser dans les test
  **/
 void pointer_error(char *file, int line);
 
 /**
  * @brief Prints an error message and exit the program in connection with an unknown error.
+ * @param file Name of the file where the function is called use __FILE__ constant.
+ * @param line Line number where the function is called use __LINE__ constant.
  * @deprecated Ne pas utiliser dans les test
  **/
 void unknown_error(char *file, int line);
@@ -34,6 +48,8 @@ void unknown_error(char *file, int line);
  * in case where it would be unvalid.
  * @param pointer Tab pointer that must be checked.
  * @param type Inform of the potential error type.
+ * @param file Name of the file where the function is called use __FILE__ constant.
+ * @param line Line number where the function is called use __LINE__ constant.
  * @pre @p pointer Must be a pointer tab with the potential error type associated.
  * @pre @p type Must be exactly "pointer" or "memory".
  * @deprecated Ne pas utiliser dans les test
@@ -45,7 +61,7 @@ void is_viable_pointer(const void *pointer, const char *type, char *file, int li
  * @param g game pointer.
  * @param i Row index.
  * @param j Column index.
- * @param fonction The string taht correspond to the fonction where check_coordinates been called.
+ * @param fonction The string that correspond to the fonction where check_coordinates been called.
  * @pre @p fonction Must correspond to the fonction.
  * @deprecated Ne pas utiliser dans les test
  **/
