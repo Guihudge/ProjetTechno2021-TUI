@@ -9,7 +9,7 @@
 #include "game_struct.h"
 
 game game_new_ext(uint nb_rows, uint nb_cols, square* squares, bool wrapping) {
-    if (nb_rows < 1 || nb_rows > 10 || nb_cols < 1 || nb_cols > 10) {
+    if (nb_rows < MINSIZE || nb_rows > MAXSIZE || nb_cols < MINSIZE || nb_cols > MAXSIZE) {
         fprintf(stderr, "Invalid size of grid\n");
         unknown_error(__FILE__, __LINE__);
     }

@@ -86,14 +86,14 @@ bool delete_and_exit(bool exit, game *games, uint size, char *error);
  *
  * @param nb_rows number of rows
  * @param nb_cols number of cols
- * @return game the new allocated struct
+ * @return The new allocated struct
  */
 game create_game_struct(uint nb_rows, uint nb_cols);
 
 /**
  * @brief Initialize and allocate memory for the history struct
  *
- * @return history -> the new history struct
+ * @return The new history struct
  */
 history init_game_history();
 
