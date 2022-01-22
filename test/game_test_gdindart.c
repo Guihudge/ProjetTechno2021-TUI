@@ -289,6 +289,11 @@ bool test_game_equal() {
 
     game diff2_game = game_new(solution_value);
 
+    square s_wrapping[15] = {S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLACK1, S_BLANK, S_BLACK2,
+                             S_BLANK, S_BLANK, S_BLANK, S_BLANK,  S_BLANK, S_BLANK,  S_BLANK};
+    game g_wrapping = game_new_ext(5, 3, s_wrapping, true);
+    game g_not_wrapping = game_new_ext(5, 3, s_wrapping, false);
+
     bool ok = game_equal(base_game, equal_game);
     ok = ok && !game_equal(base_game, diff1_game);
     ok = ok && !game_equal(diff1_game, diff2_game);
@@ -303,10 +308,17 @@ bool test_game_equal() {
 
     ok = ok && !game_equal(diff1_game, diff2_game);
 
+    ok = ok && !game_equal(g_not_wrapping, g_wrapping);
+
+    ok = ok && !game_equal(base_game, g_wrapping);
+
     game_delete(base_game);
     game_delete(equal_game);
     game_delete(diff1_game);
     game_delete(diff2_game);
+    game_delete(g_wrapping);
+    game_delete(g_not_wrapping);
+
     return ok;
 }
 

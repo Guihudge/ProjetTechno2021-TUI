@@ -269,6 +269,9 @@ bool test_game_copy() {
         return false;
     }
     oktest = game_equal(g2, g4);
+
+    // rajoute un test qui vérifie que quand tu copie un jeu il conserve ces valeur (nb_roww, nb cols et wrapping)
+
     game_delete(g2);
     game_delete(g3);
     game_delete(g4);
