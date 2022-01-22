@@ -7,7 +7,6 @@
 #include "../libgame/game.h"
 #include "../libgame/game_aux.h"
 #include "../libgame/game_ext.h"
-#include "../libgame/game_struct.h"
 
 /* ********** TEST DUMMY ********** */
 
@@ -319,18 +318,11 @@ bool test_game_redo(void) {
     if (!game_equal(test_game, copy)) {
         return false;
     }
-    if (test_game->move->redo != NULL) {
-        return false;
-    }
 
     game_undo(test_game);
     game_undo(test_game);
 
     game_play_move(test_game, 1, 1, S_LIGHTBULB);
-
-    if (test_game->move->redo != NULL) {
-        return false;
-    }
 
     game_delete(test_game);
     game_delete(copy);
