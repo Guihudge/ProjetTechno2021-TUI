@@ -276,6 +276,18 @@ bool test_game_restart(void) {
 
     if (g1 == NULL || g2 == NULL || g_true2 == NULL) exit(EXIT_FAILURE);
 
+    game_undo(g_true);
+
+    if (!game_equal(g1, g2)) {
+        return false;
+    }
+
+    game_redo(g_true);
+
+    if (!game_equal(g1, g2)) {
+        return false;
+    }
+
     if (!game_equal(g1, g2)) {
         for (uint i = 0; i < game_nb_cols(g_true); i++) {
             for (uint j = 0; j < game_nb_rows(g_true); j++) {
