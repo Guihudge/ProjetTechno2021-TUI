@@ -250,6 +250,8 @@ bool test_game_copy() {
                      S_BLANK,     S_BLACKU,    S_BLANK,  S_BLANK};
 
     game g2 = game_new(test);
+    uint nbcols = game_nb_cols(g2);
+    uint nbrows = game_nb_rows(g2);
     if (g2 == NULL) {
         return false;
     }
@@ -258,7 +260,7 @@ bool test_game_copy() {
         return false;
     }
     bool oktest;
-    if (!game_equal(g3, g2)) {
+    if (!game_equal(g3, g2) && game_nb_cols(g3) == nbcols && game_nb_rows(g3) == nbrows) {
         game_delete(g2);
         game_delete(g3);
         return false;
@@ -268,7 +270,7 @@ bool test_game_copy() {
     if (g4 == NULL) {
         return false;
     }
-    oktest = game_equal(g2, g4);
+    oktest = (game_equal(g2, g4) && game_nb_cols(g4) == nbcols && game_nb_rows(g4) == nbrows) ;
 
     // rajoute un test qui vérifie que quand tu copie un jeu il conserve ces valeur (nb_roww, nb cols et wrapping)
 
